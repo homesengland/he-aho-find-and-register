@@ -1,0 +1,62 @@
+@model CurrentSituation
+
+@{
+    ViewBag.Title = "Current Situation";
+    var anyTrueForCurrentCircumstances = nameof(CurrentSituation.AnyTrueForCurrentCircumstances);
+}
+
+
+<div class="govuk-width-container ">
+
+    <a class="govuk-back-link" href="/annual-income">Back</a>
+
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                <form method="post" action="current-situation">
+
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                    {
+                       HtmlId = anyTrueForCurrentCircumstances,
+                       ValidationMessage = Html.ValidationMessageFor(m => m.AnyTrueForCurrentCircumstances),
+                       AriaDescribe = anyTrueForCurrentCircumstances + "-error",
+                       Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                       Title = "Is any one of the following statements true for your current circumstances?",
+                       Content =
+                                @<div>
+                                    <ul class="govuk-list govuk-list--bullet">
+                                        <li>I'm a first-time buyer</li>
+                                        <li>I used to own a home but cannot afford to buy one now</li>
+                                        <li>I'm forming a new household - for example, after a relationship breakdown</li>
+                                        <li>I'm an existing shared owner, and I want to move</li>
+                                        <li>I own a home and want to move but cannot afford a new home that meets my needs</li>
+                                    </ul>
+                                    <div class="govuk-radios govuk-radios--inline">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="situation-yes" asp-for="@anyTrueForCurrentCircumstances"
+                                                    name="@anyTrueForCurrentCircumstances" type="radio" value="true">
+                                            <label class="govuk-label govuk-radios__label" for="situation-yes">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="situation-no" asp-for="@anyTrueForCurrentCircumstances"
+                                                    name="@anyTrueForCurrentCircumstances" type="radio" value="false">
+                                            <label class="govuk-label govuk-radios__label" for="situation-no">
+                                                No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                    })
+                    <button class="govuk-button" data-module="govuk-button" type="submit">
+                        Continue
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+</div>

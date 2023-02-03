@@ -1,0 +1,54 @@
+@model AnnualIncome
+
+@{
+    ViewBag.Title = "Annual Income";
+    var isYourTotalIncomeAboveThreshold = nameof(AnnualIncome.IsYourTotalIncomeAboveThreshold);
+}
+
+
+<div class="govuk-width-container ">
+
+    <a class="govuk-back-link" href="/">Back</a>
+
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                <form method="post" action="annual-income">
+
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                    {
+                       HtmlId = isYourTotalIncomeAboveThreshold,
+                       ValidationMessage = Html.ValidationMessageFor(m => m.IsYourTotalIncomeAboveThreshold),
+                       AriaDescribe = isYourTotalIncomeAboveThreshold + "-error",
+                       Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                       Title = "Is your total household annual income less than £80,000 (or less than £90,000 if living in London)?",
+                       Content =
+                                @<div class="govuk-radios govuk-radios--inline">
+                                    <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input" id="income-yes" asp-for="@isYourTotalIncomeAboveThreshold"
+                                               name="@isYourTotalIncomeAboveThreshold" type="radio" value="true">
+                                        <label class="govuk-label govuk-radios__label" for="income-yes">
+                                            Yes
+                                        </label>
+                                    </div>
+                                    <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input" id="income-no" asp-for="@isYourTotalIncomeAboveThreshold"
+                                               name="@isYourTotalIncomeAboveThreshold" type="radio" value="false">
+                                        <label class="govuk-label govuk-radios__label" for="income-no">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                    })
+
+                    <button class="govuk-button" data-module="govuk-button" type="submit">
+                        Continue
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+</div>

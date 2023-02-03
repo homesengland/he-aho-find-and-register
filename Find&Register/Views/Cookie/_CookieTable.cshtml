@@ -1,0 +1,21 @@
+﻿@model CookieDescriptions
+
+<table class="govuk-table govuk-!-margin-bottom-7">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Name</th>
+            <th scope="col" class="govuk-table__header govuk-!-width-one-half">Purpose</th>
+            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Expires</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        @foreach (var cookieDescription in Model.Descriptions)
+        {
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@cookieDescription.Name</td>
+                <td class="govuk-table__cell">@cookieDescription.Purpose</td>
+                <td class="govuk-table__cell">@cookieDescription.Expiry</td>
+            </tr>
+        }
+    </tbody>
+</table>
