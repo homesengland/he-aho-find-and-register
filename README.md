@@ -6,6 +6,7 @@ Before starting you will need to add user secrets through dotnet user-secrets:
 
 run the following commands from the Find\&Register project folder:
 (replacing the square brackets with appropiate values)
+
     cd Find\&Register
 
     dotnet user-secrets set "Analytics:GaTag" [ask the tech team for the values]
@@ -15,6 +16,8 @@ run the following commands from the Find\&Register project folder:
     dotnet user-secrets set "DataSources:Locations:ApiUrl" [ask the tech team for the values]
     dotnet user-secrets set "DataSources:Locations:ApiToken" [ask the tech team for the values]
     dotnet user-secrets set "DataSources:Locations:ClientHeaderKey" [ask the tech team for the values]
+    dotnet user-secrets set "DataSources:Locations:UseApi" [ask the tech team for the values]
+    dotnet user-secrets set "DataSources:Providers" [ask the tech team for the values]
 
 ### Coding standard
 
