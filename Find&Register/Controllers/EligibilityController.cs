@@ -35,6 +35,11 @@ namespace Find_Register.Controllers
         [HttpPost]
         public IActionResult WhereDoYouWantToBuyAHome(EligibilityWhereDoYouWantToBuyAHomePage _EligibilityWhereDoYouWantToBuyAHomePage)
         {
+            var applicationCookie = _cookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
+            var cookie = applicationCookie.EligibilityResponses.Value;
+            cookie.EligibilityWhereDoYouWantToBuyAHomePage = _EligibilityWhereDoYouWantToBuyAHomePage;
+            applicationCookie.EligibilityResponses.Value = cookie;
+
             if (_EligibilityWhereDoYouWantToBuyAHomePage.LivingLocation == true)
             {
                 return RedirectToAction(nameof(EligibilityOutcome));
@@ -49,11 +54,6 @@ namespace Find_Register.Controllers
             {
                 return View(_EligibilityWhereDoYouWantToBuyAHomePage);
             }
-
-            var applicationCookie = _cookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
-            var cookie = applicationCookie.EligibilityResponses.Value;
-            cookie.EligibilityWhereDoYouWantToBuyAHomePage = _EligibilityWhereDoYouWantToBuyAHomePage;
-            applicationCookie.EligibilityResponses.Value = cookie;
 
             return View(_EligibilityWhereDoYouWantToBuyAHomePage);
         }
