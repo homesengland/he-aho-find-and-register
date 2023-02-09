@@ -23,9 +23,9 @@ namespace Find_Register.Controllers
             _cookieHelper = cookieHelper;
         }
 
-        //page 1
+        //page 1 WhereDoYouWantToBuyAHome
         [HttpGet]
-        public IActionResult WhereDoYouWantToBuyAHome()
+        public IActionResult Index()
         {
             ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
             var _EligibilityWhereDoYouWantToBuyAHomePage = new EligibilityWhereDoYouWantToBuyAHomePage();
@@ -33,7 +33,7 @@ namespace Find_Register.Controllers
         }
 
         [HttpPost]
-        public IActionResult WhereDoYouWantToBuyAHome(EligibilityWhereDoYouWantToBuyAHomePage _EligibilityWhereDoYouWantToBuyAHomePage)
+        public IActionResult Index(EligibilityWhereDoYouWantToBuyAHomePage _EligibilityWhereDoYouWantToBuyAHomePage)
         {
             var applicationCookie = _cookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
             var cookie = applicationCookie.EligibilityResponses.Value;

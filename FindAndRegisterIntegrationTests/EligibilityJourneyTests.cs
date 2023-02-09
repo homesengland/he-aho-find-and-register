@@ -37,8 +37,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
-            //driver.CreateAxeHtmlReport(axeResult, "/Users/syed.ali/Projects/HomesEngland-FindnRegister/HEFindAndRegister/FindAndRegisterIntegrationTests/");
-        }
+       }
     }
 }
 
