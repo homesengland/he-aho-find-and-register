@@ -1,7 +1,12 @@
 ﻿using System;
+using System.IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Selenium.Axe;
 using Xunit;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
+
 
 namespace FindAndRegisterIntegrationTests
 {
@@ -23,6 +28,16 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             Assert.NotEqual(Host + "Eligibility/whereDoYouWantToBuyAHome", driver.Url);
             Assert.Equal(Host + "Eligibility/BuyingWithAnotherPerson", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void WhereDoYouWantToBuyAHomeAccessibilityTest()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+            //driver.CreateAxeHtmlReport(axeResult, "/Users/syed.ali/Projects/HomesEngland-FindnRegister/HEFindAndRegister/FindAndRegisterIntegrationTests/");
         }
     }
 }
