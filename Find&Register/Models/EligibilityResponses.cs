@@ -11,5 +11,9 @@ public struct EligibilityResponses
 {
     public AnnualIncome AnnualIncome { get; set; }
     public CurrentSituation CurrentSituation { get; set; }
-    public EligibilityWhereDoYouWantToBuyAHomePage EligibilityWhereDoYouWantToBuyAHomePage { get; set; }
+    public EligibilityJourneyWhereDoYouWantToBuyAHome EligibilityJourneyWhereDoYouWantToBuyAHome { get; set; }
+    public EligibilityJourneyBuyingWithAnotherPerson EligibilityJourneyBuyingWithAnotherPerson { get; set; }
+    public EligibilityJourneyHowMuchDoYouEarn EligibilityJourneyHowMuchDoYouEarn { get; set; }
+    public EligibilityJourneyHowMuchDoYouEarn_MultiplePeople EligibilityJourneyHowMuchDoYouEarn_MultiplePeople { get; set; }
+
 }
