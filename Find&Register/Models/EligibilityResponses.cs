@@ -11,4 +11,5 @@ public struct EligibilityResponses
 {
     public AnnualIncome AnnualIncome { get; set; }
     public CurrentSituation CurrentSituation { get; set; }
+    public EligibilityWhereDoYouWantToBuyAHomePage EligibilityWhereDoYouWantToBuyAHomePage { get; set; }
 }

@@ -27,6 +27,7 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="109.0.5414.7400" />
     <PackageReference Include="Selenium.WebDriver" Version="4.6.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Selenium.Axe" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +36,7 @@
     <None Remove="Selenium.WebDriver" />
     <None Remove="appsettings.json" />
     <None Remove="Microsoft.Extensions.Configuration.UserSecrets" />
+    <None Remove="Selenium.Axe" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />

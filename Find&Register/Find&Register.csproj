@@ -20,6 +20,7 @@
     <None Remove="Extensions\" />
     <None Remove="Views\FooterLinks\" />
     <None Remove="Middleware\" />
+    <None Remove="Views\Eligibility\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0-beta1" />
@@ -33,6 +34,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="Views\FooterLinks\" />
     <Folder Include="Middleware\" />
+    <Folder Include="Views\Eligibility\" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="FindAndRegisterUnitTests" />
