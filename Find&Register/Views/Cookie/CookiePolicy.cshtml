@@ -30,7 +30,7 @@
                 @await Html.PartialAsync("_CookieTable", new CookieDescriptions
                 {
                     Descriptions = new List<CookieDescription> {
-                        new CookieDescription ("CookieSettings", "Stores your cookie settings", "1 year")
+                        new CookieDescription ("analytics-settings", "Stores your cookie settings", "1 year")
                     }
                 })
 
@@ -41,17 +41,16 @@
                     on your answers.
                 </p>
 
-                @Html.PartialAsync("_CookieTable", new CookieDescriptions
+                @await Html.PartialAsync("_CookieTable", new CookieDescriptions
                 {
                     Descriptions = new List<CookieDescription> {
-                        new CookieDescription (".AspNetCore.Antiforgery.*", "Ensures the details you submitted on a page came from the expected session", "At the end of your session"),
-                        new CookieDescription ("he_identity*", "Used to facilitate login", "At the end of your session")
+                        new CookieDescription ("eligibility-responses", "Helps us calculate your eligibility when you check if you are eligible to buy a shared ownership home", "At the end of your session")
                     }
                 })
 
                 <h2 class="govuk-heading-m">Cookies that measure website use</h2>
                 <p class="govuk-body">
-                    We use third party services (Application Insights) to collect anonymised information about how you
+                    We use third party services (Google Analytics) to collect anonymised information about how you
                     use this service so we can improve it.
                 </p>
                 <p class="govuk-inset-text">
@@ -76,7 +75,8 @@
             {
                 Descriptions = new List<CookieDescription> {
                     new CookieDescription ("ai_session", "Helps us recognise actions as part of the same session", "At the end of your session"),
-                    new CookieDescription ("ai_user", "Helps us recognise users anonymously on returning visits over time", "1 year")
+                    new CookieDescription ("ai_user", "Helps us recognise users anonymously on returning visits over time", "1 year"),
+                    new CookieDescription ("__ga*", "Helps us recognise users anonymously on Google Analytics", "2 years")
                 }
             })
 

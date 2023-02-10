@@ -58,11 +58,17 @@ public class CookieHelperTests
         var mockRequestCookies = new RequestCookiesTestCollection();
         var mockResponseCookies = new Mock<IResponseCookies>();
 
+        mockRequestCookies.Add("_ga_A643FC42", "aaa");
+        mockRequestCookies.Add("_ga", "bbb");
+        mockRequestCookies.Add("__utmc", "ccc");
+        mockRequestCookies.Add("ai_user", "sam");
+        mockRequestCookies.Add("ai_session", "frodo");
+
         var helper = new CookieHelper();
         var cookieData = helper.GetApplicationCookieData(mockRequestCookies, mockResponseCookies.Object);
         cookieData.AnalyticSettings.Value = new AnalyticSettings { AcceptAnalytics = false};
 
-        mockResponseCookies.Verify(m => m.Delete(It.IsAny<string>()), Times.Exactly(ApplicationCookieDataModel.AnalyticsCookieNames.Count()));
+        mockResponseCookies.Verify(m => m.Delete(It.IsAny<string>()), Times.Exactly(5));
     }
 
     [Fact]

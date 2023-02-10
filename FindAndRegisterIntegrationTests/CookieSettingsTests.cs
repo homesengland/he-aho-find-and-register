@@ -79,9 +79,8 @@ public class CookieSettingsTests : SeleniumTestsBase
         driver.Manage().Cookies.AddCookie(new Cookie("ai_session", "1231243234"));
         driver.Manage().Cookies.AddCookie(new Cookie("ai_user", "testuser"));
 
-        driver.Manage().Cookies.AddCookie(new Cookie("__utma", "Lorem ipsum dolor sit amet,"));
-        driver.Manage().Cookies.AddCookie(new Cookie("__utmb", "consectetur adipiscing elit,"));
-        driver.Manage().Cookies.AddCookie(new Cookie("__utmc", "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
+        driver.Manage().Cookies.AddCookie(new Cookie("_ga", "aaa"));
+        driver.Manage().Cookies.AddCookie(new Cookie("_ga_S65GS35J678", "bbb"));
 
         driver.FindElement(By.Id("Cookies_link")).Click();
         actions.ScrollByAmount(0, 500).Perform();
@@ -102,9 +101,8 @@ public class CookieSettingsTests : SeleniumTestsBase
         Assert.Null(driver.Manage().Cookies.GetCookieNamed("ai_user"));
         // application insight cookies have been removed
 
-        Assert.Null(driver.Manage().Cookies.GetCookieNamed("__utma"));
-        Assert.Null(driver.Manage().Cookies.GetCookieNamed("__utmb"));
-        Assert.Null(driver.Manage().Cookies.GetCookieNamed("__utmc"));
+        Assert.Null(driver.Manage().Cookies.GetCookieNamed("_ga"));
+        Assert.Null(driver.Manage().Cookies.GetCookieNamed("_ga_S65GS35J678"));
         // google analytics cookies have been removed
 
         driver.Navigate().GoToUrl(Host);
@@ -113,9 +111,8 @@ public class CookieSettingsTests : SeleniumTestsBase
         Assert.Null(driver.Manage().Cookies.GetCookieNamed("ai_user"));
         // application insight cookies have not been readded after moving to a new page
 
-        Assert.Null(driver.Manage().Cookies.GetCookieNamed("__utma"));
-        Assert.Null(driver.Manage().Cookies.GetCookieNamed("__utmb"));
-        Assert.Null(driver.Manage().Cookies.GetCookieNamed("__utmc"));
+        Assert.Null(driver.Manage().Cookies.GetCookieNamed("_ga"));
+        Assert.Null(driver.Manage().Cookies.GetCookieNamed("_ga_S65GS35J678"));
         // google analytics cookies have not been readded after moving to a new page
     }
 
