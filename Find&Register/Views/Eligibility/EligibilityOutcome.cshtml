@@ -1,7 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EligibilityJourneyBuyingWithAnotherPerson
 @{
+    ViewBag.Title = "Eligibilty Outome";
+    string SingleBuyer = @ViewBag.outcome;
 }
 
-page 5
+@await Html.PartialAsync(SingleBuyer)

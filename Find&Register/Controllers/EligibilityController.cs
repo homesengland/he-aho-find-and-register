@@ -45,7 +45,9 @@ namespace Find_Register.Controllers
 
             if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == true)
             {
-                return RedirectToAction(nameof(EligibilityOutcomeLondon));
+                cookie.EligibilityOutcome = "London";
+                applicationCookie.EligibilityResponses.Value = cookie;
+                return RedirectToAction(nameof(EligibilityOutcome));
             }
 
             if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == false)
@@ -113,7 +115,9 @@ namespace Find_Register.Controllers
 
             if (_EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80 == true)
             {
-                return RedirectToAction(nameof(EligibilityOutcomeForOver80KIncome));
+                cookie.EligibilityOutcome = "Over80K";
+                applicationCookie.EligibilityResponses.Value = cookie;
+                return RedirectToAction(nameof(EligibilityOutcome));
             }
 
             if (_EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80 == false)
@@ -147,7 +151,9 @@ namespace Find_Register.Controllers
 
             if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == true)
             {
-                return RedirectToAction(nameof(EligibilityOutcomeForOver80KIncome));
+                cookie.EligibilityOutcome = "Over80K";
+                applicationCookie.EligibilityResponses.Value = cookie;
+                return RedirectToAction(nameof(EligibilityOutcome));
             }
 
             if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == false)
@@ -172,17 +178,17 @@ namespace Find_Register.Controllers
         }
 
         [HttpPost]
-        public IActionResult FirstTimeBuyer(EligibilityJourneyFirstTimeBuyer _EligibilityJourneyFirstTimeBuyer, IFormCollection u)
+        public IActionResult FirstTimeBuyer(EligibilityJourneyFirstTimeBuyer _EligibilityJourneyFirstTimeBuyer)
         {
             var applicationCookie = _cookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
             var cookie = applicationCookie.EligibilityResponses.Value;
             cookie.EligibilityJourneyFirstTimeBuyer = _EligibilityJourneyFirstTimeBuyer;
             applicationCookie.EligibilityResponses.Value = cookie;
 
-            if (u.Keys.Contains("current-circumstances"))
-            {
-                return RedirectToAction(nameof(EligibilityOutcome));
-            }
+            //if (u.Keys.Contains("current-circumstances"))
+            //{
+            //    return RedirectToAction(nameof(EligibilityOutcome));
+            //}
 
             //if (_EligibilityJourneyFirstTimeBuyer.JointIncomeOver80 == false)
             //{
@@ -202,6 +208,13 @@ namespace Find_Register.Controllers
         public IActionResult EligibilityOutcome()
         {
             ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+
+            var applicationCookie = _cookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
+            var cookie = applicationCookie.EligibilityResponses.Value;
+
+            if (cookie.EligibilityOutcome == "London") { ViewBag.outcome = "EligibilityOutcomeLondon"; }
+            if (cookie.EligibilityOutcome == "Over80K") { ViewBag.outcome = "EligibilityOutcomeForOver80KIncome"; }
+
             return View();
         }
 
@@ -213,18 +226,17 @@ namespace Find_Register.Controllers
         }
 
         [HttpGet]
-        public IActionResult Eligable()
-        {
-            ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult EligibilityOutcomeLondon()
         {
             ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
             return View("EligibilityOutcomeLondon");
         }
-        
+
+        [HttpGet]
+        public IActionResult Eligable()
+        {
+            ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+            return View();
+        }
     }
 }

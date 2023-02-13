@@ -34,7 +34,7 @@ namespace Find_Register.Models
 
     public class EligibilityJourneyFirstTimeBuyer
     {
-        public bool firstTimeBuyer { get; set; }
+        public bool? firstTimeBuyer { get; set; }
         public bool? ownAHomeButNeedToMove { get; set; }
         public bool? cannotAffordAHome { get; set; }
         public bool? theseDoNotApply { get; set; }
