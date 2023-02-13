@@ -31,5 +31,13 @@ namespace Find_Register.Models
         [Required(ErrorMessage = "Choose how much you both earn")]
         public bool? JointIncomeOver80 { get; set; }
     }
+
+    public class EligibilityJourneyFirstTimeBuyer
+    {
+        public bool firstTimeBuyer { get; set; }
+        public bool? ownAHomeButNeedToMove { get; set; }
+        public bool? cannotAffordAHome { get; set; }
+        public bool? theseDoNotApply { get; set; }
+    }
 }
 

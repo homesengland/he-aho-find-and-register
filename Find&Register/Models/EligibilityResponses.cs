@@ -15,5 +15,5 @@ public struct EligibilityResponses
     public EligibilityJourneyBuyingWithAnotherPerson EligibilityJourneyBuyingWithAnotherPerson { get; set; }
     public EligibilityJourneyHowMuchDoYouEarn EligibilityJourneyHowMuchDoYouEarn { get; set; }
     public EligibilityJourneyHowMuchDoYouEarn_MultiplePeople EligibilityJourneyHowMuchDoYouEarn_MultiplePeople { get; set; }
-
+    public EligibilityJourneyFirstTimeBuyer EligibilityJourneyFirstTimeBuyer { get; set; }
 }

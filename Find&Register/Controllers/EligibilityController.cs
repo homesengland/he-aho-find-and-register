@@ -45,7 +45,7 @@ namespace Find_Register.Controllers
 
             if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == true)
             {
-                return RedirectToAction(nameof(EligibilityOutcome));
+                return RedirectToAction(nameof(EligibilityOutcomeLondon));
             }
 
             if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == false)
@@ -113,7 +113,7 @@ namespace Find_Register.Controllers
 
             if (_EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80 == true)
             {
-                return RedirectToAction(nameof(EligibilityOutcome));
+                return RedirectToAction(nameof(EligibilityOutcomeForOver80KIncome));
             }
 
             if (_EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80 == false)
@@ -147,7 +147,7 @@ namespace Find_Register.Controllers
 
             if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == true)
             {
-                return RedirectToAction(nameof(EligibilityOutcome));
+                return RedirectToAction(nameof(EligibilityOutcomeForOver80KIncome));
             }
 
             if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == false)
@@ -171,6 +171,32 @@ namespace Find_Register.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult FirstTimeBuyer(EligibilityJourneyFirstTimeBuyer _EligibilityJourneyFirstTimeBuyer, IFormCollection u)
+        {
+            var applicationCookie = _cookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
+            var cookie = applicationCookie.EligibilityResponses.Value;
+            cookie.EligibilityJourneyFirstTimeBuyer = _EligibilityJourneyFirstTimeBuyer;
+            applicationCookie.EligibilityResponses.Value = cookie;
+
+            if (u.Keys.Contains("current-circumstances"))
+            {
+                return RedirectToAction(nameof(EligibilityOutcome));
+            }
+
+            //if (_EligibilityJourneyFirstTimeBuyer.JointIncomeOver80 == false)
+            //{
+            //    return RedirectToAction(nameof(EligibilityOutcome));
+            //}
+
+            if (!ModelState.IsValid)
+            {
+                return View(_EligibilityJourneyFirstTimeBuyer);
+            }
+
+            return View(_EligibilityJourneyFirstTimeBuyer);
+        }
+
         //page 5
         [HttpGet]
         public IActionResult EligibilityOutcome()
@@ -179,5 +205,26 @@ namespace Find_Register.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult EligibilityOutcomeForOver80KIncome()
+        {
+            ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Eligable()
+        {
+            ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult EligibilityOutcomeLondon()
+        {
+            ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+            return View("EligibilityOutcomeLondon");
+        }
+        
     }
 }
