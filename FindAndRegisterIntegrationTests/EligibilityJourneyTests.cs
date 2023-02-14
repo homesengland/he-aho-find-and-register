@@ -382,6 +382,7 @@ namespace FindAndRegisterIntegrationTests
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
+
     }
 }
 

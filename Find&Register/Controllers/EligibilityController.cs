@@ -241,6 +241,7 @@ namespace Find_Register.Controllers
                 return RedirectToAction(nameof(EligibilityOutcome));
             }
 
+
             if (_EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true & _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
                 & _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null & _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
             {
