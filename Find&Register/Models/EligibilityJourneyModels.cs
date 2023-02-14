@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Xunit.Sdk;
 
@@ -31,5 +32,19 @@ namespace Find_Register.Models
         [Required(ErrorMessage = "Choose how much you both earn")]
         public bool? JointIncomeOver80 { get; set; }
     }
+
+    public class EligibilityJourneyFirstTimeBuyer
+    {
+
+        [Required(ErrorMessage = "Select at least one option")]
+        public bool? firstTimeBuyer { get; set; }
+        public bool? ownAHomeButNeedToMove { get; set; }
+        public bool? cannotAffordAHome { get; set; }
+        public bool? theseDoNotApply { get; set; }
+        public bool? conflictingChoicesChosen { get; set; }
+    }
+
+
 }
+
 

@@ -192,6 +192,197 @@ namespace FindAndRegisterIntegrationTests
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void NavigatingToFirstTimeBuyerSinglesJourney()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-multi-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Multi-Buyer-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void NavigatingToFirstTimeBuyerMultiJourney()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void FirstTimeBuyerAccessibilityTest()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+        }
+
+        ///eligability pages
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void NavigatingToElibilityOutcomeForLondon()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void ElibilityOutcomeForLondonLink()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("londonURL")).Click();
+            Assert.Equal("https://www.london.gov.uk/programmes-strategies/housing-and-land/homes-londoners/search", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void ElibilityOutcomeForLondonAccessibilityTest()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void ElibilityOutcomeForEarningsOver80k()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-81")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void ElibilityOutcomeForEarningsOver80kAccessibilityTest()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-81")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void NavigatingToFirstTimeBuyerNotEligableOutcome()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            driver.FindElement(By.Id("none")).Click();
+            driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void NotEligableOutcomeAccessibilityTest()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            driver.FindElement(By.Id("none")).Click();
+            driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void NavigatingToEligableOutcome()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            driver.FindElement(By.Id("own-a-home")).Click();
+            driver.FindElement(By.Id("cannot-afford-home")).Click();
+            driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void EligableOutcomeAccessibilityTest()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            driver.FindElement(By.Id("own-a-home")).Click();
+            driver.FindElement(By.Id("cannot-afford-home")).Click();
+            driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
+            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+        }
+
     }
 }
 

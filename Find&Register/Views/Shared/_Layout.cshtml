@@ -44,8 +44,8 @@
                             </svg>
                             <!--<![endif]-->
                             <!--[if IE 8]>
-                            <img src="/assets/images/govuk-logotype-crown.png" class="govuk-header__logotype-crown-fallback-image" width="36" height="32">
-                            <![endif]-->
+                        <img src="/assets/images/govuk-logotype-crown.png" class="govuk-header__logotype-crown-fallback-image" width="36" height="32">
+                        <![endif]-->
                             <span class="govuk-header__logotype-text">
                                 GOV.UK
                             </span>
@@ -76,7 +76,7 @@
 
                 <div class="container">
                     @* <main role="main" class="pb-3"> *@
-                        @RenderBody()
+                    @RenderBody()
                     @* </main> *@
                 </div>
             }
@@ -84,7 +84,7 @@
             {
                 <div class="container">
                     @* <main role="main" class="pb-3"> *@
-                        @RenderBody()
+                    @RenderBody()
                     @* </main> *@
                 </div>
             }
@@ -135,6 +135,7 @@
 
         @await RenderSectionAsync("Scripts", required: false)
     </body>
+
 </html>
 
 

@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="govuk-width-container ">
+    <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h1 class="govuk-heading-l">You may not be eligible to buy a shared ownership home</h1>
+                <p class="govuk-body">
+                    Based on the information you provided, you may not be eligible to buy a shared ownership home.
+                </p>
+                <h2 class="govuk-heading-m">Why you are not eligible for shared ownership</h2>
+                @if (ViewBag.theseDoNotApply == false) {
+                <p>You told us either that you:</p>
+                @*<ul class="govuk-list govuk-list--bullet">
+                    <li>own a home</li>
+                    <li>do not need to move</li>
+                    <li>can afford a home that meets your needs</li>
+                </ul>*@
+                <ul class="govuk-list govuk-list--bullet">
+                        @if (ViewBag.firstTimeBuyer != false)
+                        {<li>own a home</li>}
+                        @if (ViewBag.ownAHomeButNeedToMove != false)
+                        {<li>do not need to move</li>}
+                        @if (ViewBag.cannotAffordAHome != false)
+                        {<li>can afford a home that meets your needs</li>}
+                </ul>
+                }else{
+                }
+                
+                <h2 class="govuk-heading-m">Other help to buy a home</h2>
+                <p class="govuk-body">You may be eligible for support to buy a home through other <a href="https://www.gov.uk/affordable-home-ownership-schemes">affordable home ownership schemes</a>.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+

@@ -43,6 +43,12 @@
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="Views\Eligibility\EligibilityOutcomeForOver80KIncome.cshtml" />
+    <Content Remove="Views\Eligibility\EligibilityOutcomeIAmEligable.cshtml" />
+    <Content Remove="Views\Eligibility\EligibilityOutcomeLondon.cshtml" />
+    <Content Remove="Views\Eligibility\NotEligable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="Views\GenericErrors\InternalServerError.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
