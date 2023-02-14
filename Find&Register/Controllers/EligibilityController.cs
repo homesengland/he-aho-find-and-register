@@ -185,6 +185,37 @@ namespace Find_Register.Controllers
             cookie.EligibilityJourneyFirstTimeBuyer = _EligibilityJourneyFirstTimeBuyer;
             applicationCookie.EligibilityResponses.Value = cookie;
 
+            if (!ModelState.IsValid)
+            {
+                return View(_EligibilityJourneyFirstTimeBuyer);
+            }
+            
+            //Nothing is selected
+            if(
+                _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null &&
+                _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null &&
+                _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null &&
+                _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null
+            )
+            {
+                ModelState.AddModelError("Invalid Selection", "Please choose at least one option");
+                return View(_EligibilityJourneyFirstTimeBuyer);
+            }
+
+           // Users can only select from one group of options at a time
+           if(
+                _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == true && 
+                (
+                    _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true ||
+                    _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true ||
+                    _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true
+                )
+           ) 
+           {
+                ModelState.AddModelError("Invalid Answer", "Please check your answers and try again");
+                return View(_EligibilityJourneyFirstTimeBuyer);
+           }
+            
             if (_EligibilityJourneyFirstTimeBuyer.theseDoNotApply == true && _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
                 && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null)
             {
@@ -265,10 +296,7 @@ namespace Find_Register.Controllers
                 return RedirectToAction(nameof(EligibilityOutcome));
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View(_EligibilityJourneyFirstTimeBuyer);
-            }
+            
 
             return View(_EligibilityJourneyFirstTimeBuyer);
         }
