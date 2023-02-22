@@ -21,6 +21,7 @@
     <None Remove="Views\FooterLinks\" />
     <None Remove="Middleware\" />
     <None Remove="Views\Eligibility\" />
+    <None Remove="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0-beta1" />
@@ -35,6 +36,7 @@
     <Folder Include="Views\FooterLinks\" />
     <Folder Include="Middleware\" />
     <Folder Include="Views\Eligibility\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="FindAndRegisterUnitTests" />
@@ -42,12 +44,7 @@
   <ItemGroup>
     <Folder Include="Filters\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Remove="Views\Eligibility\EligibilityOutcomeForOver80KIncome.cshtml" />
-    <Content Remove="Views\Eligibility\EligibilityOutcomeIAmEligable.cshtml" />
-    <Content Remove="Views\Eligibility\EligibilityOutcomeLondon.cshtml" />
-    <Content Remove="Views\Eligibility\NotEligable.cshtml" />
-  </ItemGroup>
+ 
   <ItemGroup>
     <Content Update="Views\GenericErrors\InternalServerError.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -56,6 +53,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Views\GenericErrors\ServiceUnavailable.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\accessible-autocomplete.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
