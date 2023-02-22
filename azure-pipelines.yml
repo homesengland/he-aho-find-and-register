@@ -12,11 +12,11 @@ resources:
   repositories:
   - repository: he-ahofr-deployment
     type: git
-    name: 'Find Affordable Homes/he-ahofr-deployment'   
+    name: 'Find Affordable Homes/he-ahofr-deployment'
     ref: 'main'
   - repository: templates
     type: git
-    name: 'Find Affordable Homes/Templates'   
+    name: 'Find Affordable Homes/Templates'
     ref: 'master'
 
 stages:

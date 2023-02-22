@@ -14,23 +14,15 @@
                     Based on the information you provided, you may not be eligible to buy a shared ownership home.
                 </p>
                 <h2 class="govuk-heading-m">Why you are not eligible for shared ownership</h2>
-                @if (ViewBag.theseDoNotApply == false) {
-                <p>You told us either that you:</p>
-                @*<ul class="govuk-list govuk-list--bullet">
-                    <li>own a home</li>
-                    <li>do not need to move</li>
-                    <li>can afford a home that meets your needs</li>
-                </ul>*@
+             
+                <p class="govuk-body"> You told us either that you:</p>
+               
                 <ul class="govuk-list govuk-list--bullet">
-                        @if (ViewBag.firstTimeBuyer != false)
-                        {<li>own a home</li>}
-                        @if (ViewBag.ownAHomeButNeedToMove != false)
-                        {<li>do not need to move</li>}
-                        @if (ViewBag.cannotAffordAHome != false)
-                        {<li>can afford a home that meets your needs</li>}
+                        <li>own a home</li>
+                        <li>do not need to move</li>
+                        <li>can afford a home that meets your needs</li>
                 </ul>
-                }else{
-                }
+                
                 
                 <h2 class="govuk-heading-m">Other help to buy a home</h2>
                 <p class="govuk-body">You may be eligible for support to buy a home through other <a href="https://www.gov.uk/affordable-home-ownership-schemes">affordable home ownership schemes</a>.</p>

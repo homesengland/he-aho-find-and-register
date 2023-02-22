@@ -2,11 +2,6 @@
 
 namespace Find_Register.Models;
 
-/// <summary>
-/// *** Sample type for Json serializable cookie ***
-/// Note: If using a reference type (class) for underlaying cookie class, please ensure you trigger the value setter
-/// to update the HttpResponse cookie.
-/// </summary>
 public struct EligibilityResponses
 {
     public AnnualIncome AnnualIncome { get; set; }
@@ -17,4 +12,6 @@ public struct EligibilityResponses
     public EligibilityJourneyHowMuchDoYouEarn_MultiplePeople EligibilityJourneyHowMuchDoYouEarn_MultiplePeople { get; set; }
     public EligibilityJourneyFirstTimeBuyer EligibilityJourneyFirstTimeBuyer { get; set; }
     public string EligibilityOutcome { get; set; }
+    public string PreviousPage { get; set; }
+    public string PreviousPageBeforeErrorOutcome { get; set; }
 }

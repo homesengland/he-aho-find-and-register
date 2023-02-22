@@ -44,7 +44,9 @@
   <ItemGroup>
     <Folder Include="Filters\" />
   </ItemGroup>
- 
+  <ItemGroup>
+    <Content Remove="Views\Eligibility\EligibilityOutcomeIAmEligable.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Update="Views\GenericErrors\InternalServerError.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -36,7 +36,7 @@ namespace Find_Register.Models
     public class EligibilityJourneyFirstTimeBuyer
     {
 
-        [Required(ErrorMessage = "Select at least one option")]
+        
         public bool? firstTimeBuyer { get; set; }
         public bool? ownAHomeButNeedToMove { get; set; }
         public bool? cannotAffordAHome { get; set; }

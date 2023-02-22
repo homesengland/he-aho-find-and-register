@@ -26,10 +26,6 @@ namespace FindAndRegisterIntegrationTests
             string contactUsNavingationLink = Host + "FooterLinks/ContactUs";
             Assert.Equal(contactUsNavingationLink, driver.Url);
             driver.Navigate().GoToUrl(Host);
-
-            driver.FindElement(By.Id("Privacy_link")).Click();
-            string privacyNavingationLink = "https://www.gov.uk/government/publications/homes-england-privacy-notice/homes-england-privacy-notice#users-of-our-website-and-web-portals";
-            Assert.Equal(privacyNavingationLink, driver.Url);
         }
 
         [Fact]

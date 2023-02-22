@@ -16,7 +16,9 @@
     <script nonce="@Nonces.GaNonce">window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', '@AnalyticsConfig.Value.GaTag');</script>
+        gtag('config', '@AnalyticsConfig.Value.GaTag', {
+            'cookie_domain': 'none'
+        });</script>
     <noscript>
         <!--
             Note: this collect analytics for users without Javascript for if we are using
