@@ -1,11 +1,6 @@
-﻿using System;
-using System.IO;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium.Axe;
-using Xunit;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
 
 
 namespace FindAndRegisterIntegrationTests
@@ -383,6 +378,25 @@ namespace FindAndRegisterIntegrationTests
             Assert.Null(axeResult.Error);
         }
 
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void EligableOutcomeLinksToSearchForProvider()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+            driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            driver.FindElement(By.Id("buying-with-another-person-no")).Click();
+            driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
+            driver.FindElement(By.Id("annual-income-single-80")).Click();
+            driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
+            driver.FindElement(By.Id("own-a-home")).Click();
+            driver.FindElement(By.Id("cannot-afford-home")).Click();
+            driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
+            driver.FindElement(By.Id("eligible-result-find-a-provider-link")).Click();
+            Assert.True(driver.Url.Equals(Host + "Search") || driver.Url.Equals(Host + "find-organisations-selling-shared-ownership-homes"));
+                // depending on if ticket to change url has been merged
+        }
     }
 }
 
