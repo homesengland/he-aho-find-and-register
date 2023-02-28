@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 using Xunit.Sdk;
 
 namespace Find_Register.Models
@@ -35,16 +36,19 @@ namespace Find_Register.Models
 
     public class EligibilityJourneyFirstTimeBuyer
     {
-
-        
+        [Required(ErrorMessage = "Select at least one option")]
         public bool? firstTimeBuyer { get; set; }
+        
         public bool? ownAHomeButNeedToMove { get; set; }
         public bool? cannotAffordAHome { get; set; }
         public bool? theseDoNotApply { get; set; }
+
+        [Required(ErrorMessage = "Select either one of the first 3 options, or ‘These do not apply to me’")]
+        public bool? Conflicting4Choices { get; set; }
+
+        [Required(ErrorMessage = "Select either ‘I do not own a home’, or ‘I own a home but need to move’")]
         public bool? conflictingChoicesChosen { get; set; }
     }
-
-
 }
 
 
