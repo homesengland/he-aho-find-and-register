@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Selenium.Axe;
 
 namespace FindAndRegisterIntegrationTests
 {
@@ -23,14 +25,52 @@ namespace FindAndRegisterIntegrationTests
 
         [Fact]
         [Trait("Selenium", "Smoke")]
+        public void ContactUsTitleSize()
+        {
+            using IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Contact_link")).Click();
+            var title = driver.FindElement(By.Id("page-title")).GetAttribute("innerHTML");
+            Assert.Equal("Contact Us", title);
+
+            var classes = driver.FindElement(By.Id("page-title")).GetAttribute("class");
+            Assert.Equal("govuk-heading-l", classes);
+        }
+
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
         public void ContactUsEmailLink()
         {
             using IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("Contact_link")).Click();
-            var previousURL = driver.FindElement(By.Id("TechSupportEmail")).GetAttribute("href");
-            Assert.Contains("mailto:", previousURL);
+
+            var emailLink = driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("href");
+            Assert.Contains("mailto:", emailLink);
+
+            emailLink = driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("href");
+            Assert.Contains("mailto:", emailLink);
+
+            emailLink = driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("href");
+            Assert.Contains("mailto:", emailLink);
+
+            AxeResult axeResult = new AxeBuilder(driver).Analyze();
+            Assert.Null(axeResult.Error);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void ContactUsCallChargeLinkTargetsExpectedUrl()
+        {
+            using IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Contact_link")).Click();
+            var emailLink = driver.FindElement(By.Id("contact-us-midlands-call-charge-link")).GetAttribute("href");
+            Assert.Equal("https://www.gov.uk/call-charges", emailLink);
         }
 
         [Fact]
@@ -46,6 +86,19 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("Accessibility_link")).Click();
             driver.FindElement(By.ClassName("govuk-back-link")).Click();
             Assert.Equal(previousURL, driver.Url);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void AccessibilityTitleSize()
+        {
+            using IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Accessibility_link")).Click();
+
+            var classes = driver.FindElement(By.Id("page-title")).GetAttribute("class");
+            Assert.Equal("govuk-heading-l", classes);
         }
 
         [Fact]
