@@ -2,6 +2,7 @@
 @inject ICookieHelper CookieHelper
 @{
     var analyticSettings = CookieHelper.GetApplicationCookieData(Context.Request.Cookies, Context.Response.Cookies).AnalyticSettings;
+    var layoutModel = ViewContext.HttpContext.Items["LayoutModel"] as LayoutDataModel;
 }
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@
             {
                 @if (!analyticSettings.Value.HideConfirmation)
                 {
-                    <partial name="_CookieConfirmation" />
+                    <partial name="_CookieConfirmation" model="layoutModel" />
                 }
                 @if (analyticSettings.Value.AcceptAnalytics)
                 {
@@ -30,7 +31,7 @@
             }
             else
             {
-                <partial name="_CookieBanner" />
+                <partial name="_CookieBanner" model="layoutModel" />
             }
 
 
@@ -53,8 +54,8 @@
                     </a>
                 </div>
                 <div class="govuk-header__content">
-                    <a href="/annual-income" class="govuk-header__link govuk-header__service-name">
-                        Find a shared ownership provider
+                    <a href="@layoutModel?.HeaderLink" class="govuk-header__link govuk-header__service-name">
+                        @layoutModel?.HeaderText
                     </a>
                 </div>
             </div>
@@ -69,25 +70,15 @@
                             beta
                         </strong>
                         <span class="govuk-phase-banner__text">
-                            This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+                            This is a new service – your <a class="govuk-link" href="@layoutModel?.FeedbackLink">feedback</a> will help us to improve it.
                         </span>
                     </p>
                 </div>
+            }
 
-                <div class="container">
-                    @* <main role="main" class="pb-3"> *@
-                    @RenderBody()
-                    @* </main> *@
-                </div>
-            }
-            else
-            {
-                <div class="container">
-                    @* <main role="main" class="pb-3"> *@
-                    @RenderBody()
-                    @* </main> *@
-                </div>
-            }
+            <div class="container">
+                @RenderBody()
+            </div>
         </div>
 
         <footer class="govuk-footer" role="contentinfo">
@@ -97,17 +88,17 @@
                         <h2 class="govuk-visually-hidden">Support links</h2>
                         <ul class="govuk-footer__inline-list">
                             <li class="govuk-footer__inline-list-item">
-                                <a class="govuk-footer__link" id="Accessibility_link" href="@Url.Action("Accessibility", "FooterLinks")">
+                                <a class="govuk-footer__link" id="Accessibility_link" href="@layoutModel?.FooterLinkRoot/accessibility">
                                     Accessibility
                                 </a>
                             </li>
                             <li class="govuk-footer__inline-list-item">
-                                <a class="govuk-footer__link" id="Cookies_link" href="/cookie-settings">
+                                <a class="govuk-footer__link" id="Cookies_link" href="@layoutModel?.FooterLinkRoot/cookie-settings">
                                     Cookies
                                 </a>
                             </li>
                             <li class="govuk-footer__inline-list-item">
-                                <a class="govuk-footer__link" id="Contact_link" href="@Url.Action("ContactUs", "FooterLinks")">
+                                <a class="govuk-footer__link" id="Contact_link" href="@layoutModel?.FooterLinkRoot/contact-us">
                                     Contact
                                 </a>
                             </li>

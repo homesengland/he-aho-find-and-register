@@ -7,22 +7,27 @@ namespace FindAndRegisterIntegrationTests
 {
     public class EligibilityJourneyTests : SeleniumTestsBase
     {
+        public EligibilityJourneyTests()
+        {
+            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+        }
+
         [Fact]
         [Trait("Selenium", "Smoke")]
         public void WhereDoYouWantToBuyAHomeNavigation()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
-            Assert.NotEqual(Host + "Eligibility", driver.Url);
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.NotEqual(Host, driver.Url);
+            Assert.Equal(Host + "continue-on-the-homes-for-londoners-website", driver.Url);
 
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
-            Assert.NotEqual(Host + "Eligibility", driver.Url);
-            Assert.Equal(Host + "Eligibility/BuyingWithAnotherPerson", driver.Url);
+            Assert.NotEqual(Host, driver.Url);
+            Assert.Equal(Host + "are-you-buying-with-another-person", driver.Url);
         }
 
         [Fact]
@@ -39,25 +44,25 @@ namespace FindAndRegisterIntegrationTests
         public void BuyingWithAnotherPersonNavigation()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
-            Assert.NotEqual(Host + "Eligibility", driver.Url);
-            Assert.Equal(Host + "Eligibility/BuyingWithAnotherPerson", driver.Url);
+            Assert.NotEqual(Host, driver.Url);
+            Assert.Equal(Host + "are-you-buying-with-another-person", driver.Url);
 
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
-            Assert.NotEqual(Host + "Eligibility/BuyingWithAnotherPerson", driver.Url);
-            Assert.Equal(Host + "Eligibility/HowMuchDoYouEarn_MultiplePeople", driver.Url);
+            Assert.NotEqual(Host + "are-you-buying-with-another-person", driver.Url);
+            Assert.Equal(Host + "how-much-do-you-both-earn", driver.Url);
 
 
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
-            Assert.NotEqual(Host + "Eligibility/BuyingWithAnotherPerson", driver.Url);
-            Assert.Equal(Host + "Eligibility/HowMuchDoYouEarn", driver.Url);
+            Assert.NotEqual(Host + "are-you-buying-with-another-person", driver.Url);
+            Assert.Equal(Host + "how-much-do-you-earn", driver.Url);
         }
 
         [Fact]
@@ -65,7 +70,7 @@ namespace FindAndRegisterIntegrationTests
         public void BuyingWithAnotherPersonAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
@@ -77,12 +82,12 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToHowMuchDoYouEarn()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/HowMuchDoYouEarn", driver.Url);
+            Assert.Equal(Host + "how-much-do-you-earn", driver.Url);
         }
 
         [Fact]
@@ -90,14 +95,14 @@ namespace FindAndRegisterIntegrationTests
         public void HowMuchDoYouEarnChoosingBelow80k()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-single-80")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+            Assert.Equal(Host + "select-all-that-apply-to-you", driver.Url);
         }
 
         [Fact]
@@ -105,14 +110,14 @@ namespace FindAndRegisterIntegrationTests
         public void HowMuchDoYouEarnChoosingAbove80k()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-single-81")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
         }
 
         [Fact]
@@ -120,12 +125,12 @@ namespace FindAndRegisterIntegrationTests
         public void HowMuchDoYouEarnAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/HowMuchDoYouEarn", driver.Url);
+            Assert.Equal(Host + "how-much-do-you-earn", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
@@ -135,12 +140,12 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToHowMuchDoYouEarn_MultiplePeople()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/HowMuchDoYouEarn_MultiplePeople", driver.Url);
+            Assert.Equal(Host + "how-much-do-you-both-earn", driver.Url);
         }
 
         [Fact]
@@ -148,14 +153,14 @@ namespace FindAndRegisterIntegrationTests
         public void HowMuchDoYouEarn_MultiplePeopleChoosingBelow80k()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-multi-80")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Multi-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+            Assert.Equal(Host + "select-all-that-apply-to-you", driver.Url);
         }
 
         [Fact]
@@ -163,14 +168,14 @@ namespace FindAndRegisterIntegrationTests
         public void HowMuchDoYouEarn_MultiplePeopleChoosingAbove80k()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-multi-81")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Multi-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
         }
 
         [Fact]
@@ -178,12 +183,12 @@ namespace FindAndRegisterIntegrationTests
         public void HowMuchDoYouEarn_MultiplePeopleAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/HowMuchDoYouEarn_MultiplePeople", driver.Url);
+            Assert.Equal(Host + "how-much-do-you-both-earn", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
@@ -193,14 +198,14 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToFirstTimeBuyerSinglesJourney()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-multi-80")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Multi-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+            Assert.Equal(Host + "select-all-that-apply-to-you", driver.Url);
         }
 
         [Fact]
@@ -208,14 +213,14 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToFirstTimeBuyerMultiJourney()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-single-80")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+            Assert.Equal(Host + "select-all-that-apply-to-you", driver.Url);
         }
 
         [Fact]
@@ -223,14 +228,14 @@ namespace FindAndRegisterIntegrationTests
         public void FirstTimeBuyerAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-single-80")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/FirstTimeBuyer", driver.Url);
+            Assert.Equal(Host + "select-all-that-apply-to-you", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
@@ -241,10 +246,10 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToElibilityOutcomeForLondon()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "continue-on-the-homes-for-londoners-website", driver.Url);
         }
 
         [Fact]
@@ -252,7 +257,7 @@ namespace FindAndRegisterIntegrationTests
         public void ElibilityOutcomeForLondonLink()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("londonURL")).Click();
@@ -264,10 +269,10 @@ namespace FindAndRegisterIntegrationTests
         public void ElibilityOutcomeForLondonAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "continue-on-the-homes-for-londoners-website", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
@@ -277,14 +282,14 @@ namespace FindAndRegisterIntegrationTests
         public void ElibilityOutcomeForEarningsOver80k()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-single-81")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
         }
 
         [Fact]
@@ -292,14 +297,14 @@ namespace FindAndRegisterIntegrationTests
         public void ElibilityOutcomeForEarningsOver80kAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             driver.FindElement(By.Id("annual-income-single-81")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
@@ -309,7 +314,7 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToFirstTimeBuyerNotEligableOutcome()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -318,7 +323,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
             driver.FindElement(By.Id("none")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
         }
 
         [Fact]
@@ -326,7 +331,7 @@ namespace FindAndRegisterIntegrationTests
         public void NotEligableOutcomeAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -335,7 +340,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
             driver.FindElement(By.Id("none")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }
@@ -345,7 +350,7 @@ namespace FindAndRegisterIntegrationTests
         public void NavigatingToEligableOutcome()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -355,7 +360,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("own-a-home")).Click();
             driver.FindElement(By.Id("cannot-afford-home")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
         }
 
         [Fact]
@@ -363,7 +368,7 @@ namespace FindAndRegisterIntegrationTests
         public void EligableOutcomeAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -373,7 +378,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("own-a-home")).Click();
             driver.FindElement(By.Id("cannot-afford-home")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
-            Assert.Equal(Host + "Eligibility/EligibilityOutcome", driver.Url);
+            Assert.Equal(Host + "you-may-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
             AxeResult axeResult = new AxeBuilder(driver).Analyze();
             Assert.Null(axeResult.Error);
         }

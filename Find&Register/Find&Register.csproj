@@ -18,7 +18,6 @@
     <None Remove="Cookies\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Extensions\" />
-    <None Remove="Views\FooterLinks\" />
     <None Remove="Middleware\" />
     <None Remove="Views\Eligibility\" />
     <None Remove="Views\Search\" />
@@ -39,7 +38,6 @@
   <ItemGroup>
     <Folder Include="Cookies\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Views\FooterLinks\" />
     <Folder Include="Middleware\" />
     <Folder Include="Views\Eligibility\" />
     <Folder Include="Views\Search\" />

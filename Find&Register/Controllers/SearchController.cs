@@ -1,54 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Find_Register.Filters;
+﻿using Find_Register.Filters;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Find_Register.DataSourceService;
 using Find_Register.Models;
-
+using Find_Register.Cookies;
 
 namespace Find_Register.Controllers;
-    
-    [TypeFilter(typeof(UnhandledExceptionFilter))]
-    public class SearchController : Controller
+
+[TypeFilter(typeof(UnhandledExceptionFilter))]
+[JourneyLayoutFilter(Journey.Search)]
+[Route("find-organisations-selling-shared-ownership-homes")]
+public class SearchController : BaseControllerWithShareStaticPages
+{
+    private readonly ILogger<SearchController> _logger;
+    private readonly IDataSources _locationDataSource;
+
+    // GET: /<controller>/
+    public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource, ICookieHelper cookieHelper) : base(cookieHelper)
     {
-        private readonly ILogger<SearchController> _logger;
-        private readonly IDataSources _locationDataSource;
-
-        // GET: /<controller>/
-        public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource)
-        {
-            _logger = logger;
-            _locationDataSource = locationDataSource;
-        }
-
-        public IActionResult Index()
-        {
-            return View(new SearchResultsModel());
-        }
-
-        [HttpPost]
-        public IActionResult SearchResults(SearchResultsModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-
-            var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(model.Area ?? string.Empty);
-
-            model.ProviderModels = providers;
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult SearchResults()
-        {
-            return View(new SearchResultsModel());
-        }
+        _logger = logger;
+        _locationDataSource = locationDataSource;
     }
+
+    [HttpGet]
+    public IActionResult Index()
+    {
+        var locations = _locationDataSource.GetLocationDataSource.Locations;
+
+        return View(new SearchResultsModel { LocationModels = locations });
+    }
+
+    [HttpPost]
+    [Route("organisations-that-sell-shared-ownership-homes")]
+    public IActionResult SearchResults(SearchResultsModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(model.Area ?? string.Empty);
+        var locations = _locationDataSource.GetLocationDataSource.Locations;
+
+        model.ProviderModels = providers;
+        model.LocationModels = locations;
+
+        return View(model);
+    }
+}

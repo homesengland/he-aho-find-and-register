@@ -8,6 +8,11 @@ namespace FindAndRegisterIntegrationTests
 {
 	public class FooterLinksTests : SeleniumTestsBase
     {
+        public FooterLinksTests()
+        {
+            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+        }
+
         [Fact]
         [Trait("Selenium", "Smoke")]
         public void ContactUsBackButton()

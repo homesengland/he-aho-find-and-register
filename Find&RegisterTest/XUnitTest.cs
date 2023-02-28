@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Logging;
-
-namespace FindAndRegisterUnitTest;
-
 using Find_Register.Controllers;
 using Find_Register.Filters;
 using Microsoft.AspNetCore.Http;
@@ -18,34 +15,36 @@ using Microsoft.AspNetCore.Routing;
 using Find_Register.Models;
 using Moq;
 
+namespace FindAndRegisterUnitTest;
+
 public class XUnitTest
 {
-    private ILogger<HomeController> Logger => new Mock<ILogger<HomeController>>().Object;
+    private ILogger<EligibilityController> Logger => new Mock<ILogger<EligibilityController>>().Object;
     
     
-    private readonly HomeController _homeController;
+    private readonly EligibilityController _eligibilityController;
 
     public XUnitTest()
     {
         var mockICookieHelper = new Mock<ICookieHelper>();
-        _homeController = new HomeController(Logger,mockICookieHelper.Object);
-        _homeController.ControllerContext = new ControllerContext();
+        _eligibilityController = new EligibilityController(Logger, mockICookieHelper.Object);
+        _eligibilityController.ControllerContext = new ControllerContext();
     }
 
     [Fact]
     [Trait("XUnit", "Smoke")]
     public void CheckHomePage()
     {
-        var result = _homeController.Index();
+        var result = _eligibilityController.Index();
         var viewResult = Assert.IsType<ViewResult>(result);
-        Assert.Equal(200, _homeController.Ok().StatusCode);
+        Assert.Equal(200, _eligibilityController.Ok().StatusCode);
     }
 
     [Fact]
     [Trait("XUnit", "Smoke")]
     public void CheckGlobalFilter()
     {
-        var result = _homeController.AnnualIncome();
+        var result = _eligibilityController.BuyingWithAnotherPerson();
 
         // Create a default ActionContext (depending on our case-scenario)
         var actionContext = new ActionContext()

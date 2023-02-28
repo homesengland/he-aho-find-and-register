@@ -6,6 +6,11 @@ namespace FindAndRegisterIntegrationTests
 {
 	public class FooterTests : SeleniumTestsBase
     {
+        public FooterTests()
+        {
+            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+        }
+
         [Fact]
         [Trait("Selenium", "Smoke")]
         public void FooterLinks()
@@ -14,7 +19,7 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
 
             driver.FindElement(By.Id("Accessibility_link")).Click();
-            string AccessibilityNavingationLink = Host + "FooterLinks/Accessibility";
+            string AccessibilityNavingationLink = Host + "accessibility";
             Assert.Equal(AccessibilityNavingationLink, driver.Url);
             driver.Navigate().GoToUrl(Host);
 
@@ -23,7 +28,7 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
 
             driver.FindElement(By.Id("Contact_link")).Click();
-            string contactUsNavingationLink = Host + "FooterLinks/ContactUs";
+            string contactUsNavingationLink = Host + "contact-us";
             Assert.Equal(contactUsNavingationLink, driver.Url);
             driver.Navigate().GoToUrl(Host);
         }

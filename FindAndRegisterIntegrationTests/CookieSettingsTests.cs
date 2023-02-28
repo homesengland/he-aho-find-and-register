@@ -8,7 +8,12 @@ using OpenQA.Selenium.Interactions;
 namespace FindAndRegisterIntegrationTests;
 
 public class CookieSettingsTests : SeleniumTestsBase
-{   
+{
+    public CookieSettingsTests()
+    {
+        Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+    }
+
     [Fact]
     [Trait("Selenium", "Smoke")]
     public void CookieSettings_PageLoads()
@@ -73,7 +78,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         var actions = new Actions(driver);
 
         driver.Manage().Cookies.DeleteAllCookies();
-        driver.Navigate().GoToUrl(Host + "current-situation");
+        driver.Navigate().GoToUrl(Host);
         actions.ScrollByAmount(0, 500).Perform();
 
         driver.Manage().Cookies.AddCookie(new Cookie("ai_session", "1231243234"));
@@ -88,7 +93,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         ClickSubmit(driver);
 
-        Assert.Equal(Host + "current-situation", driver.Url);
+        Assert.Equal(Host, driver.Url);
         // user is returned to the previous page they were on
 
         var acceptAnalyticsCookie = driver.Manage().Cookies.GetCookieNamed("analytic-settings");
@@ -124,7 +129,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         var actions = new Actions(driver);
 
         driver.Manage().Cookies.DeleteAllCookies();
-        driver.Navigate().GoToUrl(Host + "current-situation");
+        driver.Navigate().GoToUrl(Host);
         actions.ScrollByAmount(0, 500).Perform();
         
 
@@ -140,7 +145,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         driver.FindElement(By.Id("accept-yes")).Click();
         ClickSubmit(driver);
 
-        Assert.Equal(Host + "current-situation", driver.Url);
+        Assert.Equal(Host, driver.Url);
         // user is returned to the previous page they were on
 
         var acceptAnalyticsCookie = driver.Manage().Cookies.GetCookieNamed("analytic-settings");
@@ -172,11 +177,11 @@ public class CookieSettingsTests : SeleniumTestsBase
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
         Assert.Equal(Host + "cookie-policy", driver.Url);
 
-        driver.Navigate().GoToUrl(Host + "current-situation");
+        driver.Navigate().GoToUrl(Host);
         actions.ScrollByAmount(0, 1000);
         driver.FindElement(By.Id("Cookies_link")).Click();
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
-        Assert.Equal(Host + "current-situation", driver.Url);
+        Assert.Equal(Host, driver.Url);
     }
 
     [Fact]

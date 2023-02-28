@@ -35,15 +35,13 @@ builder.Services.Configure<RazorViewEngineOptions>(o => o.ViewLocationExpanders.
 builder.Services.AddScoped<ICookieHelper, CookieHelper>();
 builder.Services.AddTransient<IHttpClient, HttpClientWrapper>();
 
-var app = builder
-    .Build();
-
+var app = builder.Build();
 app.UseHeaderSecurity();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/check-eligiblility-to-buy-a-shared-ownership-home/error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -56,6 +54,6 @@ app.UseEndpoints(ep => ep.MapRazorPages());
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Eligibility}/{action=Index}/{id?}");
 
 app.Run();

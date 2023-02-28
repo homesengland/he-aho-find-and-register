@@ -5,6 +5,11 @@ namespace FindAndRegisterIntegrationTests;
 
 public class SeleniumTest : SeleniumTestsBase
 {
+    public SeleniumTest()
+    {
+        Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+    }
+
     [Fact]
     [Trait("Selenium", "Smoke")]
     public void SkeletonTest()
@@ -14,41 +19,7 @@ public class SeleniumTest : SeleniumTestsBase
         {
             //does not work as we cant run the web instance with the test.
             driver.Navigate().GoToUrl(Host);
-            Assert.Contains("Find a shared ownership provider", driver.Title);
-        }
-    }
-
-    [Fact]
-    [Trait("Selenium", "Smoke")]
-    public void Eligibility_HappyPath()
-    {
-        using IWebDriver driver = new ChromeDriver();
-
-        driver.Navigate().GoToUrl(Host + "annual-income");
-        Assert.Contains("Annual Income", driver.Title);
-        driver.FindElement(By.Id("income-yes")).Click();
-
-        ClickSubmit(driver);
-        Assert.Equal(Host + "current-situation", driver.Url);
-        Assert.Contains("Current Situation", driver.Title);
-        // Check that we have moved to the next page
-
-        driver.FindElement(By.Id("situation-yes")).Click();
-
-        ClickSubmit(driver);
-    }
-
-    [Fact]
-    [Trait("Selenium", "Smoke")]
-    public void CurrentSituation_BackButton()
-    {
-        //creating new instance of chrome driver
-        using (IWebDriver driver = new ChromeDriver())
-        {
-            driver.Navigate().GoToUrl(Host + "current-situation");
-            driver.FindElement(By.ClassName("govuk-back-link")).Click();
-            Assert.Equal(Host + "annual-income", driver.Url);
+            Assert.Contains("Where do you want to buy a home", driver.Title);
         }
     }
 }
-

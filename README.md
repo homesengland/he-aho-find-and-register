@@ -19,6 +19,11 @@ run the following commands from the Find\&Register project folder:
     dotnet user-secrets set "DataSources:Locations:UseApi" [ask the tech team for the values]
     dotnet user-secrets set "DataSources:Providers" [ask the tech team for the values]
 
+If you wish to run locally with dummy data set:
+
+    dotnet user-secrets set "DataSources:Locations:UseApi" false
+    dotnet user-secrets set "DataSources:Locations:LocalFile" "resources/TestLocations.json"
+
 ### Coding standard
 
 Find and Register follows Homes England coding standards and must follow Govuk frontend design standards.

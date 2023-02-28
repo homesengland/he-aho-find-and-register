@@ -13,4 +13,3 @@ public class GovukValidatedFormFieldModel
     public string? Title { get; set; }
     public Func<object, IHtmlContent>? Content { get; set; }
 }
-
