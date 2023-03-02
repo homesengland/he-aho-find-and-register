@@ -19,6 +19,7 @@ public class GenericErrorsController : Controller
     [Route("500")]
     public IActionResult InternalServerError()
     {
+        ViewBag.ContactUsLink = "https://www.gov.uk/government/organisations/homes-england/about/access-and-opening";
         return View();
     }
 
@@ -26,6 +27,7 @@ public class GenericErrorsController : Controller
     [Route("404")]
     public IActionResult PageNotFound()
     {
+        ViewBag.ContactUsLink = "/check-eligiblility-to-buy-a-shared-ownership-home/contact-us";
         return View();
     }
 
@@ -33,6 +35,7 @@ public class GenericErrorsController : Controller
     [Route("503")]
     public IActionResult ServiceUnavailable()
     {
+        ViewBag.ContactUsLink = "https://www.gov.uk/government/organisations/homes-england/about/access-and-opening";
         return View();
     }
 }

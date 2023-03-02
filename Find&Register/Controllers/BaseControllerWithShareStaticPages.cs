@@ -68,6 +68,7 @@ public abstract class BaseControllerWithShareStaticPages : Controller
     public IActionResult Accessibility()
     {
         ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+        ViewBag.FindSharedOwnershipLink = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
         return View();
     }
 

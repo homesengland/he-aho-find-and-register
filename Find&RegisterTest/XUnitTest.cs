@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
 using Find_Register.Models;
 using Moq;
+using Microsoft.Extensions.Configuration;
 using Find_RegisterTest;
 
 namespace FindAndRegisterUnitTest;
@@ -21,16 +22,18 @@ namespace FindAndRegisterUnitTest;
 public class XUnitTest
 {
     private ILogger<EligibilityController> Logger => new Mock<ILogger<EligibilityController>>().Object;
-    
-    
+ 
+
     private readonly EligibilityController _eligibilityController;
 
     public XUnitTest()
     {
         var mockICookieHelper = new Mock<ICookieHelper>();
-        var mockConfig = new MockConfig();
-        mockConfig.Add("BaseUrl", "https://somewhere.somedomain.uk");
-        _eligibilityController = new EligibilityController(Logger, mockICookieHelper.Object, mockConfig);
+
+        var mockIConfig = new MockConfig();
+        mockIConfig.Add("BaseUrl", "https://somewhere.somedomain.uk");
+        _eligibilityController = new EligibilityController(Logger, mockICookieHelper.Object, mockIConfig);
+
         _eligibilityController.ControllerContext = new ControllerContext();
     }
 
@@ -47,7 +50,7 @@ public class XUnitTest
     [Trait("XUnit", "Smoke")]
     public void CheckGlobalFilter()
     {
-        var result = _eligibilityController.BuyingWithAnotherPerson();
+        var result = _eligibilityController.Index();
 
         // Create a default ActionContext (depending on our case-scenario)
         var actionContext = new ActionContext()
