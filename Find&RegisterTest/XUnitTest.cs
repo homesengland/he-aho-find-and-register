@@ -16,6 +16,7 @@ using Find_Register.Models;
 using Moq;
 using Microsoft.Extensions.Configuration;
 using Find_RegisterTest;
+using FluentAssertions;
 
 namespace FindAndRegisterUnitTest;
 
@@ -97,6 +98,44 @@ public class XUnitTest
         var errors = resourceExecutingContext.HttpContext.Items["errors"] as List<ErrorSummary>;
 
         Assert.Single(errors!);
+    }
+
+    [Fact]
+    public void GeneralStatusErrorsTest()
+    {
+        ////Arrange
+        //var webPage = _eligibilityController;
+        //webPage.StatusCode(500);
+
+        //var actionContext = new ActionContext()
+        //{
+        //    HttpContext = new DefaultHttpContext(),
+        //    RouteData = new RouteData(),
+        //    ActionDescriptor = new ActionDescriptor()
+        //};
+        //var resourceExecutingContext = new ActionExecutedContext(
+        //    actionContext,
+        //    new List<IFilterMetadata>(),
+        //    new List<IValueProviderFactory>()
+        //);
+
+        //// Act (Call the method under test with the arranged parameters)
+        //resourceExecutingContext.ModelState.AddModelError("testkey", "testerror");
+        ////attribute.OnActionExecuted(resourceExecutingContext);
+        //webPage.Index();
+
+        //var url = webPage.Url;
+
+        ////Assert
+        //Assert.IsType<List<ErrorSummary>>(resourceExecutingContext.HttpContext.Items["errors"]);
+        //var errors = resourceExecutingContext.HttpContext.Items["errors"] as List<ErrorSummary>;
+
+        //Assert.Single(errors!);
+
+
+
+
+        
     }
 }
 
