@@ -29,6 +29,14 @@ public class SearchController : BaseControllerWithShareStaticPages
         return View(new SearchResultsModel { LocationModels = locations });
     }
 
+    [HttpGet]
+    [Route("organisations-that-sell-shared-ownership-homes")]
+    // this route can be hit on a get method when we use back button, in which case return us to the search page
+    public IActionResult SearchResults()
+    {
+        return RedirectToAction(nameof(Index));
+    }
+
     [HttpPost]
     [Route("organisations-that-sell-shared-ownership-homes")]
     public IActionResult SearchResults(SearchResultsModel model)
@@ -39,8 +47,13 @@ public class SearchController : BaseControllerWithShareStaticPages
         }
 
         var locations = _locationDataSource.GetLocationDataSource.Locations;
-
         var gssCode = locations?.FirstOrDefault(l => l.LocalAuthority?.Equals(model.Area ?? string.Empty) ?? false)?.LocationCode;
+
+        if (string.IsNullOrEmpty(gssCode) && !(locations?.Any(l => l.LocationCode?.Equals(gssCode) ?? false) ?? false))
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
         var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
         
         model.ProviderModels = providers;
