@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
 using Find_Register.Models;
 using Moq;
+using Find_RegisterTest;
 
 namespace FindAndRegisterUnitTest;
 
@@ -27,7 +28,9 @@ public class XUnitTest
     public XUnitTest()
     {
         var mockICookieHelper = new Mock<ICookieHelper>();
-        _eligibilityController = new EligibilityController(Logger, mockICookieHelper.Object);
+        var mockConfig = new MockConfig();
+        mockConfig.Add("BaseUrl", "https://somewhere.somedomain.uk");
+        _eligibilityController = new EligibilityController(Logger, mockICookieHelper.Object, mockConfig);
         _eligibilityController.ControllerContext = new ControllerContext();
     }
 

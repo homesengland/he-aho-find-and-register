@@ -19,6 +19,16 @@ run the following commands from the Find\&Register project folder:
     dotnet user-secrets set "DataSources:Locations:UseApi" [ask the tech team for the values]
     dotnet user-secrets set "DataSources:Providers" [ask the tech team for the values]
 
+To use sharepoint datasource for the providers, please add the following user secrets:
+    dotnet user-secrets set "SharePointGraph:ClientId" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:ClientSecret" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:ProviderSite" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:ProvidersList" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:SharepointHost" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:MicrosoftInstance" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:GraphUrl" [ask the tech team for the values]
+    dotnet user-secrets set "SharePointGraph:TenantId" [ask the tech team for the values]
+
 If you wish to run locally with dummy data set:
 
     dotnet user-secrets set "DataSources:Locations:UseApi" false

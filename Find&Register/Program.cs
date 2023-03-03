@@ -12,9 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<LocationConfiguration>(
     builder.Configuration.GetRequiredSection("DataSources:Locations")
 );
+builder.Services.Configure<ProvidersSharePointAccessConfiguration>(
+    builder.Configuration.GetRequiredSection("SharePointGraph")
+);
 
+builder.Services.AddSingleton<IGraphServiceClientInstance, GraphServiceClientInstance>();
+builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSource>();
 builder.Services.AddSingleton<IDataSources, DataSources>();
-
 
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.Configure<TelemetryConfiguration>(
@@ -22,7 +26,8 @@ builder.Services.Configure<TelemetryConfiguration>(
 );
 builder.Services.Configure<AnalyticsConfiguration>(
      builder.Configuration.GetRequiredSection("Analytics")
- );
+);
+
 builder.Services.AddScoped<NonceModel>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();

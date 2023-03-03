@@ -1,0 +1,124 @@
+﻿using System.Net.Http.Headers;
+using Find_Register.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.Graph;
+using Microsoft.Identity.Client;
+
+namespace Find_Register.DataSourceService;
+
+public interface IGraphServiceClientInstance
+{
+    public DateTimeOffset? GetLastModified();
+    public IEnumerable<ProviderModel> GetAllProviders();
+}
+
+public class GraphServiceClientInstance : IGraphServiceClientInstance
+{
+    private readonly ProvidersSharePointAccessConfiguration _config;
+    private readonly ILogger _logger;
+
+    public GraphServiceClientInstance(IOptions<ProvidersSharePointAccessConfiguration> config, ILogger<GraphServiceClientInstance> logger)
+    {
+        _config = config.Value;
+        _logger = logger;
+    }
+
+    public DateTimeOffset? GetLastModified()
+    {
+        try
+        {
+            var client = GetAuthenticatedGraphClient();
+
+            var task = Task.Run<List>(async () => await client
+                 .Sites
+                .GetByPath($"sites/{_config.ProviderSite}", _config.SharepointHost)
+                .Lists[_config.ProvidersList]
+                .Request()
+                .GetAsync());
+            return task.Result.LastModifiedDateTime;
+        }
+        catch (Exception ex)
+        {
+            _logger.Log(Microsoft.Extensions.Logging.LogLevel.Error, $"Failed to fetch to Providers sharepoint list update time - {ex.Message}");
+            return null;
+        }        
+    }
+
+    public IEnumerable<ProviderModel> GetAllProviders()
+    {
+        var client = GetAuthenticatedGraphClient();
+        IListItemsCollectionPage? sharePointData;
+
+        try
+        {
+            var task = Task.Run<IListItemsCollectionPage>(async () => await client
+                .Sites
+                .GetByPath($"sites/{_config.ProviderSite}", _config.SharepointHost)
+                .Lists[_config.ProvidersList]
+                .Items
+                .Request()
+                .Expand(item => item.Fields)
+                .Top(1000)
+                .GetAsync());
+
+            sharePointData = task.Result;
+        }
+        catch (Exception ex)
+        {
+            _logger.Log(Microsoft.Extensions.Logging.LogLevel.Error, $"Failed to connect to Providers sharepoint list - {ex.Message}");
+            return new List<ProviderModel>();
+        }
+
+        var providerResult = new List<ProviderModel>();
+
+        foreach (var dataItem in sharePointData)
+        {
+            try
+            {
+                var sharepointProvider = new SharepointProviderValue();
+                sharepointProvider.CompanyName = dataItem.Fields.AdditionalData["CompanyName"].ToString();
+                sharepointProvider.ContactNumber = dataItem.Fields.AdditionalData["ContactNumber"].ToString();
+                sharepointProvider.Email = dataItem.Fields.AdditionalData["Email"].ToString();
+                sharepointProvider.HOLD = dataItem.Fields.AdditionalData["HOLD"] as bool? ?? false;
+                sharepointProvider.IsLocalAuthority = dataItem.Fields.AdditionalData["IsLocalAuthority"] as bool? ?? false;
+                sharepointProvider.LocalAuthorities = dataItem.Fields.AdditionalData["LocalAuthorities"].ToString();
+                sharepointProvider.OPSO = dataItem.Fields.AdditionalData["OPSO"] as bool? ?? false;
+                sharepointProvider.RentToBuy = dataItem.Fields.AdditionalData["RentToBuy"] as bool? ?? false;
+
+                providerResult.Add(new ProviderModel(sharepointProvider));
+            }
+            catch (Exception ex)
+            {
+                // catch individual invalid rows and move on to the next row
+                _logger.Log(Microsoft.Extensions.Logging.LogLevel.Error, $"Invalid sharepoint list value - {ex.Message}");
+            }
+        }
+        return providerResult;
+    }
+
+    private GraphServiceClient GetAuthenticatedGraphClient()
+    {
+        string[] scopes = new string[] { $"{_config.GraphUrl}.default" };
+        // Generates a scope -> "https://graph.microsoft.com/.default"
+
+        IConfidentialClientApplication app;
+        {
+            app = ConfidentialClientApplicationBuilder.Create(_config.ClientId)
+                .WithClientSecret(_config.ClientSecret)
+                .WithAuthority(new Uri(_config.Authority))
+                .Build();
+        }
+
+        var graphServiceClient =
+                new GraphServiceClient("https://graph.microsoft.com/V1.0/", new DelegateAuthenticationProvider(async (requestMessage) =>
+                {
+                    AuthenticationResult result = await app.AcquireTokenForClient(scopes)
+                        .ExecuteAsync();
+
+                    requestMessage.Headers.Authorization =
+                        new AuthenticationHeaderValue("Bearer", result.AccessToken);
+                }));
+
+        return graphServiceClient;
+    }
+}

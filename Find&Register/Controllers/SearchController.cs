@@ -38,10 +38,11 @@ public class SearchController : BaseControllerWithShareStaticPages
             return RedirectToAction(nameof(Index));
         }
 
-
-        var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(model.Area ?? string.Empty);
         var locations = _locationDataSource.GetLocationDataSource.Locations;
 
+        var gssCode = locations?.FirstOrDefault(l => l.LocalAuthority?.Equals(model.Area ?? string.Empty) ?? false)?.LocationCode;
+        var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
+        
         model.ProviderModels = providers;
         model.LocationModels = locations;
 

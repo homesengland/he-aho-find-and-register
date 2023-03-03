@@ -1,32 +1,38 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Find_Register.DataSourceService;
 
 namespace Find_Register.Models;
 
 public class ProviderModel
 {
-    /// <summary>
-    /// A Unique ID for this provider as stored in Homes England CRM system
-    /// </summary>
-    public string? CrmId { get; set; }
+    public ProviderModel(){
+        Locations = new List<string>();
+    }
 
-    /// <summary>
-    /// Unique ID for this provider as sent through on Sharepoint list or other editing system
-    /// </summary>
-    public string? Id { get; set; }
+    public ProviderModel(SharepointProviderValue providers) {
+        Name = providers.CompanyName;
+        Email = providers.Email;
+        Phone = providers.ContactNumber;
+        Website = providers.URL;
+        Opso = providers.OPSO;
+        Hold = providers.HOLD;
+        RentToBuy = providers.RentToBuy;
+        IsLocalAuthority = providers.IsLocalAuthority;
+        Locations = new List<string>();
+
+        providers.LocalAuthorities?.Split(";")
+            .ToList()
+            .ForEach(la => Locations.Add(la));
+    }
 
     public string? Name { get; set; }
 
     /// <summary>
-    /// Email for admin contact
-    /// </summary>
-    public string? AdminEmail { get; set; }
-
-    /// <summary>
     /// Email for sales to display on search results
     /// </summary>
-    public string? SalesEmail { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     /// Phone for sales to display on search results
@@ -47,10 +53,14 @@ public class ProviderModel
     [JsonPropertyName("HOLD")]
     public bool Hold { get; set; }
 
+    public bool RentToBuy { get; set; }
+
+    public bool IsLocalAuthority { get; set; }    
+
     /// <summary>
     /// Collection of Local authority names this provider operates in
     /// </summary>
-    public List<string>? Locations {get; set;}
+    public List<string> Locations {get; set;}
 }
 
 public class ProviderFileModel

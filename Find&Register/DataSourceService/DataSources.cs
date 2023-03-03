@@ -65,10 +65,11 @@ public class DataSources : IDataSources
             if (_cache.TryGetValue<IProviderDataSource>(_providerCacheKey, out var cachedProviderDataSource))
                 return cachedProviderDataSource;
 
-            var providerDataSource = new ProviderDataSource(_serviceProvider);
+            var providerDataSource = new ProviderBlobDataSource(_serviceProvider);
             var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CachePeriodMinutes));
             _cache.Set<IProviderDataSource>(_providerCacheKey, providerDataSource, cacheEntryOptions);
             return providerDataSource;
         }
     }
+    
 }

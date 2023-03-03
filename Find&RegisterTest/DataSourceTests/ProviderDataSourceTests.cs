@@ -17,7 +17,7 @@ public class ProviderDataSourceTests
         mockServiceProvider.Setup(m => m.GetService(typeof(IConfiguration))).Returns(mockConfig);
 
         var source = new ProviderDataSource(mockServiceProvider.Object);
-        Assert.Equal(280, source.Providers?.Count);
+        Assert.Equal(24, source.Providers?.Count());
     }
 
     [Fact]
@@ -34,17 +34,17 @@ public class ProviderDataSourceTests
             UseApi = false
         };
         var locations = new LocationDataSource(locationConfig, null).Locations;
-        var locationName = locations?.Where(l => !l.IsLondon).First().LocalAuthority;
+        var locationGssCode = locations?.Where(l => !l.IsLondon && l.LocalAuthority!.Equals("Leicester")).First().LocationCode;
 
 
         var providerSource = new ProviderDataSource(mockServiceProvider.Object);
-        var providersAtLocation = providerSource.ProvidersActiveInLocalAuthority(locationName!);
-        Assert.Equal(5, providersAtLocation?.Count);
-        // The dummy data has 1 provider for each location + 4 providers that operate nationally, thus this should always return 5 results
+        var providersAtLocation = providerSource.ProvidersActiveInLocalAuthority(locationGssCode!);
+        Assert.Equal(5, providersAtLocation?.Count());
+        // The dummy data has 1 provider for each of the first 20 locations + 4 providers that operate nationally, thus this should return 5 results
 
         foreach(var provider in providersAtLocation!)
         {
-            Assert.Contains(locationName, provider.Locations!);
+            Assert.Contains(locationGssCode, provider.Locations!);
         }
     }
 
@@ -59,7 +59,7 @@ public class ProviderDataSourceTests
         mockServiceProvider.Setup(m => m.GetService(typeof(ILogger))).Returns(mockLogger);
 
         var source = new ProviderDataSource(mockServiceProvider.Object);
-        Assert.Equal(0, source.Providers?.Count);
+        Assert.Equal(0, source.Providers?.Count());
         Assert.Equal(1, mockLogger.LoggedMessages?.Count);
 
     }

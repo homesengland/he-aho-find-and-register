@@ -11,6 +11,9 @@ public class LocationModel
     [JsonPropertyName("name")]
     public string? LocalAuthority { get; set; }
 
+    [JsonPropertyName("gssCode")]
+    public string? LocationCode { get; set; }
+
     [JsonPropertyName("areaCodeDescription")]
     public string? AreaCode { get; set; }
 

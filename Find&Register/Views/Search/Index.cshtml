@@ -7,7 +7,7 @@
 }
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     var countries = [];
-    @if(Model.LocationModels != null) @foreach (var location in Model.LocationModels)
+    @if(Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
     {
         @:countries.push("@location.LocalAuthority");
     }

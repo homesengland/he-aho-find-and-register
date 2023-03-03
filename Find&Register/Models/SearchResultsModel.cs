@@ -8,7 +8,7 @@ namespace Find_Register.Models
         [Required]
         public string? Area { get; set; }
 
-        public List<ProviderModel>? ProviderModels {get;set;}
+        public IEnumerable<ProviderModel>? ProviderModels {get;set;}
         public List<LocationModel>? LocationModels { get; set; }
 
     }

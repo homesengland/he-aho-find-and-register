@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Find_Register.Models;
+﻿using Find_Register.Models;
 using System.Text.Json;
 
 namespace Find_Register.DataSourceService;
@@ -19,7 +16,7 @@ public class ProviderDataSource : IProviderDataSource
 
             var config = serviceProvider.GetRequiredService<IConfiguration>();
             var locationFile = config[ProviderPathConfigKey];
-            var jsonString = File.ReadAllText(locationFile);
+            var jsonString = System.IO.File.ReadAllText(locationFile);
             Providers = JsonSerializer.Deserialize<ProviderFileModel>(jsonString)?.Providers;
         }
         catch (Exception ex)
@@ -33,11 +30,10 @@ public class ProviderDataSource : IProviderDataSource
         }
     }
 
-    public List<ProviderModel>? Providers { get; }
+    public IEnumerable<ProviderModel>? Providers { get; }
 
-    public List<ProviderModel>? ProvidersActiveInLocalAuthority(string localAuthority)
+    public IEnumerable<ProviderModel>? ProvidersActiveInLocalAuthority(string localAuthority)
     {
-        return Providers?.Where(p => p.Locations != null && p.Locations.Contains(localAuthority)).ToList();
+        return Providers?.Where(p => p.Locations != null && p.Locations.Contains(localAuthority)).OrderBy(p => p.Name);
     }
 }
-
