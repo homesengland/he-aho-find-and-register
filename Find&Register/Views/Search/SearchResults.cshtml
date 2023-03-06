@@ -66,7 +66,7 @@
                         <p class="govuk-body">@localAuthorityProvider.Name can help you find a new home. They know about new developments before the homes are listed for sale. Contact @localAuthorityProvider.Name to ask about upcoming developments.</p>
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @localAuthorityProvider.Phone</p>
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a href="mailto:@localAuthorityProvider.Email">@localAuthorityProvider.Email</a></p>
-                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a href="@localAuthorityProvider.Website">@localAuthorityProvider.Website</a></p>
+                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a href="@localAuthorityProvider.WebsiteUrl">@localAuthorityProvider.Website</a></p>
                     </div>
                 }
                 @foreach (var provider in Model.ProviderModels?.Where(p => !p.IsLocalAuthority) ?? new List<ProviderModel>())
@@ -76,7 +76,7 @@
                         <a href="mailto:@provider.Email">@provider.Email </a>
                     </p>
                     <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> 
-                        <a href="@provider.Website">@provider.Website</a>
+                        <a href="@provider.WebsiteUrl">@provider.Website</a>
                     </p>
                     if (provider.Opso || provider.Hold)
                     {

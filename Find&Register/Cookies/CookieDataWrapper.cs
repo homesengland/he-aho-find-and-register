@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Azure.Core;
+using Newtonsoft.Json;
 
 namespace Find_Register.Cookies;
 
@@ -18,7 +20,6 @@ public class CookieDataWrapper<T>
     private Action<T> _updateCookieCallback;
     private Action<T>? _addtionalUpdateCallback;
     private readonly Action _unSetCallback;
-
     /// <summary>
     /// Initializes a Cookie datawrapper for a particular cookie for a particular request.
     /// </summary>
@@ -80,10 +81,11 @@ public class CookieDataWrapper<T>
                         CookieOptions cookieOptions,
                         IResponseCookies responseCookies)
     {
-        var currentValue = !isSet ? default : cookieValue != null && cookieValue.Equals(true.ToString(), StringComparison.OrdinalIgnoreCase);
+        
+        var currentValue = !isSet ? default : cookieValue != null && Base64Decode(cookieValue).Equals(true.ToString(), StringComparison.OrdinalIgnoreCase);
 
         var updateCookieCallback = (bool newValue) => {
-            responseCookies.Append(cookieName, newValue.ToString(), cookieOptions);
+            responseCookies.Append(cookieName, Base64Encode(newValue.ToString()), cookieOptions);
         };
 
         var unSetCallback = () => responseCookies.Delete(cookieName);
@@ -98,10 +100,10 @@ public class CookieDataWrapper<T>
                     CookieOptions cookieOptions,
                     IResponseCookies responseCookies)
     {
-        var currentValue = !isSet ? "" : cookieValue ?? "";
+        var currentValue = !isSet ? "" : Base64Decode(cookieValue ?? "");
 
         var updateCookieCallback = (string newValue) => {
-            responseCookies.Append(cookieName, newValue, cookieOptions);
+            responseCookies.Append(cookieName, Base64Encode(newValue), cookieOptions);
         };
 
         var unSetCallback = () => responseCookies.Delete(cookieName);
@@ -117,14 +119,26 @@ public class CookieDataWrapper<T>
                     IResponseCookies responseCookies) where TU : struct
     {        
         var currentValue = (!isSet || cookieValue == null) ?
-            default : JsonConvert.DeserializeObject<TU>(cookieValue);
+            default : JsonConvert.DeserializeObject<TU>(Base64Decode(cookieValue));
 
         var updateCookieCallback = (TU newValue) => {
-            responseCookies.Append(cookieName, JsonConvert.SerializeObject(newValue), cookieOptions);
+            responseCookies.Append(cookieName, Base64Encode(JsonConvert.SerializeObject(newValue)), cookieOptions);
         };
 
         var unSetCallback = () => responseCookies.Delete(cookieName);
 
         return new CookieDataWrapper<TU>(currentValue, isSet, updateCookieCallback, unSetCallback);
+    }
+
+    private static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
+    private static string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
     }
 }

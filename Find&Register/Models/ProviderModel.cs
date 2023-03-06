@@ -15,7 +15,8 @@ public class ProviderModel
         Name = providers.CompanyName;
         Email = providers.Email;
         Phone = providers.ContactNumber;
-        Website = providers.URL;
+        Website = providers.WebsiteName;
+        WebsiteUrl = providers.WebsiteUrl;
         Opso = providers.OPSO;
         Hold = providers.HOLD;
         RentToBuy = providers.RentToBuy;
@@ -40,6 +41,7 @@ public class ProviderModel
     public string? Phone { get; set; }
 
     public string? Website { get; set; }
+    public string? WebsiteUrl { get; set; }
 
     /// <summary>
     /// Indicates that this provider has OPSO properties

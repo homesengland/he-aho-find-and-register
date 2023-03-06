@@ -43,6 +43,13 @@ builder.Services.AddTransient<IHttpClient, HttpClientWrapper>();
 var app = builder.Build();
 app.UseHeaderSecurity();
 
+app.UseCookiePolicy(
+    new CookiePolicyOptions
+    {
+        Secure = CookieSecurePolicy.Always,
+        MinimumSameSitePolicy = SameSiteMode.Strict
+    });
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

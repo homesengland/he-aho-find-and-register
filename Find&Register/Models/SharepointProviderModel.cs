@@ -8,7 +8,8 @@ public class SharepointProviderRoot {
 public class SharepointProviderValue
 {
     public string? CompanyName { get; set; }
-    public string? URL { get; set; }
+    public string? WebsiteName { get; set; }
+    public string? WebsiteUrl { get; set; }
     public string? Email { get; set; }
     public string? ContactNumber { get; set; }
     public bool IsLocalAuthority { get; set; }

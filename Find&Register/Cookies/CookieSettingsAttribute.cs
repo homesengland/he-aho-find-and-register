@@ -36,7 +36,7 @@ public class CookieSettingsAttribute : Attribute
     /// <returns>CookieOption object that should be used when setting this cookie</returns>
     public CookieOptions GenerateCookieOptions()
     {
-        var cookieOptions = new CookieOptions { IsEssential = true };
+        var cookieOptions = new CookieOptions { IsEssential = true, Secure = true, SameSite = SameSiteMode.Strict };
         if (ExpiryDays > 0) cookieOptions.Expires = DateTimeOffset.Now.AddDays(ExpiryDays);
         return cookieOptions;
     }

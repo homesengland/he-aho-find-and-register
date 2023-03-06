@@ -79,11 +79,15 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
                 sharepointProvider.CompanyName = dataItem.Fields.AdditionalData["CompanyName"].ToString();
                 sharepointProvider.ContactNumber = dataItem.Fields.AdditionalData["ContactNumber"].ToString();
                 sharepointProvider.Email = dataItem.Fields.AdditionalData["Email"].ToString();
-                sharepointProvider.HOLD = dataItem.Fields.AdditionalData["HOLD"] as bool? ?? false;
-                sharepointProvider.IsLocalAuthority = dataItem.Fields.AdditionalData["IsLocalAuthority"] as bool? ?? false;
+                sharepointProvider.WebsiteName = dataItem.Fields.AdditionalData["URL"].ToString();
+                sharepointProvider.WebsiteUrl = CorrectUrl(dataItem.Fields.AdditionalData["URL"].ToString());
+                sharepointProvider.HOLD = Convert.ToBoolean(dataItem.Fields.AdditionalData["HOLD"].ToString());
+                sharepointProvider.IsLocalAuthority = Convert.ToBoolean(dataItem.Fields.AdditionalData["IsLocalAuthority"].ToString());
                 sharepointProvider.LocalAuthorities = dataItem.Fields.AdditionalData["LocalAuthorities"].ToString();
-                sharepointProvider.OPSO = dataItem.Fields.AdditionalData["OPSO"] as bool? ?? false;
-                sharepointProvider.RentToBuy = dataItem.Fields.AdditionalData["RentToBuy"] as bool? ?? false;
+                sharepointProvider.OPSO = Convert.ToBoolean(dataItem.Fields.AdditionalData["OPSO"].ToString());
+                sharepointProvider.RentToBuy = Convert.ToBoolean(dataItem.Fields.AdditionalData["RentToBuy"].ToString());
+
+
 
                 providerResult.Add(new ProviderModel(sharepointProvider));
             }
@@ -94,6 +98,12 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
             }
         }
         return providerResult;
+    }
+
+    private string CorrectUrl(string? originalUri)
+    {
+        if (string.IsNullOrEmpty(originalUri)) return "#";
+        return Uri.IsWellFormedUriString(originalUri, UriKind.Absolute) ? originalUri : $"//{originalUri}";
     }
 
     private GraphServiceClient GetAuthenticatedGraphClient()
