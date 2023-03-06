@@ -38,12 +38,27 @@ public class SearchController : BaseControllerWithShareStaticPages
     }
 
     [HttpPost]
+    public IActionResult Index(SearchResultsModel model)
+    {
+        var locations = _locationDataSource.GetLocationDataSource.Locations;
+        if (!ModelState.IsValid)
+        {
+            return View(new SearchResultsModel { LocationModels = locations });
+        }
+        else
+        {
+            return RedirectToAction("SearchResults", "Search", model);
+        }
+       
+    }
+
+    [HttpGet]
     [Route("organisations-that-sell-shared-ownership-homes")]
     public IActionResult SearchResults(SearchResultsModel model)
     {
         if (!ModelState.IsValid)
         {
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index),model);
         }
 
         var locations = _locationDataSource.GetLocationDataSource.Locations;
