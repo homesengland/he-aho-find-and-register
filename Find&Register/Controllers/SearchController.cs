@@ -55,10 +55,29 @@ public class SearchController : BaseControllerWithShareStaticPages
         }
 
         var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
-        
+
         model.ProviderModels = providers;
         model.LocationModels = locations;
 
+        if(providers?.Count() == 0)
+        {
+            return NoSearchResults(model);
+        }
+
         return View(model);
+    }
+
+    [HttpGet]
+    [Route("organisations-that-sell-shared-no-results")]
+    public IActionResult NoSearchResults()
+    {
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    [Route("organisations-that-sell-shared-no-results")]
+    public IActionResult NoSearchResults(SearchResultsModel model)
+    {
+        return View(nameof(NoSearchResults), model);
     }
 }
