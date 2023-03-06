@@ -4,4 +4,5 @@ public interface IDataSources
 {
     public ILocationDataSource GetLocationDataSource { get; }
     public IProviderDataSource GetProviderDataSource { get; }
+    public IProviderBlobDataSource? GetProviderBlobDataSource { get; }
 }

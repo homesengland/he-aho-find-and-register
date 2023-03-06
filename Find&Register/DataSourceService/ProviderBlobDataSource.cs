@@ -1,31 +1,24 @@
 ﻿using Find_Register.Models;
 using System.Text.Json;
-using Azure.Storage.Blobs;
 
 namespace Find_Register.DataSourceService;
 
-public class ProviderBlobDataSource : IProviderDataSource
+public class ProviderBlobDataSource : IProviderBlobDataSource
 {
-
-    private readonly string _connectionString;
-    private readonly string _containerName;
     private const string _blobName = "SampleOutput.json";
     private const string _localFile = "providers.json";
     private DateTimeOffset? _lastModified;
     private readonly ILogger? _logger;
+    private IBlobContainerClient _blobClient;
 
 
-    public ProviderBlobDataSource(IServiceProvider serviceProvider)
+    public ProviderBlobDataSource(ILogger<ProviderBlobDataSource> logger, IConfiguration config, IBlobContainerClient blobClient)
     {
-        _logger = serviceProvider.GetService<ILogger>();
-
-        var config = serviceProvider.GetRequiredService<IConfiguration>();
-        _connectionString = config["DataSources:Providers:ConnectionString"];
-        _containerName = config["DataSources:Providers:ContainerName"];
+        _logger = logger;
+        _blobClient = blobClient;
     }
 
-    private List<ProviderModel>? _providers;
-
+    private List<ProviderModel>? _providers = new List<ProviderModel>();
     public IEnumerable<ProviderModel>? Providers
     {
         get
@@ -40,30 +33,27 @@ public class ProviderBlobDataSource : IProviderDataSource
 
     public IEnumerable<ProviderModel>? ProvidersActiveInLocalAuthority(string localAuthorityGssCode)
     {
-        return Providers?.Where(p => p.Locations != null && p.Locations.Contains(localAuthorityGssCode)).OrderBy(p => p.Name);
+        return Providers?.Where(p => p.Locations != null && p.Locations.Contains(localAuthorityGssCode)).OrderBy(p => p.Name).ToList();
     }
 
     private bool HasUpdates()
-    {
-        BlobContainerClient container = new BlobContainerClient(_connectionString, _containerName);
-        BlobClient blob = container.GetBlobClient(_blobName);
-        var modified = blob.GetProperties().Value.LastModified;
-        return _lastModified == null || modified > _lastModified;
+    {        
+        var modified = _blobClient.GetBlobLastModified(_blobName);
+        return modified != null && (_lastModified == null || modified > _lastModified);
     }
 
     private void DownloadBlob()
     {
-        BlobContainerClient container = new BlobContainerClient(_connectionString, _containerName);
-        BlobClient blob = container.GetBlobClient(_blobName);
-        var modified = blob.GetProperties().Value.LastModified;
-        blob.DownloadTo(_localFile);
-        _lastModified = modified;
+        _lastModified = _blobClient.DownloadBlobAndReturnLastModiedDate(_blobName, _localFile);
 
         try
         {
             var jsonString = File.ReadAllText(_localFile);
             var sharePointProviders = JsonSerializer.Deserialize<SharepointProviderRoot>(jsonString)?.body?.value;
-            _providers = sharePointProviders?.Select(p => new ProviderModel(p)).ToList() ?? new List<ProviderModel>();
+            _providers = sharePointProviders?.Select(p =>
+            {
+                return new ProviderModel(p);
+            }).ToList() ?? new List<ProviderModel>();
         }
         catch (Exception ex)
         {

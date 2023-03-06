@@ -18,6 +18,10 @@ builder.Services.Configure<ProvidersSharePointAccessConfiguration>(
 
 builder.Services.AddSingleton<IGraphServiceClientInstance, GraphServiceClientInstance>();
 builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSource>();
+
+builder.Services.AddSingleton<IBlobContainerClient, BlobContainerClientWrapper>();
+builder.Services.AddSingleton<IProviderBlobDataSource, ProviderBlobDataSource>();
+
 builder.Services.AddSingleton<IDataSources, DataSources>();
 
 builder.Services.AddApplicationInsightsTelemetry();
@@ -53,7 +57,7 @@ app.UseCookiePolicy(
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/check-eligiblility-to-buy-a-shared-ownership-home/error");
+    app.UseExceptionHandler("/pagenotfound");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -67,5 +71,7 @@ app.UseEndpoints(ep => ep.MapRazorPages());
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Eligibility}/{action=Index}/{id?}");
+
+app.UseStatusCodePagesWithRedirects("/GenericErrors/{0}");
 
 app.Run();

@@ -9,3 +9,6 @@ public interface IProviderDataSource
     public IEnumerable<ProviderModel>? ProvidersActiveInLocalAuthority(string localAuthority);
 }
 
+public interface IProviderBlobDataSource : IProviderDataSource
+{
+}

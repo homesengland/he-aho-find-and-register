@@ -1,4 +1,6 @@
-﻿public class SharepointProviderBody
+﻿using System.Text.Json.Serialization;
+
+public class SharepointProviderBody
 {
     public List<SharepointProviderValue>? value { get; set; }
 }
@@ -8,6 +10,8 @@ public class SharepointProviderRoot {
 public class SharepointProviderValue
 {
     public string? CompanyName { get; set; }
+
+    [JsonPropertyName("URL")]
     public string? WebsiteName { get; set; }
     public string? WebsiteUrl { get; set; }
     public string? Email { get; set; }
