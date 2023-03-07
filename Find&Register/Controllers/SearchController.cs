@@ -29,14 +29,6 @@ public class SearchController : BaseControllerWithShareStaticPages
         return View(new SearchResultsModel { LocationModels = locations });
     }
 
-    [HttpGet]
-    [Route("organisations-that-sell-shared-ownership-homes")]
-    // this route can be hit on a get method when we use back button, in which case return us to the search page
-    public IActionResult SearchResults()
-    {
-        return RedirectToAction(nameof(Index));
-    }
-
     [HttpPost]
     public IActionResult Index(SearchResultsModel model)
     {
@@ -47,18 +39,20 @@ public class SearchController : BaseControllerWithShareStaticPages
         }
         else
         {
+
             return RedirectToAction("SearchResults", "Search", model);
         }
        
     }
 
     [HttpGet]
+    [HttpPost]
     [Route("organisations-that-sell-shared-ownership-homes")]
     public IActionResult SearchResults(SearchResultsModel model)
     {
         if (!ModelState.IsValid)
         {
-            return RedirectToAction(nameof(Index),model);
+            return RedirectToAction(nameof(Index), model);
         }
 
         var locations = _locationDataSource.GetLocationDataSource.Locations;
@@ -66,6 +60,7 @@ public class SearchController : BaseControllerWithShareStaticPages
 
         if (string.IsNullOrEmpty(gssCode) && !(locations?.Any(l => l.LocationCode?.Equals(gssCode) ?? false) ?? false))
         {
+            //add error message here
             return RedirectToAction(nameof(Index));
         }
 
@@ -84,13 +79,14 @@ public class SearchController : BaseControllerWithShareStaticPages
         model.ProviderModels = providers;
         model.LocationModels = locations;
 
-        if(providers?.Count() == 0)
+        if (providers?.Count() == 0)
         {
             return NoSearchResults(model);
         }
 
         return View(model);
     }
+
 
     [HttpGet]
     [Route("organisations-that-sell-shared-no-results")]
