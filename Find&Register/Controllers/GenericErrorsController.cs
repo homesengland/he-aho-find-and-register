@@ -25,7 +25,7 @@ public class GenericErrorsController : Controller
     //404 errors 
     public IActionResult PageNotFound()
     {
-        ViewBag.ContactUsLink = "/check-eligiblility-to-buy-a-shared-ownership-home/contact-us";
+        ViewBag.ContactUsLink = "https://www.gov.uk/government/organisations/homes-england/about/access-and-opening";
         return View();
     }
 

@@ -46,7 +46,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         var actions = new Actions(driver);
         // open front page first so that the driver can fetch the context for cookie domains
 
-        driver.Manage().Cookies.AddCookie(new Cookie("analytic-settings", HttpUtility.UrlEncode(
+        driver.Manage().Cookies.AddCookie(new Cookie("analytic-settings", Base64Encode(
                 JsonConvert.SerializeObject(new AnalyticSettings { AcceptAnalytics = true, HideConfirmation = true }))
             ));
         driver.Navigate().GoToUrl(Host + "cookie-settings");
@@ -58,7 +58,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         Assert.True(doAccept.Selected);
 
 
-        driver.Manage().Cookies.AddCookie(new Cookie("analytic-settings", HttpUtility.UrlEncode(
+        driver.Manage().Cookies.AddCookie(new Cookie("analytic-settings", Base64Encode(
                 JsonConvert.SerializeObject(new AnalyticSettings { AcceptAnalytics = false, HideConfirmation = true }))
             ));
         driver.Navigate().GoToUrl(Host + "cookie-settings");
@@ -81,11 +81,11 @@ public class CookieSettingsTests : SeleniumTestsBase
         driver.Navigate().GoToUrl(Host);
         actions.ScrollByAmount(0, 500).Perform();
 
-        driver.Manage().Cookies.AddCookie(new Cookie("ai_session", "1231243234"));
-        driver.Manage().Cookies.AddCookie(new Cookie("ai_user", "testuser"));
+        driver.Manage().Cookies.AddCookie(new Cookie("ai_session", Base64Encode("1231243234")));
+        driver.Manage().Cookies.AddCookie(new Cookie("ai_user", Base64Encode("testuser")));
 
-        driver.Manage().Cookies.AddCookie(new Cookie("_ga", "aaa"));
-        driver.Manage().Cookies.AddCookie(new Cookie("_ga_S65GS35J678", "bbb"));
+        driver.Manage().Cookies.AddCookie(new Cookie("_ga", Base64Encode("aaa")));
+        driver.Manage().Cookies.AddCookie(new Cookie("_ga_S65GS35J678", Base64Encode("bbb")));
 
         driver.FindElement(By.Id("Cookies_link")).Click();
         actions.ScrollByAmount(0, 500).Perform();
@@ -97,7 +97,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         // user is returned to the previous page they were on
 
         var acceptAnalyticsCookie = driver.Manage().Cookies.GetCookieNamed("analytic-settings");
-        var deserialized = JsonConvert.DeserializeObject<AnalyticSettings>(HttpUtility.UrlDecode(acceptAnalyticsCookie.Value));
+        var deserialized = JsonConvert.DeserializeObject<AnalyticSettings>(Base64Decode(acceptAnalyticsCookie.Value));
         Assert.False(deserialized.AcceptAnalytics);
         Assert.InRange(acceptAnalyticsCookie.Expiry!.Value, DateTime.Now.AddDays(364), DateTime.Now.AddDays(366));
         // analytics acceptance cookie has been set and expires in 365 days
@@ -133,12 +133,12 @@ public class CookieSettingsTests : SeleniumTestsBase
         actions.ScrollByAmount(0, 500).Perform();
         
 
-        driver.Manage().Cookies.AddCookie(new Cookie("ai_session", "1231243234"));
-        driver.Manage().Cookies.AddCookie(new Cookie("ai_user", "testuser"));
+        driver.Manage().Cookies.AddCookie(new Cookie("ai_session", Base64Encode("1231243234")));
+        driver.Manage().Cookies.AddCookie(new Cookie("ai_user", Base64Encode("testuser")));
 
-        driver.Manage().Cookies.AddCookie(new Cookie("__utma", "Lorem ipsum dolor sit amet,"));
-        driver.Manage().Cookies.AddCookie(new Cookie("__utmb", "consectetur adipiscing elit,"));
-        driver.Manage().Cookies.AddCookie(new Cookie("__utmc", "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
+        driver.Manage().Cookies.AddCookie(new Cookie("__utma", Base64Encode("Lorem ipsum dolor sit amet,")));
+        driver.Manage().Cookies.AddCookie(new Cookie("__utmb", Base64Encode("consectetur adipiscing elit,")));
+        driver.Manage().Cookies.AddCookie(new Cookie("__utmc", Base64Encode("sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
 
         driver.FindElement(By.Id("Cookies_link")).Click();
         actions.ScrollByAmount(0, 500).Perform();
@@ -149,18 +149,18 @@ public class CookieSettingsTests : SeleniumTestsBase
         // user is returned to the previous page they were on
 
         var acceptAnalyticsCookie = driver.Manage().Cookies.GetCookieNamed("analytic-settings");
-        var deserialized = JsonConvert.DeserializeObject<AnalyticSettings>(HttpUtility.UrlDecode(acceptAnalyticsCookie.Value));
+        var deserialized = JsonConvert.DeserializeObject<AnalyticSettings>(Base64Decode(acceptAnalyticsCookie.Value));
         Assert.True(deserialized.AcceptAnalytics);
         Assert.InRange(acceptAnalyticsCookie.Expiry!.Value, DateTime.Now.AddDays(364), DateTime.Now.AddDays(366));
         // analytics acceptance cookie has been set and expires in 365 days
 
-        Assert.Equal("1231243234", driver.Manage().Cookies.GetCookieNamed("ai_session").Value);
-        Assert.Equal("testuser", driver.Manage().Cookies.GetCookieNamed("ai_user").Value);
+        Assert.Equal(Base64Encode("1231243234"), driver.Manage().Cookies.GetCookieNamed("ai_session").Value);
+        Assert.Equal(Base64Encode("testuser"), driver.Manage().Cookies.GetCookieNamed("ai_user").Value);
         // application insight cookies have been removed
 
-        Assert.Equal("Lorem ipsum dolor sit amet,", driver.Manage().Cookies.GetCookieNamed("__utma").Value);
-        Assert.Equal("consectetur adipiscing elit,", driver.Manage().Cookies.GetCookieNamed("__utmb").Value);
-        Assert.Equal("sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", driver.Manage().Cookies.GetCookieNamed("__utmc").Value);
+        Assert.Equal(Base64Encode("Lorem ipsum dolor sit amet,"), driver.Manage().Cookies.GetCookieNamed("__utma").Value);
+        Assert.Equal(Base64Encode("consectetur adipiscing elit,"), driver.Manage().Cookies.GetCookieNamed("__utmb").Value);
+        Assert.Equal(Base64Encode("sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."), driver.Manage().Cookies.GetCookieNamed("__utmc").Value);
         // google analytics cookies have been removed
     }
 

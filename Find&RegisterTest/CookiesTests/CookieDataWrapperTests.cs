@@ -13,7 +13,7 @@ public class CookieDataWrapperTests
 
         var cookieDataWrapper = CookieDataWrapper<bool>.GenerateBoolCookieDataWrapper(
             true,
-            "True",
+            Base64Encode("True"),
             "test-cookie",
             new CookieOptions(),
             mockResponseCookies.Object
@@ -42,7 +42,7 @@ public class CookieDataWrapperTests
 
         var cookieDataWrapper = CookieDataWrapper<string>.GenerateStringCookieDataWrapper(
             true,
-            "aaabbbccc",
+            Base64Encode("aaabbbccc"),
             "test-cookie",
             new CookieOptions(),
             mockResponseCookies.Object
@@ -72,7 +72,7 @@ public class CookieDataWrapperTests
 
         var cookieDataWrapper = CookieDataWrapper<TestJsonSerializable>.GenerateJsonResponsesCookieDataWrapper<TestJsonSerializable>(
             false,
-            "",
+            Base64Encode(""),
             "test-cookie",
             new CookieOptions(),
             mockResponseCookies.Object
@@ -81,7 +81,7 @@ public class CookieDataWrapperTests
         var underlayingObject = new TestJsonSerializable { SomeField = "some value" };
         cookieDataWrapper.Value = underlayingObject;
 
-        mockResponseCookies.Verify(m => m.Append("test-cookie", "{\"SomeField\":\"some value\"}", It.IsAny<CookieOptions>()), Times.Once);
+        mockResponseCookies.Verify(m => m.Append("test-cookie", Base64Encode("{\"SomeField\":\"some value\"}"), It.IsAny<CookieOptions>()), Times.Once);
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class CookieDataWrapperTests
 
         var cookieDataWrapper = CookieDataWrapper<TestJsonSerializable>.GenerateJsonResponsesCookieDataWrapper<TestJsonSerializable>(
             true,
-            "{\"SomeField\":\"testValue\"}",
+            Base64Encode("{\"SomeField\":\"testValue\"}"),
             "test-cookie",
             new CookieOptions(),
             mockResponseCookies.Object
@@ -102,5 +102,11 @@ public class CookieDataWrapperTests
     private struct TestJsonSerializable
     {
         public string SomeField;
+    }
+
+    private static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
     }
 }

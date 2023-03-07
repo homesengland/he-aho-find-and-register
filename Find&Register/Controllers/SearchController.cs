@@ -52,7 +52,7 @@ public class SearchController : BaseControllerWithShareStaticPages
     {
         if (!ModelState.IsValid)
         {
-            return RedirectToAction(nameof(Index), model);
+            return View(model);
         }
 
         var locations = _locationDataSource.GetLocationDataSource.Locations;
@@ -61,7 +61,7 @@ public class SearchController : BaseControllerWithShareStaticPages
         if (string.IsNullOrEmpty(gssCode) && !(locations?.Any(l => l.LocationCode?.Equals(gssCode) ?? false) ?? false))
         {
             //add error message here
-            return RedirectToAction(nameof(Index));
+            return View(model);
         }
 
         var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
