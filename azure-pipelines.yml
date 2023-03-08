@@ -16,7 +16,7 @@ resources:
     ref: 'main'
   - repository: templates
     type: git
-    name: 'Find Affordable Homes/Templates'
+    name: 'Cloud Hosting Service/Templates'
     ref: 'master'
 
 stages:
