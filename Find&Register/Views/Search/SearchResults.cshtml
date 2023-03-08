@@ -32,7 +32,7 @@
             @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <h1 class="govuk-fieldset__heading">
-                    These organisations sell shared ownership homes in
+                    These organisations sell shared ownership homes in @Model.Area
                 </h1>
             </legend>
             <form method="post">
@@ -106,6 +106,12 @@
                 {
                     <ul class="govuk-list govuk-list--bullet">
                         <li>Home Ownership for People with Long-Term Disabilities (HOLD)</li>
+                    </ul>
+                }
+                @if (provider.RentToBuy)
+                {
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>Rent to Buy</li>
                     </ul>
                 }
                 if (Model?.ProviderModels?.Last().Equals(provider) != true)
