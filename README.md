@@ -20,6 +20,7 @@ run the following commands from the Find\&Register project folder:
     dotnet user-secrets set "DataSources:Providers" [ask the tech team for the values]
 
 To use sharepoint datasource for the providers, please add the following user secrets:
+
     dotnet user-secrets set "SharePointGraph:ClientId" [ask the tech team for the values]
     dotnet user-secrets set "SharePointGraph:ClientSecret" [ask the tech team for the values]
     dotnet user-secrets set "SharePointGraph:ProviderSite" [ask the tech team for the values]
