@@ -20,7 +20,6 @@ builder.Services.AddSingleton<IGraphServiceClientInstance, GraphServiceClientIns
 builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSource>();
 
 builder.Services.AddSingleton<IBlobContainerClient, BlobContainerClientWrapper>();
-builder.Services.AddSingleton<IProviderBlobDataSource, ProviderBlobDataSource>();
 
 builder.Services.AddSingleton<IDataSources, DataSources>();
 

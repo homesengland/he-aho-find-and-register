@@ -65,17 +65,6 @@ public class SearchController : BaseControllerWithShareStaticPages
         }
 
         var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
-
-        var blobProviders = _locationDataSource.GetProviderBlobDataSource?.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
-
-        if (blobProviders != null)
-        {
-            foreach (var provider in blobProviders) {
-                provider.Name = $"[Blob] {provider.Name}";
-            }
-            providers = providers?.Union(blobProviders);
-        }
-
         model.ProviderModels = providers;
         model.LocationModels = locations;
 

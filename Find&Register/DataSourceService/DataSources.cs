@@ -71,9 +71,4 @@ public class DataSources : IDataSources
             return providerDataSource;
         }
     }
-
-    /// <summary>
-    /// temp property for 2nd provider store
-    /// </summary>
-    public IProviderBlobDataSource? GetProviderBlobDataSource => _serviceProvider.GetService<IProviderBlobDataSource>();
 }
