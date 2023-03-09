@@ -1,5 +1,5 @@
 @{
-    var layoutModel = ViewContext.HttpContext.Items["LayoutModel"] as LayoutDataModel;
+    ViewBag.Title = "Page Not Found";
 }
 <div class="govuk-width-container">
     <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
@@ -13,7 +13,7 @@
                     If you pasted the web address, check you copied the entire address.
                 </p>
                 <p class="govuk-body">
-                    If the web address is correct or you selected a link or button, <a href="@layoutModel?.FooterLinkRoot/contact-us" class="govuk-link">contact Homes England </a> if need to speak to someone about finding an organisation that sells shared ownership homes.
+                    If the web address is correct or you selected a link or button, <a href="@ViewBag.ContactUsLink" class="govuk-link">contact Homes England </a>.
                 </p>
             </div>
         </div>

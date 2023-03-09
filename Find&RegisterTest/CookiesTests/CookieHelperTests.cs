@@ -37,14 +37,14 @@ public class CookieHelperTests
         // False when not set
 
         helper = new CookieHelper();
-        mockRequestCookies["analytic-settings"] = "{AcceptAnalytics:true, HideConfirmation: true}";
+        mockRequestCookies["analytic-settings"] = Base64Encode("{AcceptAnalytics:true, HideConfirmation: true}");
 
         cookieData = helper.GetApplicationCookieData(mockRequestCookies, mockResponseCookies.Object);
         Assert.True(cookieData.AnalyticSettings.Value.AcceptAnalytics);
         // Explicitly set to true
 
         helper = new CookieHelper();
-        mockRequestCookies["analytic-settings"] = "{AcceptAnalytics:false, HideConfirmation: true}";
+        mockRequestCookies["analytic-settings"] = Base64Encode("{AcceptAnalytics:false, HideConfirmation: true}");
 
         cookieData = helper.GetApplicationCookieData(mockRequestCookies, mockResponseCookies.Object);
         Assert.False(cookieData.AnalyticSettings.Value.AcceptAnalytics);
@@ -58,11 +58,11 @@ public class CookieHelperTests
         var mockRequestCookies = new RequestCookiesTestCollection();
         var mockResponseCookies = new Mock<IResponseCookies>();
 
-        mockRequestCookies.Add("_ga_A643FC42", "aaa");
-        mockRequestCookies.Add("_ga", "bbb");
-        mockRequestCookies.Add("__utmc", "ccc");
-        mockRequestCookies.Add("ai_user", "sam");
-        mockRequestCookies.Add("ai_session", "frodo");
+        mockRequestCookies.Add("_ga_A643FC42", Base64Encode("aaa"));
+        mockRequestCookies.Add("_ga", Base64Encode("bbb"));
+        mockRequestCookies.Add("__utmc", Base64Encode("ccc"));
+        mockRequestCookies.Add("ai_user", Base64Encode("sam"));
+        mockRequestCookies.Add("ai_session", Base64Encode("frodo"));
 
         var helper = new CookieHelper();
         var cookieData = helper.GetApplicationCookieData(mockRequestCookies, mockResponseCookies.Object);
@@ -83,4 +83,11 @@ public class CookieHelperTests
 
         mockResponseCookies.Verify(m => m.Delete(It.IsAny<string>()), Times.Never);
     }
+
+    private static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
 }

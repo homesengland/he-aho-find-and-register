@@ -52,7 +52,7 @@ public class CookieBannerTests : SeleniumTestsBase
         driver.FindElement(By.Id("cookie-banner")).FindElement(By.Id("accept-all-cookies-btn")).Click();
         Assert.Equal(Host, driver.Url);
         var acceptAnalyticsCookie = driver.Manage().Cookies.GetCookieNamed("analytic-settings");
-        var deserialized = JsonConvert.DeserializeObject<AnalyticSettings>(HttpUtility.UrlDecode(acceptAnalyticsCookie.Value));
+        var deserialized = JsonConvert.DeserializeObject<AnalyticSettings>(Base64Decode(acceptAnalyticsCookie.Value));
         Assert.True(deserialized.AcceptAnalytics);
         Assert.NotNull(driver.FindElement(By.Id("cookie-confirmation")));
     }

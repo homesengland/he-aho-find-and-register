@@ -21,7 +21,7 @@ public class ProviderBlobDataSourceTests
         _provider = builder.Services.BuildServiceProvider();
     }
 
-    [Fact]
+    [Fact(Skip = "Data may not be compatible untill we determine whether we are using sharepoint or blob storage")]
     public void LoadingProviderDataSourceFromBlobIsSuccessful()
     {
         var mockLogger = new Mock<ILogger<ProviderBlobDataSource>>();

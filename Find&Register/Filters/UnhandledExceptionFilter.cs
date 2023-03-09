@@ -12,6 +12,7 @@ namespace Find_Register.Filters
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
+
         }
 
         public void OnException(ExceptionContext context)

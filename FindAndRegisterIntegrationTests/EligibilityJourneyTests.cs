@@ -7,9 +7,11 @@ namespace FindAndRegisterIntegrationTests
 {
     public class EligibilityJourneyTests : SeleniumTestsBase
     {
+        private string HostForSearch;
         public EligibilityJourneyTests()
         {
-            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+            HostForSearch = Host + "find-organisations-selling-shared-ownership-homes";
+            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/"; 
         }
 
         [Fact]
@@ -388,7 +390,7 @@ namespace FindAndRegisterIntegrationTests
         public void EligableOutcomeLinksToSearchForProvider()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "Eligibility");
+            driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -399,7 +401,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("cannot-afford-home")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
             driver.FindElement(By.Id("eligible-result-find-a-provider-link")).Click();
-            Assert.True(driver.Url.Equals(Host + "Search") || driver.Url.Equals(Host + "find-organisations-selling-shared-ownership-homes"));
+            Assert.True(driver.Url.Equals(Host + "Search") || driver.Url.Equals(HostForSearch));
                 // depending on if ticket to change url has been merged
         }
     }

@@ -37,7 +37,7 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("Contact_link")).Click();
             var title = driver.FindElement(By.Id("page-title")).GetAttribute("innerHTML");
-            Assert.Equal("Contact Us", title);
+            Assert.Equal("Contact us", title);
 
             var classes = driver.FindElement(By.Id("page-title")).GetAttribute("class");
             Assert.Equal("govuk-heading-l", classes);

@@ -5,7 +5,7 @@ namespace Find_Register.Models
 {
     public class SearchResultsModel
     {
-        [Required]
+        [Required(ErrorMessage = "Enter a local authority")]
         public string? Area { get; set; }
 
         public IEnumerable<ProviderModel>? ProviderModels {get;set;}

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Find_Register.Controllers;
 
 [JourneyLayoutFilter(Journey.Other)]
-[Route("GenericErrors")]
+
 public class GenericErrorsController : Controller
 {
     public GenericErrorsController()
@@ -16,23 +16,23 @@ public class GenericErrorsController : Controller
     }
 
     //500 errors
-    [Route("500")]
     public IActionResult InternalServerError()
     {
+        ViewBag.ContactUsLink = "https://www.gov.uk/government/organisations/homes-england/about/access-and-opening";
         return View();
     }
 
-    //404 errors
-    [Route("404")]
+    //404 errors 
     public IActionResult PageNotFound()
     {
+        ViewBag.ContactUsLink = "https://www.gov.uk/government/organisations/homes-england/about/access-and-opening";
         return View();
     }
 
-    //503 errors
-    [Route("503")]
+    //503 errors 
     public IActionResult ServiceUnavailable()
     {
+        ViewBag.ContactUsLink = "https://www.gov.uk/government/organisations/homes-england/about/access-and-opening";
         return View();
     }
 }

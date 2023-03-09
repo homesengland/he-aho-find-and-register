@@ -27,7 +27,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     [HttpGet]
     public IActionResult Index()
     {
-        ViewBag.previousPage = HttpUtility.HtmlEncode(_config.GetValue<string>("BaseUrl"));
+        ViewBag.previousPage = HttpUtility.HtmlEncode(_config["BaseUrl"]);
         var _EligibilityJourneyWhereDoYouWantToBuyAHome = new EligibilityJourneyWhereDoYouWantToBuyAHome();
         return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
     }
@@ -42,7 +42,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         applicationCookie.EligibilityResponses.Value = cookie;
         cookie.PreviousPageBeforeErrorOutcome = nameof(Index);
 
-        ViewBag.previousPage = HttpUtility.HtmlEncode(_config.GetValue<string>("BaseUrl"));
+        ViewBag.previousPage = HttpUtility.HtmlEncode(_config["BaseUrl"]);
 
         if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == true)
         {
@@ -367,7 +367,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         }
         return View(_EligibilityJourneyFirstTimeBuyer);
     }
-
+    
     //page 5
     [HttpGet]
     [Route("you-may-be-eligible-to-buy-a-shared-ownership-home")]

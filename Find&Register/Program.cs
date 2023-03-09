@@ -57,7 +57,7 @@ app.UseCookiePolicy(
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/pagenotfound");
+    app.UseExceptionHandler("/GenericErrors/PageNotFound");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -72,6 +72,22 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Eligibility}/{action=Index}/{id?}");
 
-app.UseStatusCodePagesWithRedirects("/GenericErrors/{0}");
+app.Use(async (context, next) =>
+{
+    await next.Invoke();
+
+    if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+    {
+         context.Response.Redirect("/GenericErrors/PageNotFound");
+    }
+    if (context.Response.StatusCode == StatusCodes.Status500InternalServerError)
+    {
+        context.Response.Redirect("/GenericErrors/InternalServerError");
+    }
+    if (context.Response.StatusCode == StatusCodes.Status503ServiceUnavailable)
+    {
+        context.Response.Redirect("/GenericErrors/ServiceUnavailable");
+    }
+});
 
 app.Run();
