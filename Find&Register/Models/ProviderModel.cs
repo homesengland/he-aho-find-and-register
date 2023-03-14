@@ -17,6 +17,7 @@ public class ProviderModel
         Phone = providers.ContactNumber;
         Website = providers.WebsiteName;
         WebsiteUrl = providers.WebsiteUrl;
+        SharedOwnership = providers.SharedOwnership;
         Opso = providers.OPSO;
         Hold = providers.HOLD;
         RentToBuy = providers.RentToBuy;
@@ -42,6 +43,8 @@ public class ProviderModel
 
     public string? Website { get; set; }
     public string? WebsiteUrl { get; set; }
+
+    public bool SharedOwnership { get; set; }
 
     /// <summary>
     /// Indicates that this provider has OPSO properties

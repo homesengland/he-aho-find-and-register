@@ -43,6 +43,8 @@
     <None Remove="apitoken.json" />
     <None Remove="apitoken.example.json" />
     <None Remove="Microsoft.Extensions.Configuration.UserSecrets" />
+    <None Remove="ModelTests\" />
+    <None Remove="ControllerTests\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
@@ -50,6 +52,8 @@
   <ItemGroup>
     <Folder Include="CookiesTests\" />
     <Folder Include="DataSourceTests\" />
+    <Folder Include="ModelTests\" />
+    <Folder Include="ControllerTests\" />
   </ItemGroup>
     <ItemGroup>
     <Content Include="appsettings.json" Condition="'$(ExcludeConfigFilesFromBuildOutput)'!='true'">

@@ -21,7 +21,7 @@
             source: countries
         })
     })</script>
-<div class="govuk-width-container ">
+<div class="govuk-width-container govuk-body">
     <a href="https://www.gov.uk/shared-ownership-scheme/finding-shared-ownership-home" class="govuk-back-link">Back</a>
 
 
@@ -50,8 +50,6 @@
                                             <div id="tt-default" class="autocomplete-wrapper">
                                                 <div class="autocomplete__wrapper">
                                                     <div>
-                                                        @* <div id="autocomplete-default__status--A" role="status" aria-atomic="true"
-                                                            aria-live="polite"></div> *@
                                                         <div id="@Model.Area" name="@Model.Area" role="status" aria-atomic="true"
                                                              aria-live="polite"></div>
                                                     </div>
@@ -63,9 +61,8 @@
                                         </div>
                                     </div>
                     })
-                @*<form action="@Url.Action("SearchResults", "Search")" method="post" autocomplete="off">*@
 
-                <button class="govuk-button" data-module="govuk-button">
+                <button class="govuk-button" data-module="govuk-button" id="submit-search">
                     Search
                 </button>
             </form>
