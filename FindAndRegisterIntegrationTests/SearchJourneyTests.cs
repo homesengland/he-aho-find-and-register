@@ -20,8 +20,8 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
 
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);            
             // test accessibility
 
             var links = driver.FindElements(By.CssSelector("div.container a"));
@@ -43,10 +43,10 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("submit-search")).Click();
 
             var pageName = driver.FindElement(By.CssSelector("div.container H1")).Text;
-            Assert.Equal("These organisations sell shared ownership homes in Adur", pageName);            
+            Assert.Equal("These organisations sell shared ownership homes in Adur", pageName);
 
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
             // test accessibility
 
             var links = driver.FindElements(By.CssSelector("div.container a"));
