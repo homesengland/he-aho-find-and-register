@@ -123,9 +123,9 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
-        cookie.EligibilityJourneyHowMuchDoYouEarn = _EligibilityJourneyHowMuchDoYouEarn;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn);
         cookie.PreviousPageBeforeErrorOutcome = nameof(HowMuchDoYouEarn);
+        cookie.EligibilityJourneyHowMuchDoYouEarn = _EligibilityJourneyHowMuchDoYouEarn;        
         applicationCookie.EligibilityResponses.Value = cookie;
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(BuyingWithAnotherPerson), "Eligibility"));
 
@@ -168,10 +168,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
-        cookie.EligibilityJourneyHowMuchDoYouEarn_MultiplePeople = _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople;
-        applicationCookie.EligibilityResponses.Value = cookie;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn_MultiplePeople);
         cookie.PreviousPageBeforeErrorOutcome = nameof(HowMuchDoYouEarn_MultiplePeople);
+        cookie.EligibilityJourneyHowMuchDoYouEarn_MultiplePeople = _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople;
+        applicationCookie.EligibilityResponses.Value = cookie;
+        
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(BuyingWithAnotherPerson), "Eligibility"));
 
         if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == true)
