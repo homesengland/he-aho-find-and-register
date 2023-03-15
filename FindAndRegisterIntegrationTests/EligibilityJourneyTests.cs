@@ -37,8 +37,9 @@ namespace FindAndRegisterIntegrationTests
         public void WhereDoYouWantToBuyAHomeAccessibilityTest()
         {
             using IWebDriver driver = new ChromeDriver();
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            driver.Navigate().GoToUrl(Host);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -75,8 +76,8 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -133,8 +134,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             Assert.Equal(Host + "how-much-do-you-earn", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -191,8 +192,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
             driver.FindElement(By.Id("eligibility-Page-2-Submit-Button")).Click();
             Assert.Equal(Host + "how-much-do-you-both-earn", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -238,8 +239,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("annual-income-single-80")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
             Assert.Equal(Host + "select-all-that-apply-to-you", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -330,8 +331,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             Assert.Equal(Host + "continue-on-the-homes-for-londoners-website", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -362,8 +363,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("annual-income-single-81")).Click();
             driver.FindElement(By.Id("eligibility-Page-3-Single-Buyer-Submit-Button")).Click();
             Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -398,8 +399,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("none")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
             Assert.Equal(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -436,8 +437,8 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("cannot-afford-home")).Click();
             driver.FindElement(By.Id("eligibility-Page-4-Submit-Button")).Click();
             Assert.Equal(Host + "you-may-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]

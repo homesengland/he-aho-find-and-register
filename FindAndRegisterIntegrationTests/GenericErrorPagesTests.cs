@@ -33,8 +33,8 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host + "GenericErrors/serviceUnavailable");
             string serviceUnavailable = Host + "GenericErrors/serviceUnavailable";
             Assert.Equal(serviceUnavailable, driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
 
             driver.Navigate().GoToUrl(Host + "GenericErrors/PageNotFound");
             string PageNotFound = Host + "GenericErrors/PageNotFound";
@@ -43,8 +43,8 @@ namespace FindAndRegisterIntegrationTests
 
             driver.Navigate().GoToUrl(Host + "GenericErrors/InternalServerError");
             string InternalServerError = Host + "GenericErrors/InternalServerError";
-            Assert.Equal(InternalServerError, driver.Url);
-            Assert.Null(axeResult.Error);
+            axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -65,8 +65,8 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
             string pageUnavailable = Host + "GenericErrors/PageNotFound";
             Assert.Equal(pageUnavailable, driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -87,8 +87,8 @@ namespace FindAndRegisterIntegrationTests
             string pageUnavailable = Host + "GenericErrors/InternalServerError";
             driver.Navigate().GoToUrl(pageUnavailable);
             Assert.Equal(pageUnavailable, driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
@@ -109,8 +109,8 @@ namespace FindAndRegisterIntegrationTests
             string pageUnavailable = Host + "GenericErrors/ServiceUnavailable";
             driver.Navigate().GoToUrl(pageUnavailable);
             Assert.Equal(pageUnavailable, driver.Url);
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
     }
 }

@@ -70,8 +70,8 @@ namespace FindAndRegisterIntegrationTests
             var pageName = driver.FindElement(By.CssSelector("div.container H1")).Text;
             Assert.Equal("You need to use a different service", pageName);
 
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
             // test accessibility
 
             var links = driver.FindElements(By.CssSelector("div.container a"));

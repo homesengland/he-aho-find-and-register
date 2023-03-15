@@ -62,8 +62,8 @@ namespace FindAndRegisterIntegrationTests
             emailLink = driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("href");
             Assert.Contains("mailto:", emailLink);
 
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
         }
 
         [Fact]
