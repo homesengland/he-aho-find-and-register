@@ -203,7 +203,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
-        ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(cookie.PreviousPage));
+        ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(cookie.PreviousPage, "Eligibility"));
 
         return View();
     }
