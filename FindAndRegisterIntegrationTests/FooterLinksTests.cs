@@ -68,6 +68,20 @@ namespace FindAndRegisterIntegrationTests
 
         [Fact]
         [Trait("Selenium", "Smoke")]
+        public void ContactUsEmailLinkColour()
+        {
+            using IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Contact_link")).Click();
+
+            Assert.Contains(driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("class"), "govuk-link");
+            Assert.Contains(driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("class"), "govuk-link");
+            Assert.Contains(driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("class"), "govuk-link");
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
         public void ContactUsCallChargeLinkTargetsExpectedUrl()
         {
             using IWebDriver driver = new ChromeDriver();
@@ -116,6 +130,17 @@ namespace FindAndRegisterIntegrationTests
 
             var emailLink = driver.FindElement(By.Id("TechSupportEmail")).GetAttribute("href");
             Assert.Contains("mailto:", emailLink);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void AccessibilityEmailLinkColour()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Accessibility_link")).Click();
+
+            Assert.Contains(driver.FindElement(By.Id("TechSupportEmail")).GetAttribute("class"), "govuk-link");
         }
 
     }
