@@ -87,7 +87,7 @@
                 @if (Model.LocalAuthority != null)
                 {
                     <div class="counsil-container">
-                        <p class="govuk-body">@Model.LocalAuthority.Name can help you find a new home. They know about new developments before the homes are listed for sale. Contact @Model.LocalAuthority.Name to ask about upcoming developments.</p>
+                        <p class="govuk-body">@Model.LocalAuthority.Name may be able to help you find a new home. Contact @Model.LocalAuthority.Name for more information.</p>
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a></p>
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
@@ -118,11 +118,11 @@
                             }
                             @if (provider.Opso)
                             {
-                                <li>Older People's Shared Ownership (OPSO)</li>
+                                <li>Older Persons Shared Ownership (OPSO)</li>
                             }
                             @if (provider.Hold)
                             {
-                                <li>Home Ownership for People with Long-Term Disabilities (HOLD)</li>
+                                <li>Home Ownership for People with Long Term Disabilities (HOLD)</li>
                             }
                             @if (provider.RentToBuy)
                             {

@@ -6,7 +6,7 @@
 }
 
 .gem-c-cookie-banner {
-    font-family: &quot;GDS Transport&quot;, arial, sans-serif;
+    font-family: "GDS Transport", arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
@@ -32,4 +32,8 @@
    padding:20px 30px 20px 30px;
    margin-bottom: 60px;
     
+}
+
+input {
+    font-family: "GDS Transport", arial, sans-serif;
 }
