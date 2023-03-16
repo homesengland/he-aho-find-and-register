@@ -1,8 +1,13 @@
-﻿using Find_Register.Filters;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Find_Register.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Find_Register.DataSourceService;
 using Find_Register.Models;
 using Find_Register.Cookies;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.Extensions.Logging;
 
 namespace Find_Register.Controllers;
 
@@ -13,12 +18,14 @@ public class SearchController : BaseControllerWithShareStaticPages
 {
     private readonly ILogger<SearchController> _logger;
     private readonly IDataSources _locationDataSource;
+    private readonly IAntiforgery _antiforgery;
 
     // GET: /<controller>/
-    public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource, ICookieHelper cookieHelper) : base(cookieHelper)
+    public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource, ICookieHelper cookieHelper, IAntiforgery antiforgery) : base(cookieHelper)
     {
         _logger = logger;
         _locationDataSource = locationDataSource;
+        _antiforgery = antiforgery;
     }
 
     [HttpGet]
@@ -31,6 +38,7 @@ public class SearchController : BaseControllerWithShareStaticPages
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Index(SearchResultsModel model)
     {
         var locations = _locationDataSource.GetLocationDataSource.Locations;
@@ -49,8 +57,12 @@ public class SearchController : BaseControllerWithShareStaticPages
     [HttpGet]
     [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     [Route("organisations-that-sell-shared-ownership-homes")]
-    public IActionResult SearchResults(SearchResultsModel model)
+    public async Task<IActionResult> SearchResults(SearchResultsModel model)
     {
+        if (Request.Method.ToLower() == "post") 
+        {
+            await _antiforgery.ValidateRequestAsync(HttpContext);
+        }
         var locations = _locationDataSource.GetLocationDataSource.Locations;
         model.LocationModels = locations;
         model.ValidateLocalAuthorityAreaSearch(ModelState);

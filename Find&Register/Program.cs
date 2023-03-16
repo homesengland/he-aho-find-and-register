@@ -19,6 +19,8 @@ builder.Services.Configure<ProvidersSharePointAccessConfiguration>(
 builder.Services.AddSingleton<IGraphServiceClientInstance, GraphServiceClientInstance>();
 builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSource>();
 
+builder.Services.AddAntiforgery();
+
 builder.Services.AddSingleton<IBlobContainerClient, BlobContainerClientWrapper>();
 
 builder.Services.AddSingleton<IDataSources, DataSources>();
@@ -46,6 +48,7 @@ builder.Services.AddTransient<IHttpClient, HttpClientWrapper>();
 
 var app = builder.Build();
 app.UseHeaderSecurity();
+app.UseCrossSiteScriptingSecurity();
 
 app.UseCookiePolicy(
     new CookiePolicyOptions

@@ -1,4 +1,5 @@
-﻿using Find_Register.DataSourceService;
+﻿using System.Collections.Generic;
+using Find_Register.DataSourceService;
 using Moq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
@@ -6,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using Find_Register.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Find_Register.Controllers;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Find_RegisterTest.ControllerTests;
@@ -26,8 +29,10 @@ public class SearchControllerTests
         mockPs.Setup(ls => ls.Providers).Returns(new List<ProviderModel> { returnResult });
         mockPs.Setup(ls => ls.ProvidersActiveInLocalAuthority(It.IsAny<string>())).Returns(new List<ProviderModel> { returnResult });
 
-        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper());
-        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }) as ViewResult;
+        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper(), new Mock<IAntiforgery>().Object);
+        controller.ControllerContext.HttpContext = new DefaultHttpContext {Request = {Method = "post"}};
+
+        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }).Result as ViewResult;
         Assert.Equal("NoSearchResults", actionResult?.ViewName);
     }
 
@@ -44,8 +49,10 @@ public class SearchControllerTests
         mockPs.Setup(ls => ls.Providers).Returns(new List<ProviderModel> ());
         mockPs.Setup(ls => ls.ProvidersActiveInLocalAuthority(It.IsAny<string>())).Returns(new List<ProviderModel>());
 
-        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper());
-        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }) as ViewResult;
+        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper(), new Mock<IAntiforgery>().Object);
+        controller.ControllerContext.HttpContext = new DefaultHttpContext {Request = {Method = "post"}};
+
+        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }).Result as ViewResult;
         Assert.Equal("NoSearchResults", actionResult?.ViewName);
     }
 
@@ -66,8 +73,9 @@ public class SearchControllerTests
         mockPs.Setup(ls => ls.Providers).Returns(new List<ProviderModel>());
         mockPs.Setup(ls => ls.ProvidersActiveInLocalAuthority(It.IsAny<string>())).Returns(new List<ProviderModel>());
 
-        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper());
-        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }) as ViewResult;
+        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper(), new Mock<IAntiforgery>().Object);
+        controller.ControllerContext.HttpContext = new DefaultHttpContext {Request = {Method = "post"}};
+        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }).Result as ViewResult;
         Assert.Equal("SearchResultsLondon", actionResult?.ViewName);
     }
 
@@ -87,8 +95,10 @@ public class SearchControllerTests
         mockPs.Setup(ls => ls.Providers).Returns(new List<ProviderModel>());
         mockPs.Setup(ls => ls.ProvidersActiveInLocalAuthority(It.IsAny<string>())).Returns(new List<ProviderModel>());
 
-        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper());
-        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "abcdefg" }) as ViewResult;
+        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper(), new Mock<IAntiforgery>().Object);
+        controller.ControllerContext.HttpContext = new DefaultHttpContext {Request = {Method = "post"}};
+
+        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "abcdefg" }).Result as ViewResult;
         Assert.Equal(ModelValidationState.Invalid, actionResult?.ViewData.ModelState.ValidationState);
         Assert.Equal(nameof(SearchController.Index), actionResult?.ViewName);        
     }
@@ -110,8 +120,9 @@ public class SearchControllerTests
         mockPs.Setup(ls => ls.Providers).Returns(new List<ProviderModel> { returnResult });
         mockPs.Setup(ls => ls.ProvidersActiveInLocalAuthority(It.IsAny<string>())).Returns(new List<ProviderModel> { returnResult });
 
-        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper());
-        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }) as ViewResult;
+        var controller = new SearchController(mockLogger.Object, mockDataSource.Object, new MockCookieHelper(), new Mock<IAntiforgery>().Object);
+        controller.ControllerContext.HttpContext = new DefaultHttpContext {Request = {Method = "post"}};
+        var actionResult = controller.SearchResults(new SearchResultsModel { Area = "Somewhere" }).Result as ViewResult;
         Assert.Equal(ModelValidationState.Valid, actionResult?.ViewData.ModelState.ValidationState);
         Assert.Null(actionResult?.ViewName); // view name null uses controller's view resolver using the action name
     }

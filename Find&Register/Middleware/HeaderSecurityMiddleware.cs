@@ -1,5 +1,8 @@
-﻿using Find_Register.Extensions;
+﻿using System.Threading.Tasks;
+using Find_Register.Extensions;
 using Find_Register.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace Find_Register.Middleware;
@@ -35,7 +38,7 @@ public class HeaderSecurityMiddleware
     }
 }
 
-public static class HeaderSecurityMiddlewareExtensions
+public static partial class HeaderSecurityMiddlewareExtensions
 {
     public static IApplicationBuilder UseHeaderSecurity(
         this IApplicationBuilder builder)
