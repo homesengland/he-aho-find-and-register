@@ -19,7 +19,7 @@ namespace FindAndRegisterIntegrationTests
         public async Task LoadTestForSearchForProviders(string area)
         {
             const int numRequestsPerUser = 1;
-            string url = $"https://ahofr-nonprod-dev.homesengland.org.uk/find-organisations-selling-shared-ownership-homes/organisations-that-sell-shared-ownership-homes?Area={area}";
+            string url = $"{Host}find-organisations-selling-shared-ownership-homes/organisations-that-sell-shared-ownership-homes?Area={area}";
 
             HttpClient client = new();
 
