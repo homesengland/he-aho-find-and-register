@@ -14,4 +14,5 @@ public struct EligibilityResponses
     public string EligibilityOutcome { get; set; }
     public string PreviousPage { get; set; }
     public string PreviousPageBeforeErrorOutcome { get; set; }
+    public string LastJourneyPage { get; set; }
 }

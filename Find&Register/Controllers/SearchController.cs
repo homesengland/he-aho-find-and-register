@@ -22,6 +22,7 @@ public class SearchController : BaseControllerWithShareStaticPages
     }
 
     [HttpGet]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult Index()
     {
         var locations = _locationDataSource.GetLocationDataSource.Locations;
@@ -46,7 +47,7 @@ public class SearchController : BaseControllerWithShareStaticPages
     }
 
     [HttpGet]
-    [HttpPost]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     [Route("organisations-that-sell-shared-ownership-homes")]
     public IActionResult SearchResults(SearchResultsModel model)
     {

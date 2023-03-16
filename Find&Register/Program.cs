@@ -41,6 +41,7 @@ builder.Services.Configure<RazorViewEngineOptions>(o => o.ViewLocationExpanders.
     new LibraryViewEngine()
 ));
 builder.Services.AddScoped<ICookieHelper, CookieHelper>();
+builder.Services.AddScoped<JourneyPageTrackerFilterAttribute>();
 builder.Services.AddTransient<IHttpClient, HttpClientWrapper>();
 
 var app = builder.Build();

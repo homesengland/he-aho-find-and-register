@@ -14,10 +14,10 @@ namespace Find_Register.Models
         public IEnumerable<ProviderModel>? ProviderModels {get;set;}
         public List<LocationModel>? LocationModels { get; set; }
 
-        public int OpsoResults => ProviderModels?.Count(p => p.Opso) ?? 0;
-        public int HoldResults => ProviderModels?.Count(p => p.Hold) ?? 0;
-        public int SharedOwnershipResults => ProviderModels?.Count(p => p.SharedOwnership) ?? 0;
-        public int RentToBuyResults => ProviderModels?.Count(p => p.RentToBuy) ?? 0;
+        public int GetOpsoCount() => ProviderModels?.Count(p => p.Opso) ?? 0;
+        public int GetHoldCount() => ProviderModels?.Count(p => p.Hold) ?? 0;
+        public int GetSharedOwnershipCount() => ProviderModels?.Count(p => p.SharedOwnership) ?? 0;
+        public int GetRentToBuyCount() => ProviderModels?.Count(p => p.RentToBuy) ?? 0;
 
         public void ValidateLocalAuthorityAreaSearch(ModelStateDictionary modelState)
         {

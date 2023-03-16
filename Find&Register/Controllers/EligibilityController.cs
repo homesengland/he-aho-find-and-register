@@ -25,6 +25,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
     //page 1 WhereDoYouWantToBuyAHome
     [HttpGet]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult Index()
     {
         ViewBag.previousPage = HttpUtility.HtmlEncode(_config["BaseUrl"]);
@@ -66,6 +67,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 2
     [HttpGet]
     [Route("are-you-buying-with-another-person")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult BuyingWithAnotherPerson()
     {
         if(RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -107,6 +109,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 3 - single
     [HttpGet]
     [Route("how-much-do-you-earn")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult HowMuchDoYouEarn()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -152,6 +155,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 3 - multi
     [HttpGet]
     [Route("how-much-do-you-both-earn")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult HowMuchDoYouEarn_MultiplePeople()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -197,6 +201,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 4
     [HttpGet]
     [Route("select-all-that-apply-to-you")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult FirstTimeBuyer()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -373,6 +378,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     [Route("you-may-be-eligible-to-buy-a-shared-ownership-home")]
     [Route("you-may-not-be-eligible-to-buy-a-shared-ownership-home")]
     [Route("continue-on-the-homes-for-londoners-website")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult EligibilityOutcome()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));

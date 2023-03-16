@@ -9,8 +9,10 @@ namespace FindAndRegisterIntegrationTests;
 
 public class CookieSettingsTests : SeleniumTestsBase
 {
+    private string SearchUrl;
     public CookieSettingsTests()
     {
+        SearchUrl = Host + "find-organisations-selling-shared-ownership-homes/";
         Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
     }
 
@@ -171,11 +173,12 @@ public class CookieSettingsTests : SeleniumTestsBase
         using IWebDriver driver = new ChromeDriver();
         var actions = new Actions(driver);
 
+        driver.Navigate().GoToUrl(SearchUrl);
         driver.Navigate().GoToUrl(Host + "cookie-policy");
         actions.ScrollByAmount(0, 1000);
         driver.FindElement(By.Id("setting-link")).Click();
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
-        Assert.Equal(Host + "cookie-policy", driver.Url);
+        Assert.Equal(SearchUrl, driver.Url);
 
         driver.Navigate().GoToUrl(Host);
         actions.ScrollByAmount(0, 1000);
@@ -217,16 +220,23 @@ public class CookieSettingsTests : SeleniumTestsBase
 
     [Fact]
     [Trait("Selenium", "Smoke")]
-    public void CookiePolicy_BackButtonRedirectsToPreviousPag()
+    public void CookiePolicy_BackButtonRedirectsToPreviousJourneyPage()
     {
         using IWebDriver driver = new ChromeDriver();
         var actions = new Actions(driver);
 
+        driver.Navigate().GoToUrl(Host);
+        driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+        driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+        Assert.NotEqual(Host, driver.Url);
+        var fromUrl = driver.Url;
+
         driver.Navigate().GoToUrl(Host + "cookie-settings");
         actions.ScrollByAmount(0, 1000);
         driver.FindElement(By.Id("policy-link")).Click();
+        Assert.NotEqual(fromUrl, driver.Url);
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
-        Assert.Equal(Host + "cookie-settings", driver.Url);
+        Assert.Equal(fromUrl, driver.Url);
     }
 
     [Fact]

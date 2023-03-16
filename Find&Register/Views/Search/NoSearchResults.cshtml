@@ -48,7 +48,7 @@
                     <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
                 }
 
-                <form action="@Url.Action("SearchResults", "Search")" method="post" autocomplete="off">
+                <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
                     <div class="govuk-form-group">
                         <h2 class="govuk-label-wrapper">
                             <label class="govuk-label govuk-label--m" for="searchArea">

@@ -46,10 +46,10 @@ public class SearchResultsModelTests
                 new ProviderModel{ Hold = true, RentToBuy = true, SharedOwnership = true },
             }
         };
-        Assert.Equal(3, model.HoldResults);
-        Assert.Equal(1, model.OpsoResults);
-        Assert.Equal(2, model.SharedOwnershipResults);
-        Assert.Equal(1, model.RentToBuyResults);
+        Assert.Equal(3, model.GetHoldCount());
+        Assert.Equal(1, model.GetOpsoCount());
+        Assert.Equal(2, model.GetSharedOwnershipCount());
+        Assert.Equal(1, model.GetRentToBuyCount());
     }
 }
 

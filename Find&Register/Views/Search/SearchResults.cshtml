@@ -38,12 +38,12 @@
                     </h1>
                 </legend>
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>@Model.SharedOwnershipResults have shared ownership homes</li>
-                    <li>@Model.HoldResults offer Home Ownership for People with Long Term Disabilities (HOLD)</li>
-                    <li>@Model.OpsoResults have Older Persons Shared Ownership (OPSO) homes</li>
-                    <li>@Model.RentToBuyResults has Rent to Buy homes</li>
+                    <li>@Model.GetSharedOwnershipCount() have shared ownership homes</li>
+                    <li>@Model.GetHoldCount() offer Home Ownership for People with Long Term Disabilities (HOLD)</li>
+                    <li>@Model.GetOpsoCount() have Older Persons Shared Ownership (OPSO) homes</li>
+                    <li>@Model.GetRentToBuyCount() has Rent to Buy homes</li>
                 </ul>
-                <form method="post" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
+                <form method="get" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                         {
 
