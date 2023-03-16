@@ -21,6 +21,7 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("Accessibility_link")).Click();
             string AccessibilityNavingationLink = Host + "accessibility";
+            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
             Assert.Equal(AccessibilityNavingationLink, driver.Url);
 
             driver.Navigate().GoToUrl(Host);

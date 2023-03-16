@@ -21,6 +21,7 @@ builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSou
 
 builder.Services.AddAntiforgery();
 
+
 builder.Services.AddSingleton<IDataSources, DataSources>();
 
 builder.Services.AddApplicationInsightsTelemetry();

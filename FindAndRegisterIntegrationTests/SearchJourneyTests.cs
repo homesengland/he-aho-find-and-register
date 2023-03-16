@@ -19,7 +19,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
-
+            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
             var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
             Assert.Empty(axeResult.Violations);            
             // test accessibility
@@ -39,6 +39,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
+            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
             driver.FindElement(By.Id("Area")).SendKeys("Adur\t");
             driver.FindElement(By.Id("submit-search")).Click();
 
@@ -64,6 +65,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
+            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
             driver.FindElement(By.Id("Area")).SendKeys("Southwark\t");
             driver.FindElement(By.Id("submit-search")).Click();
 

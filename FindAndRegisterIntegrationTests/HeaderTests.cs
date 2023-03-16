@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
