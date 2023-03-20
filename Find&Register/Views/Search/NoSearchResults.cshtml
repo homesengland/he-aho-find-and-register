@@ -62,6 +62,12 @@
                             <div id="tt-default" class="autocomplete-wrapper">
                                 <div class="autocomplete__wrapper">
                                     <div>
+                                        <noscript>
+                                            <input type="text" id="Area" name="Area" class="autocomplete__input"
+                                                   autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                                   placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
+                                        </noscript>
+                                        
                                         <div id="@Model?.Area" name="@Model?.Area"
                                              role="status" aria-atomic="true"
                                              aria-live="polite">
@@ -75,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="govuk-button" data-module="govuk-button" id="submit-search">
+                    <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
                     </button>
                 </form>
