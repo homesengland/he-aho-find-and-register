@@ -71,7 +71,7 @@ public abstract class BaseControllerWithShareStaticPages : Controller
     {
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request.Cookies, Response.Cookies);
         ViewBag.previousPage = applicationCookie.EligibilityResponses.Value.LastJourneyPage;
-        ViewBag.FindSharedOwnershipLink = HttpUtility.HtmlEncode("/check-eligiblity-to-buy-a-shared-ownership-home");
+        ViewBag.FindSharedOwnershipLink = HttpUtility.HtmlEncode("/check-eligibility-to-buy-a-shared-ownership-home");
         ViewBag.FindSearchProviderLink = HttpUtility.HtmlEncode("/find-organisations-selling-shared-ownership-homes");
         return View();
     }
