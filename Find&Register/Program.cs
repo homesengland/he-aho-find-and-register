@@ -90,6 +90,10 @@ app.Use(async (context, next) =>
     {
         context.Response.Redirect("/GenericErrors/ServiceUnavailable");
     }
+    if (context.Response.StatusCode >= StatusCodes.Status400BadRequest)
+    {
+        context.Response.Redirect("/GenericErrors/InternalServerError");
+    }
 });
 
 app.Run();
