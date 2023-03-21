@@ -12,7 +12,7 @@ namespace FindAndRegisterIntegrationTests
         public void EligibilityBetaBanner()
         {
             using IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(Host + "check-eligiblility-to-buy-a-shared-ownership-home/");
+            driver.Navigate().GoToUrl(Host + "check-eligibility-to-buy-a-shared-ownership-home/");
             //check beta banner exist
             Assert.NotNull(driver.FindElement(By.ClassName("govuk-phase-banner")));
             driver.FindElement(By.ClassName("govuk-phase-banner")).FindElement(By.ClassName("govuk-link")).Click();

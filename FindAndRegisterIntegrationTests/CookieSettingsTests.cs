@@ -15,7 +15,7 @@ public class CookieSettingsTests : SeleniumTestsBase
     public CookieSettingsTests()
     {
         SearchUrl = Host + "find-organisations-selling-shared-ownership-homes/";
-        Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+        Host = Host + "check-eligibility-to-buy-a-shared-ownership-home/";
     }
 
     [Fact]

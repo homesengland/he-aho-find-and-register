@@ -9,7 +9,7 @@ namespace FindAndRegisterIntegrationTests
     {
         public FooterTests()
         {
-            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+            Host = Host + "check-eligibility-to-buy-a-shared-ownership-home/";
         }
 
         [Fact]
