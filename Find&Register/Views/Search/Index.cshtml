@@ -38,6 +38,7 @@
                     </h1>
                 </legend>
                 <form method="post">
+                    @Html.AntiForgeryToken()
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                         {
 
@@ -45,31 +46,31 @@
 
                            Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
                            Content =
-                                            @<div class="govuk-form-group">
-                                                <div id="searchArea-hint" class="govuk-hint">
-                                                    <label for="Area">You can search by local authority</label>
-                                                </div>
-                                                <div id="searchArea-container">
-                                                    <div id="tt-default" class="autocomplete-wrapper">
-                                                        <div class="autocomplete__wrapper">
-                                                            <div>
-                                                                <noscript>
-                                                                    <input type="text" id="Area" name="Area" class="autocomplete__input"
-                                                                           autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                                                                           placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
-                                                                </noscript>
+                                                @<div class="govuk-form-group">
+                                                    <div id="searchArea-hint" class="govuk-hint">
+                                                        <label for="Area">You can search by local authority</label>
+                                                    </div>
+                                                    <div id="searchArea-container">
+                                                        <div id="tt-default" class="autocomplete-wrapper">
+                                                            <div class="autocomplete__wrapper">
+                                                                <div>
+                                                                    <noscript>
+                                                                        <input type="text" id="Area" name="Area" class="autocomplete__input"
+                                                                               autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                                                               placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
+                                                                    </noscript>
 
-                                                                <div id="@Model.Area" name="@Model.Area" role="status" aria-atomic="true"
-                                                                     aria-live="polite"></div>
+                                                                    <div id="@Model.Area" name="@Model.Area" role="status" aria-atomic="true"
+                                                                         aria-live="polite"></div>
+                                                                </div>
+                                                                <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                                                                    id="autocomplete-default__listbox" role="listbox"></ul>
+                                                                <span id="autocomplete-default__assistiveHint"></span>
                                                             </div>
-                                                            <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                                                                id="autocomplete-default__listbox" role="listbox"></ul>
-                                                            <span id="autocomplete-default__assistiveHint"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-  })
+})
 
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
