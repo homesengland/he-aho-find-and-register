@@ -14,7 +14,7 @@ public class LayoutDataModel
                 break;
             case Journey.Eligibility:
                 HeaderText = "Check if you are eligible to buy a shared ownership home";
-                HeaderLink = "/check-eligiblility-to-buy-a-shared-ownership-home";
+                HeaderLink = "/check-eligibility-to-buy-a-shared-ownership-home";
                 FeedbackLink = "https://www.smartsurvey.co.uk/s/Eligible/";
                 FooterLinkRoot = HeaderLink;
                 break;
@@ -22,7 +22,7 @@ public class LayoutDataModel
                 HeaderText = "Shared ownership scheme";
                 HeaderLink = "https://www.gov.uk/shared-ownership-scheme";
                 FeedbackLink = "https://www.smartsurvey.co.uk/s/Eligible/";
-                FooterLinkRoot = "/check-eligiblility-to-buy-a-shared-ownership-home";
+                FooterLinkRoot = "/check-eligibility-to-buy-a-shared-ownership-home";
                 break;
         }
     }

@@ -10,7 +10,7 @@ namespace Find_Register.Controllers;
 
 [TypeFilter(typeof(UnhandledExceptionFilter))]
 [JourneyLayoutFilter(Journey.Eligibility)]
-[Route("check-eligiblity-to-buy-a-shared-ownership-home")]
+[Route("check-eligibility-to-buy-a-shared-ownership-home")]
 public class EligibilityController : BaseControllerWithShareStaticPages
 {
     ILogger<EligibilityController> _logger { get; set; }
@@ -49,7 +49,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         {
             cookie.EligibilityOutcome = "London";
             applicationCookie.EligibilityResponses.Value = cookie;
-            return Redirect("/check-eligiblity-to-buy-a-shared-ownership-home/continue-on-the-homes-for-londoners-website");
+            return Redirect("/check-eligibility-to-buy-a-shared-ownership-home/continue-on-the-homes-for-londoners-website");
         }
 
         if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == false)
