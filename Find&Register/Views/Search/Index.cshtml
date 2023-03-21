@@ -37,8 +37,7 @@
                         Where do you want to buy a home?
                     </h1>
                 </legend>
-                <form method="post">
-                    @Html.AntiForgeryToken()
+                <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                         {
 

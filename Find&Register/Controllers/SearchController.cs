@@ -37,32 +37,11 @@ public class SearchController : BaseControllerWithShareStaticPages
         return View(new SearchResultsModel { LocationModels = locations });
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Index(SearchResultsModel model)
-    {
-        var locations = _locationDataSource.GetLocationDataSource.Locations;
-        model.LocationModels = locations;
-        model.ValidateLocalAuthorityAreaSearch(ModelState);
-
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
-
-        return RedirectToAction("SearchResults", "Search", model.SimplifiedRedirectionModel());
-       
-    }
-
     [HttpGet]
     [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     [Route("organisations-that-sell-shared-ownership-homes")]
-    public async Task<IActionResult> SearchResults(SearchResultsModel model)
+    public IActionResult SearchResults(SearchResultsModel model)
     {
-        if (Request.Method.ToLower() == "post") 
-        {
-            await _antiforgery.ValidateRequestAsync(HttpContext);
-        }
         var locations = _locationDataSource.GetLocationDataSource.Locations;
         model.LocationModels = locations;
         model.ValidateLocalAuthorityAreaSearch(ModelState);
