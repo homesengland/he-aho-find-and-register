@@ -63,3 +63,12 @@ Then once this is running, in the repository root directory we can run the tests
 Go to to ADO, then pipeline create new pipeline.
 Choose github, then connect to github account on the next step. 
 then it will ask which code repo to connect too.  
+
+### Selenium Integration Test
+Integration test are built off of Xunit. The application is using a chrome web driver so insure that your chrome version is at least Version 111.0.5563.64 or higher.
+
+there are global dependencies in the usings.cs file and this project also has config variables set in the appsettings.json file. currently it just has the one variable BaseUrl. this is set to local host but it can be changed to point to DEV/QA or the UAT url.
+
+To Perform integration test, ensure that an instance of the site is running, this could be local host or dev/qa/uat. have the BeseURL pointing to that site leaving out everything after the / 
+
+once the instace is up andd running, open another instance of visual studio and look for any integration test function. Right click within that function and then click either menu option that appears. run test or debug test.

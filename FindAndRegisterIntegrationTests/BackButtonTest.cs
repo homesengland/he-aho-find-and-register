@@ -8,21 +8,29 @@ namespace FindAndRegisterIntegrationTests
 	public class BackButtonTest : SeleniumTestsBase
     {
         private string HostForSearch;
+        //constructor to set journey url variables at runtime
         public BackButtonTest()
 		{
             HostForSearch = Host + "find-organisations-selling-shared-ownership-homes/";
             Host = Host + "check-eligibility-to-buy-a-shared-ownership-home/";
         }
 
+        //fact and trait are needed for selenium test functions
         [Fact]
         [Trait("Selenium", "Smoke")]
         public void WhereDoYouWantToBuyAHomeBackNavigation()
         {
+            //we are using selenium web driver for web manipulations
             using IWebDriver driver = new ChromeDriver();
+            //we begin with navigating to the route url of a journey.
             driver.Navigate().GoToUrl(Host);
             Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            //we then set step by step instructions. this is done by looking for a specific html id or class name.
+            //we the give the driver an a function to perform on the id/class i.e. .Click()
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+            //assert is used to set test pass/fail criteria. in the below case we are cheking if the current url that the driver is on,
+            //is equal to the host variable string
             Assert.NotEqual(Host, driver.Url);
             Assert.Equal(Host + "continue-on-the-homes-for-londoners-website", driver.Url);
             driver.FindElement(By.ClassName("govuk-back-link")).Click();
@@ -35,6 +43,9 @@ namespace FindAndRegisterIntegrationTests
             Assert.Equal(Host + "are-you-buying-with-another-person", driver.Url);
             driver.FindElement(By.ClassName("govuk-back-link")).Click();
             Assert.NotEqual(Host + "are-you-buying-with-another-person", driver.Url);
+            //after the last line of code is executed the driver will close as well as the web application instance that was used to perform the automated test.
+            //this is the pattern we are using solution wide.
+            //everything is either a click or a content check. content check will use the contains() function.
         }
 
         [Fact]

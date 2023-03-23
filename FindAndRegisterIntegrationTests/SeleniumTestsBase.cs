@@ -5,17 +5,24 @@ using System.Web;
 
 namespace FindAndRegisterIntegrationTests;
 
+//Base class for all integration test classes to inherit.
 public abstract class SeleniumTestsBase
 {
     protected string Host;
+
+    //constructor to instantiate variable at run time
     public SeleniumTestsBase()
     {
+        //these three lines of code allows us to use variable set within the appsettings.json file
         var builder = WebApplication.CreateBuilder();
         ConfigurationManager configuration = builder.Configuration;
+        //BaseUrl is variable within the appsettings.json file. you can change the variable string to point to the dev/qa/uat URL
+        //currently it has been set to run on local host which requires us to have an instance of the code running.
         Host = configuration.GetValue<string>("BaseUrl");
         
     }
 
+    //the below functions are reusable functions to be used within inherited classes
     protected void ClickSubmit(IWebDriver driver)
     {
         driver.FindElement(By.XPath("//main//button[@type='submit']")).Click();
