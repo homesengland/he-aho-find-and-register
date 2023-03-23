@@ -24,9 +24,10 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
             //we begin with navigating to the route url of a journey.
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+
             //we then set step by step instructions. this is done by looking for a specific html id or class name.
             //we the give the driver an a function to perform on the id/class i.e. .Click()
+
             driver.FindElement(By.Id("choice-For-Living-In-London")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             //assert is used to set test pass/fail criteria. in the below case we are cheking if the current url that the driver is on,
@@ -54,7 +55,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             Assert.NotEqual(Host, driver.Url);
@@ -88,7 +89,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -100,7 +101,7 @@ namespace FindAndRegisterIntegrationTests
             Assert.NotEqual(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
 
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -118,7 +119,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
@@ -130,7 +131,7 @@ namespace FindAndRegisterIntegrationTests
             Assert.NotEqual(Host + "select-all-that-apply-to-you", driver.Url);
 
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-yes")).Click();
@@ -148,7 +149,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -177,7 +178,7 @@ namespace FindAndRegisterIntegrationTests
             Assert.NotEqual(Host + "you-may-not-be-eligible-to-buy-a-shared-ownership-home", driver.Url);
 
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
             driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
             driver.FindElement(By.Id("buying-with-another-person-no")).Click();
@@ -198,7 +199,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(HostForSearch);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("Area")).SendKeys("Adur\t");
             driver.FindElement(By.Id("submit-search")).Click();
 

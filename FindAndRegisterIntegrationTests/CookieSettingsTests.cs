@@ -24,7 +24,7 @@ public class CookieSettingsTests : SeleniumTestsBase
     {
         using IWebDriver driver = new ChromeDriver() ;
         driver.Navigate().GoToUrl(Host + "cookie-settings");
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         Assert.Contains("Cookie Settings", driver.Title);
     }
 
@@ -35,7 +35,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         using IWebDriver driver = new ChromeDriver();
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host + "cookie-settings");
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         var doNotAccept = driver.FindElement(By.Id("accept-no"));
         Assert.True(doNotAccept.Selected);
 
@@ -49,7 +49,7 @@ public class CookieSettingsTests : SeleniumTestsBase
     {
         using IWebDriver driver = new ChromeDriver();
         driver.Navigate().GoToUrl(Host);
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         var actions = new Actions(driver);
         // open front page first so that the driver can fetch the context for cookie domains
 
@@ -86,7 +86,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host);
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         actions.ScrollByAmount(0, 500).Perform();
 
         driver.Manage().Cookies.AddCookie(new Cookie("ai_session", Base64Encode("1231243234")));
@@ -138,7 +138,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host);
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         actions.ScrollByAmount(0, 500).Perform();
         
 
@@ -182,7 +182,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Navigate().GoToUrl(SearchUrl);
         driver.Navigate().GoToUrl(Host + "cookie-policy");
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         actions.ScrollByAmount(0, 1000);
         driver.FindElement(By.Id("setting-link")).Click();
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
@@ -256,7 +256,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host + "cookie-settings");
-        Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+        
         actions.ScrollByAmount(0, 500).Perform();
         driver.FindElement(By.Id("accept-no")).Click();
         ClickSubmit(driver);

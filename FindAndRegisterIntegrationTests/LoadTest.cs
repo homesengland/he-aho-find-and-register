@@ -1,16 +1,13 @@
-using System;
 using System.Diagnostics;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace FindAndRegisterIntegrationTests
 {
     public class LoadTest: SeleniumTestsBase
     {
-        public const int PageLoadTimeThreshold = 5;
+        private const int PageLoadTimeThreshold = 5;
         private const int NumUsers = 50;
         
         [Theory]
@@ -33,10 +30,8 @@ namespace FindAndRegisterIntegrationTests
                         Stopwatch timePerRequest = new();
                         timePerRequest.Start();
                         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
-                        // request.Content = new StringContent($"Area={area}");
-                        // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
                         HttpResponseMessage response = await client.SendAsync(request);
-                        string result = await response.Content.ReadAsStringAsync();
+                        await response.Content.ReadAsStringAsync();
                         Debug.WriteLine($"request time: minutes: {timePerRequest.Elapsed.Minutes} - seconds: {timePerRequest.Elapsed.Seconds}");
                         Assert.True(response.StatusCode == HttpStatusCode.OK);
                     }
@@ -46,8 +41,20 @@ namespace FindAndRegisterIntegrationTests
             await Task.WhenAll(tasks);
 
         }
+       
+        [Fact]
+        [Trait("Selenium", "LoadTest")]
+        public void GetPageLoadTimeInSecondsTests()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            foreach (var page in Pages)
+            {
+                driver.Navigate().GoToUrl(Host + page);
+                Assert.True(GetPageLoadTimeInSeconds(driver) < PageLoadTimeThreshold);
+            }
+        }
 
-        public static long GetPageLoadTimeInSeconds(IWebDriver driver)
+        private static long GetPageLoadTimeInSeconds(IWebDriver driver)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             var responseTime

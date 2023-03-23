@@ -20,7 +20,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.ClassName("govuk-header__service-name")).Click();
             var previousURL = driver.Url.ToString();
 
@@ -36,7 +36,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("Contact_link")).Click();
             var title = driver.FindElement(By.Id("page-title")).GetAttribute("innerHTML");
             Assert.Equal("Contact us", title);
@@ -53,7 +53,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(Host);
-            Assert.True(LoadTest.GetPageLoadTimeInSeconds(driver) < LoadTest.PageLoadTimeThreshold);
+            
             driver.FindElement(By.Id("Contact_link")).Click();
 
             var emailLink = driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("href");
