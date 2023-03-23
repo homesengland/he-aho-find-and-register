@@ -1,1 +1,2 @@
-﻿global using Xunit;
+﻿//Setting a global dependancy for this solution
+global using Xunit;

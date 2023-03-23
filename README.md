@@ -63,3 +63,12 @@ Then once this is running, in the repository root directory we can run the tests
 Go to to ADO, then pipeline create new pipeline.
 Choose github, then connect to github account on the next step. 
 then it will ask which code repo to connect too.  
+
+### Selenium Integration Test
+Integration test are built off of Xunit. We are also using a chrome web driver so insure that your chrom version is at least Version 111.0.5563.64 or higher.
+
+we have global dependencies in the usings.cs file and also have config variables set in the appsettings.json file. currently it just has the one variable BaseUrl. this is set to local host but it can be changed to point to DEV/QA or the UAT url.
+
+we also have a a base class that all integrgartion test classes can inherit from. This is called SeleniumTestBase.cs
+
+I have also provided commentary on two functions explaining how they have been written to work step by step. You can find this example in classes, BackButtonTest.cs & BetaBannerTest.cs. The first function in each class has commentary. every integration test will follow that pattern.
