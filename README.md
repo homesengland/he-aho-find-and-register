@@ -65,10 +65,10 @@ Choose github, then connect to github account on the next step.
 then it will ask which code repo to connect too.  
 
 ### Selenium Integration Test
-Integration test are built off of Xunit. We are also using a chrome web driver so insure that your chrom version is at least Version 111.0.5563.64 or higher.
+Integration test are built off of Xunit. The application is using a chrome web driver so insure that your chrome version is at least Version 111.0.5563.64 or higher.
 
-we have global dependencies in the usings.cs file and also have config variables set in the appsettings.json file. currently it just has the one variable BaseUrl. this is set to local host but it can be changed to point to DEV/QA or the UAT url.
+there are global dependencies in the usings.cs file and this project also has config variables set in the appsettings.json file. currently it just has the one variable BaseUrl. this is set to local host but it can be changed to point to DEV/QA or the UAT url.
 
-we also have a a base class that all integrgartion test classes can inherit from. This is called SeleniumTestBase.cs
+To Perform integration test, ensure that an instance of the site is running, this could be local host or dev/qa/uat. have the BeseURL pointing to that site leaving out everything after the / 
 
-I have also provided commentary on two functions explaining how they have been written to work step by step. You can find this example in classes, BackButtonTest.cs & BetaBannerTest.cs. The first function in each class has commentary. every integration test will follow that pattern.
+once the instace is up andd running, open another instance of visual studio and look for any integration test function. Right click within that function and then click either menu option that appears. run test or debug test.
