@@ -4,15 +4,17 @@
     ViewBag.Title = $"We cannot find any organisations selling shared ownership homes in {Model.Area}";
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
+
 @section Scripts {
     <script nonce="@Nonces.GaNonce" type="text/javascript" src="/js/accessible-autocomplete.min.js" style-src='self'></script>
 }
+
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     var countries = [];
     @if (Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
-    {
-        @:countries.push("@location.LocalAuthority");
-    }
+                                       {
+                                           @:countries.push("@location.LocalAuthority");
+                                       }
 </script>
 
 <script nonce="@Nonces.GaNonce" type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
@@ -36,6 +38,21 @@
                         We cannot find any organisations selling shared ownership homes in @Model.Area
                     </h1>
                 </legend>
+                @switch (Model.ProviderModels?.Count())
+                {
+                    case 0 when Model.LocalAuthority != null:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list. </p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                    case 0 when Model.LocalAuthority == null:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list.</p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                }
                 @if (Model.LocalAuthority != null)
                 {
                     <p>
@@ -43,9 +60,15 @@
                     </p>
 
                     <h2 class="govuk-heading-s">Contact @Model.LocalAuthority.Name</h2>
-                    <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
-                    <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a></p>
-                    <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
+                    <p class="govuk-body">
+                        <span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone
+                    </p>
+                    <p class="govuk-body">
+                        <span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a>
+                    </p>
+                    <p class="govuk-body">
+                        <span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a>
+                    </p>
                 }
 
                 <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
@@ -67,7 +90,7 @@
                                                    autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
                                                    placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
                                         </noscript>
-                                        
+
                                         <div id="@Model?.Area" name="@Model?.Area"
                                              role="status" aria-atomic="true"
                                              aria-live="polite">
@@ -75,8 +98,9 @@
                                     </div>
                                     <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
                                         id="autocomplete-default__listbox"
-                                        role="listbox"></ul>
-                                    <span id="autocomplete-default__assistiveHint" />
+                                        role="listbox">
+                                    </ul>
+                                    <span id="autocomplete-default__assistiveHint"/>
                                 </div>
                             </div>
                         </div>

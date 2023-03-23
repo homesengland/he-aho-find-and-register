@@ -9,9 +9,12 @@
 }
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     var countries = [];
-    @if (Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+    @if (Model.LocationModels != null)
     {
-        @:countries.push("@location.LocalAuthority");
+        @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+        {
+            @:countries.push("@location.LocalAuthority");
+        }
     }
 </script>
 
@@ -31,12 +34,37 @@
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
-                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                @if (ViewContext.HttpContext.Items["errorsBool"] as bool? == true)
+                {
+                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                }
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
                         These organisations sell shared ownership homes in @Model.Area
                     </h1>
                 </legend>
+                @switch (Model.ProviderModels?.Count())
+                {
+                    case > 0:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list.</p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                    case 0 when Model.LocalAuthority != null:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list. </p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                    case 0 when Model.LocalAuthority == null:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list.</p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                }
+
                 <ul class="govuk-list govuk-list--bullet">
                     <li>@Model.GetSharedOwnershipCount() have shared ownership homes</li>
                     <li>@Model.GetHoldCount() offer Home Ownership for People with Long Term Disabilities (HOLD)</li>
