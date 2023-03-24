@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -12,7 +13,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
 
-            driver.Navigate().GoToUrl(Host + "check-eligiblility-to-buy-a-shared-ownership-home/");
+            driver.Navigate().GoToUrl(Host + "check-eligibility-to-buy-a-shared-ownership-home/");
             var serviceName = driver.FindElement(By.ClassName("govuk-header__content")).Text;
             Assert.Equal("Check if you are eligible to buy a shared ownership home", serviceName);
         }
@@ -34,9 +35,9 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
 
-            driver.Navigate().GoToUrl(Host + "check-eligiblility-to-buy-a-shared-ownership-home/");
+            driver.Navigate().GoToUrl(Host + "check-eligibility-to-buy-a-shared-ownership-home/");
             driver.FindElement(By.ClassName("govuk-header__content")).Click();
-            Assert.Equal(Host + "check-eligiblility-to-buy-a-shared-ownership-home", driver.Url);
+            Assert.Equal(Host + "check-eligibility-to-buy-a-shared-ownership-home", driver.Url);
         }
 
         [Fact]
@@ -56,7 +57,7 @@ namespace FindAndRegisterIntegrationTests
         {
             using IWebDriver driver = new ChromeDriver();
 
-            driver.Navigate().GoToUrl(Host + "check-eligiblility-to-buy-a-shared-ownership-home/");
+            driver.Navigate().GoToUrl(Host + "check-eligibility-to-buy-a-shared-ownership-home/");
             driver.FindElement(By.ClassName("govuk-header__link")).Click();
             string landingSite = "https://www.gov.uk/";
             Assert.Equal(landingSite, driver.Url);

@@ -76,6 +76,7 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
             try
             {
                 var sharepointProvider = new SharepointProviderValue();
+                sharepointProvider.SharedOwnership = Convert.ToBoolean(dataItem.Fields.AdditionalData["SharedOwnership"].ToString());
                 sharepointProvider.CompanyName = dataItem.Fields.AdditionalData["CompanyName"].ToString();
                 sharepointProvider.ContactNumber = dataItem.Fields.AdditionalData["ContactNumber"].ToString();
                 sharepointProvider.Email = dataItem.Fields.AdditionalData["Email"].ToString();

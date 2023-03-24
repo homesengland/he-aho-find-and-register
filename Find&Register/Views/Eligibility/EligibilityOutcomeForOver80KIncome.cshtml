@@ -1,11 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-<div class="govuk-width-container ">
-    <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+﻿<div class="govuk-width-container ">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
@@ -17,7 +13,7 @@
                 <p class="govuk-body">You told us that your household income is more than £80,000. If your income changes, you can check if you are eligble again.</p>
 
                 <h2 class="govuk-heading-m">Other help to buy a home</h2>
-                <p class="govuk-body">You may be eligible for support to buy a home through other <a href="https://www.gov.uk/affordable-home-ownership-schemes">affordable home ownership schemes</a>.</p>
+                <p class="govuk-body">You may be eligible for support to buy a home through other <a class="govuk-link" href="https://www.gov.uk/affordable-home-ownership-schemes" id="AHOLink">affordable home ownership schemes</a>.</p>
             </div>
         </div>
     </main>

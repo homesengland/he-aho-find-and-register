@@ -19,8 +19,8 @@ builder.Services.Configure<ProvidersSharePointAccessConfiguration>(
 builder.Services.AddSingleton<IGraphServiceClientInstance, GraphServiceClientInstance>();
 builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSource>();
 
-builder.Services.AddSingleton<IBlobContainerClient, BlobContainerClientWrapper>();
-builder.Services.AddSingleton<IProviderBlobDataSource, ProviderBlobDataSource>();
+builder.Services.AddAntiforgery();
+
 
 builder.Services.AddSingleton<IDataSources, DataSources>();
 
@@ -42,10 +42,12 @@ builder.Services.Configure<RazorViewEngineOptions>(o => o.ViewLocationExpanders.
     new LibraryViewEngine()
 ));
 builder.Services.AddScoped<ICookieHelper, CookieHelper>();
+builder.Services.AddScoped<JourneyPageTrackerFilterAttribute>();
 builder.Services.AddTransient<IHttpClient, HttpClientWrapper>();
 
 var app = builder.Build();
 app.UseHeaderSecurity();
+app.UseCrossSiteScriptingSecurity();
 
 app.UseCookiePolicy(
     new CookiePolicyOptions
@@ -87,6 +89,10 @@ app.Use(async (context, next) =>
     if (context.Response.StatusCode == StatusCodes.Status503ServiceUnavailable)
     {
         context.Response.Redirect("/GenericErrors/ServiceUnavailable");
+    }
+    if (context.Response.StatusCode >= StatusCodes.Status400BadRequest)
+    {
+        context.Response.Redirect("/GenericErrors/InternalServerError");
     }
 });
 

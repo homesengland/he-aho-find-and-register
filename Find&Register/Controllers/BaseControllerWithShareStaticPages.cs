@@ -23,7 +23,7 @@ public abstract class BaseControllerWithShareStaticPages : Controller
 
         var model = new CookieSettings();            
         model.AcceptAnalyticsCookies = applicationCookie.AnalyticSettings.Value.AcceptAnalytics;
-        model.BackUrl = HttpUtility.HtmlEncode(Request?.Headers.Referer);
+        model.BackUrl = applicationCookie.EligibilityResponses.Value.LastJourneyPage;
 
         return View(model);
     }
@@ -53,22 +53,25 @@ public abstract class BaseControllerWithShareStaticPages : Controller
     [Route("cookie-policy")]
     public IActionResult CookiePolicy()
     {
-        ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+        var applicationCookie = CookieHelper.GetApplicationCookieData(Request.Cookies, Response.Cookies);
+        ViewBag.previousPage = applicationCookie.EligibilityResponses.Value.LastJourneyPage;
         return View();
     }
 
     [Route("contact-us")]
     public IActionResult ContactUs()
     {
-        ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
+        var applicationCookie = CookieHelper.GetApplicationCookieData(Request.Cookies, Response.Cookies);
+        ViewBag.previousPage = applicationCookie.EligibilityResponses.Value.LastJourneyPage;
         return View();
     }
 
     [Route("accessibility")]
     public IActionResult Accessibility()
     {
-        ViewBag.previousPage = HttpUtility.HtmlEncode(Request.Headers.Referer.ToString());
-        ViewBag.FindSharedOwnershipLink = HttpUtility.HtmlEncode("/check-eligiblility-to-buy-a-shared-ownership-home");
+        var applicationCookie = CookieHelper.GetApplicationCookieData(Request.Cookies, Response.Cookies);
+        ViewBag.previousPage = applicationCookie.EligibilityResponses.Value.LastJourneyPage;
+        ViewBag.FindSharedOwnershipLink = HttpUtility.HtmlEncode("/check-eligibility-to-buy-a-shared-ownership-home");
         ViewBag.FindSearchProviderLink = HttpUtility.HtmlEncode("/find-organisations-selling-shared-ownership-homes");
         return View();
     }
@@ -87,7 +90,7 @@ public abstract class BaseControllerWithShareStaticPages : Controller
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request.Cookies, Response.Cookies);
         applicationCookie.AnalyticSettings.Value = new AnalyticSettings { AcceptAnalytics = true };
 
-        return Redirect(HttpUtility.HtmlEncode(Request.Headers.Referer.ToString()));
+        return Redirect(applicationCookie.EligibilityResponses.Value.LastJourneyPage);
     }
 
     [HttpPost]
@@ -99,7 +102,7 @@ public abstract class BaseControllerWithShareStaticPages : Controller
         analyticSettings.HideConfirmation = true;
         applicationCookie.AnalyticSettings.Value = analyticSettings;
 
-        return Redirect(HttpUtility.HtmlEncode(Request.Headers.Referer.ToString()));
+        return Redirect(applicationCookie.EligibilityResponses.Value.LastJourneyPage);
     }
 }
 

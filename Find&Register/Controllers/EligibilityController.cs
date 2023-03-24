@@ -10,7 +10,7 @@ namespace Find_Register.Controllers;
 
 [TypeFilter(typeof(UnhandledExceptionFilter))]
 [JourneyLayoutFilter(Journey.Eligibility)]
-[Route("check-eligiblility-to-buy-a-shared-ownership-home")]
+[Route("check-eligibility-to-buy-a-shared-ownership-home")]
 public class EligibilityController : BaseControllerWithShareStaticPages
 {
     ILogger<EligibilityController> _logger { get; set; }
@@ -25,6 +25,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
     //page 1 WhereDoYouWantToBuyAHome
     [HttpGet]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult Index()
     {
         ViewBag.previousPage = HttpUtility.HtmlEncode(_config["BaseUrl"]);
@@ -48,7 +49,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         {
             cookie.EligibilityOutcome = "London";
             applicationCookie.EligibilityResponses.Value = cookie;
-            return Redirect("/check-eligiblility-to-buy-a-shared-ownership-home/continue-on-the-homes-for-londoners-website");
+            return Redirect("/check-eligibility-to-buy-a-shared-ownership-home/continue-on-the-homes-for-londoners-website");
         }
 
         if (_EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon == false)
@@ -66,6 +67,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 2
     [HttpGet]
     [Route("are-you-buying-with-another-person")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult BuyingWithAnotherPerson()
     {
         if(RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -107,6 +109,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 3 - single
     [HttpGet]
     [Route("how-much-do-you-earn")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult HowMuchDoYouEarn()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -123,9 +126,9 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
-        cookie.EligibilityJourneyHowMuchDoYouEarn = _EligibilityJourneyHowMuchDoYouEarn;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn);
         cookie.PreviousPageBeforeErrorOutcome = nameof(HowMuchDoYouEarn);
+        cookie.EligibilityJourneyHowMuchDoYouEarn = _EligibilityJourneyHowMuchDoYouEarn;        
         applicationCookie.EligibilityResponses.Value = cookie;
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(BuyingWithAnotherPerson), "Eligibility"));
 
@@ -152,6 +155,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 3 - multi
     [HttpGet]
     [Route("how-much-do-you-both-earn")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult HowMuchDoYouEarn_MultiplePeople()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
@@ -168,10 +172,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
-        cookie.EligibilityJourneyHowMuchDoYouEarn_MultiplePeople = _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople;
-        applicationCookie.EligibilityResponses.Value = cookie;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn_MultiplePeople);
         cookie.PreviousPageBeforeErrorOutcome = nameof(HowMuchDoYouEarn_MultiplePeople);
+        cookie.EligibilityJourneyHowMuchDoYouEarn_MultiplePeople = _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople;
+        applicationCookie.EligibilityResponses.Value = cookie;
+        
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(BuyingWithAnotherPerson), "Eligibility"));
 
         if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == true)
@@ -197,13 +202,14 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     //page 4
     [HttpGet]
     [Route("select-all-that-apply-to-you")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult FirstTimeBuyer()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
-        ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(cookie.PreviousPage));
+        ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(cookie.PreviousPage, "Eligibility"));
 
         return View();
     }
@@ -373,6 +379,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     [Route("you-may-be-eligible-to-buy-a-shared-ownership-home")]
     [Route("you-may-not-be-eligible-to-buy-a-shared-ownership-home")]
     [Route("continue-on-the-homes-for-londoners-website")]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult EligibilityOutcome()
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));

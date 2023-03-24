@@ -5,7 +5,9 @@
 
 <div class="govuk-width-container ">
 
-    <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
 
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
         <div class="govuk-grid-row">
@@ -72,13 +74,13 @@
                 <p class="govuk-body">
                     They set the following cookies.
                 </p>@await Html.PartialAsync("_CookieTable", new CookieDescriptions
-            {
-                Descriptions = new List<CookieDescription> {
-                    new CookieDescription ("ai_session", "Helps us recognise actions as part of the same session", "At the end of your session"),
-                    new CookieDescription ("ai_user", "Helps us recognise users anonymously on returning visits over time", "1 year"),
-                    new CookieDescription ("__ga*", "Helps us recognise users anonymously on Google Analytics", "2 years")
-                }
-            })
+        {
+            Descriptions = new List<CookieDescription> {
+                new CookieDescription ("ai_session", "Helps us recognise actions as part of the same session", "At the end of your session"),
+                new CookieDescription ("ai_user", "Helps us recognise users anonymously on returning visits over time", "1 year"),
+                new CookieDescription ("__ga*", "Helps us recognise users anonymously on Google Analytics", "2 years")
+            }
+        })
 
                 <h2 class="govuk-heading-m">Change your settings</h2>
                 <p class="govuk-body">You can <a id="setting-link" href="cookie-settings" class="govuk-link">change which cookies you’re happy for us to use</a>.</p>

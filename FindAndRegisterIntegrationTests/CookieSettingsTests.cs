@@ -1,5 +1,7 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using Find_Register.Models;
+using FindAndRegisterIntegrationTests;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -9,9 +11,11 @@ namespace FindAndRegisterIntegrationTests;
 
 public class CookieSettingsTests : SeleniumTestsBase
 {
+    private string SearchUrl;
     public CookieSettingsTests()
     {
-        Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+        SearchUrl = Host + "find-organisations-selling-shared-ownership-homes/";
+        Host = Host + "check-eligibility-to-buy-a-shared-ownership-home/";
     }
 
     [Fact]
@@ -20,6 +24,7 @@ public class CookieSettingsTests : SeleniumTestsBase
     {
         using IWebDriver driver = new ChromeDriver() ;
         driver.Navigate().GoToUrl(Host + "cookie-settings");
+        
         Assert.Contains("Cookie Settings", driver.Title);
     }
 
@@ -30,6 +35,7 @@ public class CookieSettingsTests : SeleniumTestsBase
         using IWebDriver driver = new ChromeDriver();
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host + "cookie-settings");
+        
         var doNotAccept = driver.FindElement(By.Id("accept-no"));
         Assert.True(doNotAccept.Selected);
 
@@ -43,6 +49,7 @@ public class CookieSettingsTests : SeleniumTestsBase
     {
         using IWebDriver driver = new ChromeDriver();
         driver.Navigate().GoToUrl(Host);
+        
         var actions = new Actions(driver);
         // open front page first so that the driver can fetch the context for cookie domains
 
@@ -79,6 +86,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host);
+        
         actions.ScrollByAmount(0, 500).Perform();
 
         driver.Manage().Cookies.AddCookie(new Cookie("ai_session", Base64Encode("1231243234")));
@@ -130,6 +138,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host);
+        
         actions.ScrollByAmount(0, 500).Perform();
         
 
@@ -171,11 +180,13 @@ public class CookieSettingsTests : SeleniumTestsBase
         using IWebDriver driver = new ChromeDriver();
         var actions = new Actions(driver);
 
+        driver.Navigate().GoToUrl(SearchUrl);
         driver.Navigate().GoToUrl(Host + "cookie-policy");
+        
         actions.ScrollByAmount(0, 1000);
         driver.FindElement(By.Id("setting-link")).Click();
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
-        Assert.Equal(Host + "cookie-policy", driver.Url);
+        Assert.Equal(SearchUrl, driver.Url);
 
         driver.Navigate().GoToUrl(Host);
         actions.ScrollByAmount(0, 1000);
@@ -217,16 +228,23 @@ public class CookieSettingsTests : SeleniumTestsBase
 
     [Fact]
     [Trait("Selenium", "Smoke")]
-    public void CookiePolicy_BackButtonRedirectsToPreviousPag()
+    public void CookiePolicy_BackButtonRedirectsToPreviousJourneyPage()
     {
         using IWebDriver driver = new ChromeDriver();
         var actions = new Actions(driver);
 
+        driver.Navigate().GoToUrl(Host);
+        driver.FindElement(By.Id("choice-For-Living-In-Somewhere-Else")).Click();
+        driver.FindElement(By.Id("eligibility-Page-1-Submit-Button")).Click();
+        Assert.NotEqual(Host, driver.Url);
+        var fromUrl = driver.Url;
+
         driver.Navigate().GoToUrl(Host + "cookie-settings");
         actions.ScrollByAmount(0, 1000);
         driver.FindElement(By.Id("policy-link")).Click();
+        Assert.NotEqual(fromUrl, driver.Url);
         driver.FindElement(By.ClassName("govuk-back-link")).Click();
-        Assert.Equal(Host + "cookie-settings", driver.Url);
+        Assert.Equal(fromUrl, driver.Url);
     }
 
     [Fact]
@@ -238,6 +256,7 @@ public class CookieSettingsTests : SeleniumTestsBase
 
         driver.Manage().Cookies.DeleteAllCookies();
         driver.Navigate().GoToUrl(Host + "cookie-settings");
+        
         actions.ScrollByAmount(0, 500).Perform();
         driver.FindElement(By.Id("accept-no")).Click();
         ClickSubmit(driver);

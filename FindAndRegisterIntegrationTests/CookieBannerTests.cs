@@ -11,7 +11,7 @@ public class CookieBannerTests : SeleniumTestsBase
 {
     public CookieBannerTests()
     {
-        Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home";
+        Host = Host + "check-eligibility-to-buy-a-shared-ownership-home";
     }
 
     [Fact]

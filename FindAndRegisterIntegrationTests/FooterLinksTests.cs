@@ -10,7 +10,7 @@ namespace FindAndRegisterIntegrationTests
     {
         public FooterLinksTests()
         {
-            Host = Host + "check-eligiblility-to-buy-a-shared-ownership-home/";
+            Host = Host + "check-eligibility-to-buy-a-shared-ownership-home/";
         }
 
         [Fact]
@@ -20,6 +20,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(Host);
+            
             driver.FindElement(By.ClassName("govuk-header__service-name")).Click();
             var previousURL = driver.Url.ToString();
 
@@ -35,6 +36,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
             
             driver.Navigate().GoToUrl(Host);
+            
             driver.FindElement(By.Id("Contact_link")).Click();
             var title = driver.FindElement(By.Id("page-title")).GetAttribute("innerHTML");
             Assert.Equal("Contact us", title);
@@ -51,6 +53,7 @@ namespace FindAndRegisterIntegrationTests
             using IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(Host);
+            
             driver.FindElement(By.Id("Contact_link")).Click();
 
             var emailLink = driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("href");
@@ -62,8 +65,22 @@ namespace FindAndRegisterIntegrationTests
             emailLink = driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("href");
             Assert.Contains("mailto:", emailLink);
 
-            AxeResult axeResult = new AxeBuilder(driver).Analyze();
-            Assert.Null(axeResult.Error);
+            var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
+            Assert.Empty(axeResult.Violations);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void ContactUsEmailLinkColour()
+        {
+            using IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Contact_link")).Click();
+
+            Assert.Contains(driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("class"), "govuk-link");
+            Assert.Contains(driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("class"), "govuk-link");
+            Assert.Contains(driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("class"), "govuk-link");
         }
 
         [Fact]
@@ -116,6 +133,17 @@ namespace FindAndRegisterIntegrationTests
 
             var emailLink = driver.FindElement(By.Id("TechSupportEmail")).GetAttribute("href");
             Assert.Contains("mailto:", emailLink);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void AccessibilityEmailLinkColour()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.Id("Accessibility_link")).Click();
+
+            Assert.Contains(driver.FindElement(By.Id("TechSupportEmail")).GetAttribute("class"), "govuk-link");
         }
 
     }

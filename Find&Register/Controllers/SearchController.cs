@@ -1,8 +1,13 @@
-﻿using Find_Register.Filters;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Find_Register.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Find_Register.DataSourceService;
 using Find_Register.Models;
 using Find_Register.Cookies;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.Extensions.Logging;
 
 namespace Find_Register.Controllers;
 
@@ -13,15 +18,18 @@ public class SearchController : BaseControllerWithShareStaticPages
 {
     private readonly ILogger<SearchController> _logger;
     private readonly IDataSources _locationDataSource;
+    private readonly IAntiforgery _antiforgery;
 
     // GET: /<controller>/
-    public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource, ICookieHelper cookieHelper) : base(cookieHelper)
+    public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource, ICookieHelper cookieHelper, IAntiforgery antiforgery) : base(cookieHelper)
     {
         _logger = logger;
         _locationDataSource = locationDataSource;
+        _antiforgery = antiforgery;
     }
 
     [HttpGet]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult Index()
     {
         var locations = _locationDataSource.GetLocationDataSource.Locations;
@@ -29,57 +37,30 @@ public class SearchController : BaseControllerWithShareStaticPages
         return View(new SearchResultsModel { LocationModels = locations });
     }
 
-    [HttpPost]
-    public IActionResult Index(SearchResultsModel model)
-    {
-        var locations = _locationDataSource.GetLocationDataSource.Locations;
-        if (!ModelState.IsValid)
-        {
-            return View(new SearchResultsModel { LocationModels = locations });
-        }
-        else
-        {
-
-            return RedirectToAction("SearchResults", "Search", model);
-        }
-       
-    }
-
     [HttpGet]
-    [HttpPost]
+    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     [Route("organisations-that-sell-shared-ownership-homes")]
     public IActionResult SearchResults(SearchResultsModel model)
     {
+        var locations = _locationDataSource.GetLocationDataSource.Locations;
+        model.LocationModels = locations;
+        model.ValidateLocalAuthorityAreaSearch(ModelState);
+
         if (!ModelState.IsValid)
         {
-            return View(model);
+            return InvalidSearchResult(model);
         }
 
-        var locations = _locationDataSource.GetLocationDataSource.Locations;
-        var gssCode = locations?.FirstOrDefault(l => l.LocalAuthority?.Equals(model.Area ?? string.Empty) ?? false)?.LocationCode;
+        var matchedLocation = locations?.FirstOrDefault(l => l.LocalAuthority?.Equals(model.Area ?? string.Empty) ?? false);
+        if (matchedLocation?.IsLondon ?? false) { return SearchResultsLondon(model); }
+        var gssCode = matchedLocation?.LocationCode;
 
-        if (string.IsNullOrEmpty(gssCode) && !(locations?.Any(l => l.LocationCode?.Equals(gssCode) ?? false) ?? false))
-        {
-            //add error message here
-            return View(model);
-        }
+        var providers = gssCode != null ?
+            _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode) : new List<ProviderModel>();
+        model.LocalAuthority = providers?.FirstOrDefault(p => p.IsLocalAuthority);
+        model.ProviderModels = providers?.Where(p => !p.IsLocalAuthority);        
 
-        var providers = _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
-
-        var blobProviders = _locationDataSource.GetProviderBlobDataSource?.ProvidersActiveInLocalAuthority(gssCode ?? string.Empty);
-
-        if (blobProviders != null)
-        {
-            foreach (var provider in blobProviders) {
-                provider.Name = $"[Blob] {provider.Name}";
-            }
-            providers = providers?.Union(blobProviders);
-        }
-
-        model.ProviderModels = providers;
-        model.LocationModels = locations;
-
-        if (providers?.Count() == 0)
+        if ((model.ProviderModels?.Count() ?? 0)== 0)
         {
             return NoSearchResults(model);
         }
@@ -87,18 +68,18 @@ public class SearchController : BaseControllerWithShareStaticPages
         return View(model);
     }
 
-
-    [HttpGet]
-    [Route("organisations-that-sell-shared-no-results")]
-    public IActionResult NoSearchResults()
+    private IActionResult InvalidSearchResult(SearchResultsModel model)
     {
-        return RedirectToAction(nameof(Index));
+        return View(nameof(Index), model);
     }
 
-    [HttpPost]
-    [Route("organisations-that-sell-shared-no-results")]
-    public IActionResult NoSearchResults(SearchResultsModel model)
+    private IActionResult NoSearchResults(SearchResultsModel model)
     {
         return View(nameof(NoSearchResults), model);
+    }
+
+    private IActionResult SearchResultsLondon(SearchResultsModel model)
+    {
+        return View(nameof(SearchResultsLondon), model);
     }
 }

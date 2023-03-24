@@ -1,0 +1,30 @@
+@model SearchResultsModel
+@inject NonceModel Nonces
+@{
+    ViewBag.Title = "You need to use a different service";
+}
+<link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
+@section Scripts {
+    <script nonce="@Nonces.GaNonce" type="text/javascript" src="/js/accessible-autocomplete.min.js" style-src='self'></script>
+}
+
+<div class="govuk-width-container govuk-body">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@Url.Action("Index", "Search")" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        You need to use a different service
+                    </h1>
+                </legend>
+                <p>
+                    You can <a class="govuk-link" href="https://www.london.gov.uk/programmes-strategies/housing-and-land/homes-londoners/homes-londoners-property-search">find shared ownership homes in London on the Homes for London website</a>.
+                </p>
+
+            </div>
+        </div>
+    </main>
+</div>
