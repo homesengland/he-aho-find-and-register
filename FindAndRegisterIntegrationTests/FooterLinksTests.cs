@@ -33,7 +33,7 @@ namespace FindAndRegisterIntegrationTests
         public void ContactUsTitleSize()
         {
             using IWebDriver driver = new ChromeDriver();
-
+            
             driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("Contact_link")).Click();
             var title = driver.FindElement(By.Id("page-title")).GetAttribute("innerHTML");
@@ -120,4 +120,3 @@ namespace FindAndRegisterIntegrationTests
 
     }
 }
-
