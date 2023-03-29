@@ -1,0 +1,7 @@
+﻿@model EligibilityJourneyBuyingWithAnotherPerson
+@{
+    ViewBag.Title = "Eligibilty Outome";
+    string SingleBuyer = @ViewBag.outcome;
+}
+
+@await Html.PartialAsync(SingleBuyer)

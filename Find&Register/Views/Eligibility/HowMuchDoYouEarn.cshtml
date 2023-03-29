@@ -1,0 +1,52 @@
+﻿@model EligibilityJourneyHowMuchDoYouEarn
+@{
+    ViewBag.Title = "How much do you earn";
+    var SingleIncomeOver80 = nameof(EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80);
+}
+
+<div class="govuk-width-container ">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                <form method="post">
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                    {
+                       HtmlId = SingleIncomeOver80,
+                       ValidationMessage = Html.ValidationMessageFor(m => m.SingleIncomeOver80),
+                       AriaDescribe = SingleIncomeOver80 + "-error",
+                       Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                       Title = "How much do you earn?",
+                       Content =
+                                @<div class="govuk-form-group">
+                                    <fieldset class="govuk-fieldset">
+                                        <div class="govuk-radios" data-module="govuk-radios">
+                                            <div class="govuk-radios__item">
+                                                <input class="govuk-radios__input" id="annual-income-single-80" asp-for="@SingleIncomeOver80" name="@SingleIncomeOver80"
+                                                       type="radio" value=false>
+                                                <label class="govuk-label govuk-radios__label" for="annual-income-single-80">
+                                                    £0 to £80,000
+                                                </label>
+                                            </div>
+                                            <div class="govuk-radios__item">
+                                                <input class="govuk-radios__input" id="annual-income-single-81" asp-for="@SingleIncomeOver80" name="@SingleIncomeOver80"
+                                                       type="radio" value=true>
+                                                <label class="govuk-label govuk-radios__label" for="annual-income-single-81">
+                                                    £80,001 or more
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+})
+                    <button class="govuk-button" id="eligibility-Page-3-Single-Buyer-Submit-Button" data-module="govuk-button" type="submit">
+                        Continue
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

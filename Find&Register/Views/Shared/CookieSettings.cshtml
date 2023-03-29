@@ -1,0 +1,106 @@
+@model CookieSettings
+
+@{
+    ViewBag.Title = "Cookie Settings";
+    var acceptAnalyticsCookies = nameof(CookieSettings.AcceptAnalyticsCookies);
+    var backUrlName = nameof(CookieSettings.BackUrl);
+    var backUrlValue = Model.BackUrl;
+}
+
+
+<div class="govuk-width-container ">
+
+    <div role="navigation" aria-label="navigate back">
+        <a href="@backUrlValue" class="govuk-back-link">Back</a>
+    </div>
+
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)
+                {
+                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                }
+
+                <h1 class="govuk-heading-l">Cookie settings</h1>
+
+                <p class="govuk-body">
+                    Cookies are small files saved on your phone, tablet or computer when you
+                    visit a website.
+                </p>
+                <div class="govuk-inset-text">
+                    <p class="govuk-body">
+                        The cookies do not identify you personally.
+                    </p>
+                </div>
+
+                <h2 class="govuk-heading-m">Strictly necessary cookies</h2>
+                <p class="govuk-body">
+                    These essential cookies do things like:
+                </p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>remember the notifications you've seen so we do not show them to you again</li>
+                </ul>
+                <p class="govuk-body">
+                    They always need to be on.
+                </p>
+
+                <h2 class="govuk-heading-m">Cookies that measure website use</h2>
+                <p class="govuk-body">
+                    We use third party services (Application Insights) to collect information about how you use this
+                    service so we can improve it.
+                </p>
+                <p class="govuk-body">
+                    They store information about:
+                </p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>how you got to the site</li>
+                    <li>pages you visit and how long you spend on them</li>
+                    <li>what you click on while you re visiting the site</li>
+                </ul>
+                <p class="govuk-body">
+                    No personal details are stored with this information, so you cannot be
+                    identified.
+                </p>
+
+                <form method="post" action="cookie-settings">
+                    <input type="hidden" name="@backUrlName" value="@backUrlValue" />
+
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                    {
+                        HtmlId = acceptAnalyticsCookies,
+                        ValidationMessage = Html.ValidationMessageFor(m => m.AcceptAnalyticsCookies),
+                        AriaDescribe = acceptAnalyticsCookies + "-error",
+                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                        Content =
+                                            @<div class="govuk-radios">
+                                                <div class="govuk-radios__item">
+                                                    <input @(Model.AcceptAnalyticsCookies ?? false ? "checked=\"checked\"" : "" )
+                                                           class="govuk-radios__input" id="accept-yes" asp-for="@acceptAnalyticsCookies"
+                                                           name="@acceptAnalyticsCookies" type="radio" value="true">
+                                                    <label class="govuk-label govuk-radios__label" for="accept-yes">
+                                                        Use cookies that measure my website use
+                                                    </label>
+                                                </div>
+                                                <div class="govuk-radios__item">
+                                                    <input @(Model.AcceptAnalyticsCookies ?? false ? "" : "checked=\"checked\"" )
+                                                           class="govuk-radios__input" id="accept-no" asp-for="@acceptAnalyticsCookies"
+                                                           name="@acceptAnalyticsCookies" type="radio" value="false">
+                                                    <label class="govuk-label govuk-radios__label" for="accept-no">
+                                                        Do not use that measure my website use
+                                                    </label>
+                                                </div>
+                                            </div>
+})
+
+                    <button class="govuk-button" data-module="govuk-button" type="submit">
+                        Save changes
+                    </button>
+                    <p class="govuk-body">
+                        <a href="cookie-policy" id="policy-link" class="govuk-link">Find out more about cookies in our cookie policy</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

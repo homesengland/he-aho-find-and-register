@@ -1,0 +1,55 @@
+﻿@model EligibilityJourneyHowMuchDoYouEarn_MultiplePeople
+@{
+    ViewBag.Title = "How much do you both earn";
+    var JointIncomeOver80 = nameof(EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80);
+}
+
+<div class="govuk-width-container ">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                <form method="post">
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                    {
+                       HtmlId = JointIncomeOver80,
+                       ValidationMessage = Html.ValidationMessageFor(m => m.JointIncomeOver80),
+                       AriaDescribe = JointIncomeOver80 + "-error",
+                       Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                       Title = "How much do you both earn?",
+                       Content =
+                                        @<div class="govuk-form-group">
+                                            <div id="annual-income-multi-hint" class="govuk-hint">
+                                                Use your combined income. For example, if you both earn £40,000, enter £80,000
+                                            </div>
+                                            <fieldset class="govuk-fieldset">
+                                                <div class="govuk-radios" data-module="govuk-radios">
+                                                    <div class="govuk-radios__item">
+                                                        <input class="govuk-radios__input" id="annual-income-multi-80" asp-for="@JointIncomeOver80" name="@JointIncomeOver80"
+                                                               type="radio" value=false>
+                                                        <label class="govuk-label govuk-radios__label" for="annual-income-multi-80">
+                                                            £0 to £80,000
+                                                        </label>
+                                                    </div>
+                                                    <div class="govuk-radios__item">
+                                                        <input class="govuk-radios__input" id="annual-income-multi-81" asp-for="@JointIncomeOver80" name="@JointIncomeOver80"
+                                                               type="radio" value=true>
+                                                        <label class="govuk-label govuk-radios__label" for="annual-income-multi-81">
+                                                            £80,001 or more
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+})
+                    <button class="govuk-button" id="eligibility-Page-3-Multi-Buyer-Submit-Button" data-module="govuk-button" type="submit">
+                        Continue
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

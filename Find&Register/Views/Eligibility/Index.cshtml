@@ -1,0 +1,48 @@
+﻿@model EligibilityJourneyWhereDoYouWantToBuyAHome
+@{
+    ViewBag.Title = "Where do you want to buy a home";
+    var LiveInLondon = nameof(EligibilityJourneyWhereDoYouWantToBuyAHome.LiveInLondon);
+}
+
+<div class="govuk-width-container">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper">
+        @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+        <form method="post">
+            @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+            {
+               HtmlId = LiveInLondon,
+               ValidationMessage = Html.ValidationMessageFor(m => m.LiveInLondon),
+               AriaDescribe = LiveInLondon + "-error",
+               Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+               Title = "Where do you want to buy a home?",
+               Content =
+                                @<div class="govuk-form-group">
+                                    <fieldset class="govuk-fieldset">
+                                        <div class="govuk-radios" data-module="govuk-radios">
+                                            <div class="govuk-radios__item">
+                                                <input class="govuk-radios__input" id="choice-For-Living-In-London" asp-for="@LiveInLondon" name="@LiveInLondon"
+                                                       type="radio" value=true>
+                                                <label class="govuk-label govuk-radios__label" for="choice-For-Living-In-London">
+                                                    London
+                                                </label>
+                                            </div>
+                                            <div class="govuk-radios__item">
+                                                <input class="govuk-radios__input" id="choice-For-Living-In-Somewhere-Else" asp-for="@LiveInLondon" name="@LiveInLondon"
+                                                       type="radio" value=false>
+                                                <label class="govuk-label govuk-radios__label" for="choice-For-Living-In-Somewhere-Else">
+                                                    Somewhere else
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+})
+            <button class="govuk-button" id="eligibility-Page-1-Submit-Button" data-module="govuk-button" type="submit">
+                Continue
+            </button>
+        </form>
+    </main>
+</div>

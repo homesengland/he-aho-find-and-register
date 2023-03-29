@@ -1,0 +1,23 @@
+﻿@model Find_Register.Models.GovukValidatedFormFieldModel
+@{
+}
+
+<div class="govuk-form-group @(Model.HasErrors ? "govuk-form-group--error" : "" ) " id="@Model.HtmlId">
+    <fieldset class="govuk-fieldset" @(Model.HasErrors ? "aria-describedby=\"" + @Model.AriaDescribe + "\"" : "")>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            @if (!string.IsNullOrWhiteSpace(Model.Title))
+                {
+                <h1 class="govuk-fieldset__heading">
+                    @Model.Title
+                </h1>
+                }
+        </legend>
+        @if (Model.HasErrors)
+            {
+            <p id="@Model.AriaDescribe" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> @Model.ValidationMessage
+            </p>
+            }
+        @Model.Content?.Invoke(Model)
+    </fieldset>
+</div>

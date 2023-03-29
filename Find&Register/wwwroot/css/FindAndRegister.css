@@ -1,0 +1,39 @@
+﻿.gem-c-button {
+    width: 90%;
+}
+.gem-c-cookie-banner__button {
+    padding: 0;
+}
+
+.gem-c-cookie-banner {
+    font-family: "GDS Transport", arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 14px;
+    font-size: .875rem;
+    line-height: 1.14286;
+    padding: 10px 0;
+    background-color: #f3f2f1;
+}
+
+.analytics-container {
+    height: 1px;
+    width: 1px;
+}
+
+.analytics-container > img {
+    height: 1px;
+    width: 1px;
+}
+
+.counsil-container {
+   background-color:#f3f2f1;
+   padding:20px 30px 20px 30px;
+   margin-bottom: 60px;
+    
+}
+
+input {
+    font-family: "GDS Transport", arial, sans-serif;
+}

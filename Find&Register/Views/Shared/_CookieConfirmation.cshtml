@@ -1,0 +1,14 @@
+﻿@model Find_Register.Models.LayoutDataModel
+
+<div id="cookie-confirmation" class="gem-c-cookie-banner govuk-clearfix" role="region" aria-label="cookie banner">
+    <div class="govuk-width-container gem-c-cookie-banner__confirmation u-show" tabindex="-1">
+        <p class="govuk-body" role="alert">Your cookie settings have been saved. You can <a class="govuk-link" href="@Model.FooterLinkRoot/cookie-settings" id="cookie-settings-link">change your cookie settings</a> at any time.</p>
+        <form action="@Model.FooterLinkRoot/hide-confirmation" method="post" novalidate="">
+            <div class="gem-c-cookie-banner__buttons">
+                <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-accept govuk-grid-column-full govuk-grid-column-one-half-from-desktop">
+                    <button class="gem-c-button govuk-button gem-c-button--inline" type="submit" id="hide-confirmation-btn">Hide this message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

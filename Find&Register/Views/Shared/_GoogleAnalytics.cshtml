@@ -1,0 +1,31 @@
+﻿@using Microsoft.Extensions.Options
+
+@model Find_Register.Models.AnalyticSettings
+@inject IOptions<AnalyticsConfiguration> AnalyticsConfig
+@inject NonceModel Nonces
+
+@using System.Web
+@{
+    var cacheBustingRandomNumber = new Random().Next();
+    var pagePath = HttpUtility.UrlEncode(Context.Request.Path.Value);
+}
+
+<div class="analytics-container" id="google-analytics-container">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=@AnalyticsConfig.Value.GaTag"></script>
+    <script nonce="@Nonces.GaNonce">window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '@AnalyticsConfig.Value.GaTag', {
+            'cookie_domain': 'none'
+        });</script>
+    <noscript>
+        <!--
+            Note: this collect analytics for users without Javascript for if we are using
+            Google Analytics' Universal Analytics (UA). However UA will be depreciated July 2023
+            and won't work with the newer GA-4 which Google is replacing it with so it may
+            be that we cannot get analytics for no-javascript users in the future.
+        -->
+        <img src="https://www.google-analytics.com/collect?v=1&t=pageview&dp=@pagePath&tid=@AnalyticsConfig.Value.GaTag&cid=@Model.GoogleAnalyticsNoJsClientId&z=@cacheBustingRandomNumber" />
+    </noscript>
+</div>

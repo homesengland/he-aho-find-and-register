@@ -1,0 +1,49 @@
+﻿@model EligibilityJourneyBuyingWithAnotherPerson
+@{
+    ViewBag.Title = "Are you buying with another person";
+    var SingleBuyer = nameof(EligibilityJourneyBuyingWithAnotherPerson.SingleBuyer);
+}
+
+<div class="govuk-width-container ">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+        <form method="post">
+            @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+            {
+               HtmlId = SingleBuyer,
+               ValidationMessage = Html.ValidationMessageFor(m => m.SingleBuyer),
+               AriaDescribe = SingleBuyer + "-error",
+               Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+               Title = "Are you buying with another person?",
+               Content =
+                                    @<div class="govuk-form-group">
+                                        <fieldset class="govuk-fieldset">
+                                            <div class="govuk-radios" data-module="govuk-radios">
+                                                <div class="govuk-radios__item">
+                                                    <input class="govuk-radios__input" id="buying-with-another-person-yes" asp-for="@SingleBuyer" name="@SingleBuyer"
+                                                           type="radio" value=true>
+                                                    <label class="govuk-label govuk-radios__label" for="buying-with-another-person-yes">
+                                                        Yes
+                                                    </label>
+                                                </div>
+                                                <div class="govuk-radios__item">
+                                                    <input class="govuk-radios__input" id="buying-with-another-person-no" asp-for="@SingleBuyer" name="@SingleBuyer"
+                                                           type="radio" value=false>
+                                                    <label class="govuk-label govuk-radios__label" for="buying-with-another-person-no">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+})
+            <button class="govuk-button" id="eligibility-Page-2-Submit-Button" data-module="govuk-button" type="submit">
+                Continue
+            </button>
+        </form>
+    </main>
+</div>
+

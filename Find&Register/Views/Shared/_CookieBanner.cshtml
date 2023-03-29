@@ -1,0 +1,27 @@
+﻿@model Find_Register.Models.LayoutDataModel
+
+<div id="cookie-banner" class="gem-c-cookie-banner govuk-clearfix" role="region" aria-label="cookie banner">
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div>
+                    <h2 class="govuk-heading-m">Tell us whether you accept cookies</h2>
+                    <p class="govuk-body">
+                        We use <a class="govuk-link" href="@Model.FooterLinkRoot/cookie-policy" id="cookie-policy-link">cookies to collect information</a> about how you use this website. We
+                        use the information to improve the website and the application service.
+                    </p>
+                </div>
+                <form action="@Model.FooterLinkRoot/accept-all-cookies" method="post" novalidate="">
+                    <div>
+                        <div class="gem-c-cookie-banner__button govuk-grid-column-full govuk-grid-column-one-half-from-desktop">
+                            <button class="gem-c-button govuk-button" type="submit" id="accept-all-cookies-btn">Accept all cookies</button>
+                        </div>
+                        <div class="gem-c-cookie-banner__button govuk-grid-column-full govuk-grid-column-one-half-from-desktop">
+                            <a class="gem-c-button govuk-button" role="button" href="@Model.FooterLinkRoot/cookie-settings" id="cookie-preference-btn">Set cookie preferences</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

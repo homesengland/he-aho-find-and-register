@@ -1,0 +1,90 @@
+@{
+    ViewBag.Title = "Cookie Policy";
+}
+
+
+<div class="govuk-width-container ">
+
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h1 class="govuk-heading-l">Cookie policy</h1>
+
+                <p class="govuk-body">
+                    This service puts small files (known as ‘cookies’) on
+                    your phone, tablet or computer to collect information about how you browse
+                    the website. Find out more about the cookies we use, what they are for and
+                    when they expire.
+                </p>
+
+                <h2 class="govuk-heading-m">Cookies message</h2>
+                <p class="govuk-body">
+                    When you first use the service we show a message inviting you to accept
+                    cookies or review your settings. We’ll set cookies so that your computer
+                    knows you have seen the message and not to show it again, and also to store
+                    your settings.
+                </p>
+
+                @await Html.PartialAsync("_CookieTable", new CookieDescriptions
+                {
+                    Descriptions = new List<CookieDescription> {
+                        new CookieDescription ("analytics-settings", "Stores your cookie settings", "1 year")
+                    }
+                })
+
+                <h2 class="govuk-heading-m">Strictly necessary cookies</h2>
+                <p class="govuk-body">
+                    When you use the service, we set cookies to remember the answers you give
+                    to the questions. This is so that we can give you relevant information based
+                    on your answers.
+                </p>
+
+                @await Html.PartialAsync("_CookieTable", new CookieDescriptions
+                {
+                    Descriptions = new List<CookieDescription> {
+                        new CookieDescription ("eligibility-responses", "Helps us calculate your eligibility when you check if you are eligible to buy a shared ownership home", "At the end of your session")
+                    }
+                })
+
+                <h2 class="govuk-heading-m">Cookies that measure website use</h2>
+                <p class="govuk-body">
+                    We use third party services (Google Analytics) to collect anonymised information about how you
+                    use this service so we can improve it.
+                </p>
+                <p class="govuk-inset-text">
+                    They are not allowed to use or share the data about how you use the
+                    service.
+                </p>
+                <p class="govuk-body">
+                    They store information about:
+                </p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>how you got to the site</li>
+                    <li>pages you visit and how long you spend on them</li>
+                    <li>what you click on while you’re visiting the site</li>
+                </ul>
+                <p class="govuk-body">
+                    No personal details are stored with this information, so you cannot be
+                    identified.
+                </p>
+                <p class="govuk-body">
+                    They set the following cookies.
+                </p>@await Html.PartialAsync("_CookieTable", new CookieDescriptions
+        {
+            Descriptions = new List<CookieDescription> {
+                new CookieDescription ("ai_session", "Helps us recognise actions as part of the same session", "At the end of your session"),
+                new CookieDescription ("ai_user", "Helps us recognise users anonymously on returning visits over time", "1 year"),
+                new CookieDescription ("__ga*", "Helps us recognise users anonymously on Google Analytics", "2 years")
+            }
+        })
+
+                <h2 class="govuk-heading-m">Change your settings</h2>
+                <p class="govuk-body">You can <a id="setting-link" href="cookie-settings" class="govuk-link">change which cookies you’re happy for us to use</a>.</p>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,175 @@
+@model SearchResultsModel
+@inject NonceModel Nonces
+@{
+    ViewBag.Title = $"These organisations sell shared ownership homes in {Model.Area}";
+}
+<link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
+@section Scripts {
+    <script nonce="@Nonces.GaNonce" type="text/javascript" src="/js/accessible-autocomplete.min.js" style-src='self'></script>
+}
+<script nonce="@Nonces.GaNonce" type="text/javascript">
+    var countries = [];
+    @if (Model.LocationModels != null)
+    {
+        @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+        {
+            @:countries.push("@location.LocalAuthority");
+        }
+    }
+</script>
+
+<script nonce="@Nonces.GaNonce" type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
+        var element = document.querySelector('#tt-default')
+        var id = 'Area'
+        accessibleAutocomplete({
+            element: element,
+            id: id,
+            source: countries
+        })
+    })</script>
+<div class="govuk-width-container govuk-body">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@Url.Action("Index", "Search")" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if (ViewContext.HttpContext.Items["errorsBool"] as bool? == true)
+                {
+                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                }
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        These organisations sell shared ownership homes in @Model.Area
+                    </h1>
+                </legend>
+                @switch (Model.ProviderModels?.Count())
+                {
+                    case > 0:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list.</p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                    case 0 when Model.LocalAuthority != null:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list. </p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                    case 0 when Model.LocalAuthority == null:
+                        <div class="govuk-inset-text">
+                            <p>This is a new service and we are still adding organisations to this list.</p>
+                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                        </div>
+                        break;
+                }
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>@Model.GetSharedOwnershipCount() have shared ownership homes</li>
+                    <li>@Model.GetHoldCount() offer Home Ownership for People with Long Term Disabilities (HOLD)</li>
+                    <li>@Model.GetOpsoCount() have Older Persons Shared Ownership (OPSO) homes</li>
+                    <li>@Model.GetRentToBuyCount() has Rent to Buy homes</li>
+                </ul>
+                <form method="get" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                        {
+
+                           ValidationMessage = Html.ValidationMessageFor(m => m.Area),
+
+                           Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+
+                           Content =
+                                                                    @<div class="govuk-form-group">
+                                                                        <h2 class="govuk-label-wrapper">
+                                                                            <label class="govuk-label govuk-label--m" for="searchArea">
+                                                                                Search again
+                                                                            </label>
+                                                                        </h2>
+                                                                        <div id="searchArea-hint" class="govuk-hint">
+                                                                            <label for="Area">You can search by local authority</label>
+                                                                        </div>
+                                                                        <div id="searchArea-container">
+                                                                            <div id="tt-default" class="autocomplete-wrapper">
+                                                                                <div class="autocomplete__wrapper">
+                                                                                    <div>
+                                                                                        <noscript>
+                                                                                            <input type="text" id="Area" name="Area" class="autocomplete__input"
+                                                                                                   autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                                                                                   placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
+                                                                                        </noscript>
+                                                                                        
+                                                                                        <div id="@Model.Area" name="@Model.Area"
+                                                                                             role="status" aria-atomic="true"
+                                                                                             aria-live="polite">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                                                                                        id="autocomplete-default__listbox"
+                                                                                        role="listbox"></ul>
+                                                                                    <span id="autocomplete-default__assistiveHint" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+})
+                    <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
+                        Search
+                    </button>
+                </form>
+
+                @if (Model.LocalAuthority != null)
+                {
+                    <div class="counsil-container">
+                        <p class="govuk-body">@Model.LocalAuthority.Name may be able to help you find a new home. Contact @Model.LocalAuthority.Name for more information.</p>
+                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
+                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a></p>
+                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
+                    </div>
+                }
+                @foreach (var provider in Model.ProviderModels?.Where(p => !p.IsLocalAuthority) ?? new List<ProviderModel>())
+                {
+                    <h2 class="govuk-heading-m">@provider.Name</h2>
+                    <p class="govuk-body">
+                        <span class="govuk-!-font-weight-bold">Telephone:</span>
+                        @provider.Phone
+                    </p>
+                    <p class="govuk-body">
+                        <span class="govuk-!-font-weight-bold">Email:</span>
+                        <a class="govuk-link" href="mailto:@provider.Email">@provider.Email</a>
+                    </p>
+                    <p class="govuk-body">
+                        <span class="govuk-!-font-weight-bold">Website:</span>
+                        <a class="govuk-link" href="@provider.WebsiteUrl">@provider.Website</a>
+                    </p>
+                    if (provider.SharedOwnership || provider.Opso || provider.Hold || provider.RentToBuy)
+                    {
+                        <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes through: </h3>
+                        <ul class="govuk-list govuk-list--bullet">
+                            @if (provider.SharedOwnership)
+                            {
+                                <li>Shared Ownership</li>
+                            }
+                            @if (provider.Opso)
+                            {
+                                <li>Older Persons Shared Ownership (OPSO)</li>
+                            }
+                            @if (provider.Hold)
+                            {
+                                <li>Home Ownership for People with Long Term Disabilities (HOLD)</li>
+                            }
+                            @if (provider.RentToBuy)
+                            {
+                                <li>Rent to Buy</li>
+                            }
+                        </ul>
+                    }
+                    if (Model?.ProviderModels?.Last().Equals(provider) != true)
+                    {
+                        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                    }
+                }
+            </div>
+        </div>
+    </main>
+</div>
