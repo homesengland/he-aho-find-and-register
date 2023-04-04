@@ -35,6 +35,10 @@
     
 }
 
+#main-content {
+    overflow-wrap: anywhere;
+}
+
 input {
     font-family: "GDS Transport", arial, sans-serif;
 }
