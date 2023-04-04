@@ -84,6 +84,18 @@ namespace FindAndRegisterIntegrationTests
             Assert.True(texts.All(paragraph => paragraph.GetCssValue("font-family").Contains("GDS Transport")));
             // all text are gds transport
         }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void SearchingReturnsResultsForProvidersWithoutAPhoneNumber()
+        {
+            var relativeUrl = "/organisations-that-sell-shared-ownership-homes?Area=Allerdale";
+
+            using IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Host + relativeUrl);
+                
+            Assert.Contains("Above Derwent Community Land Trust", driver.FindElement(By.Id("main-content")).Text);
+        }
     }
 }
 

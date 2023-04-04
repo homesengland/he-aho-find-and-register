@@ -80,38 +80,38 @@
                            Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
 
                            Content =
-                                                                    @<div class="govuk-form-group">
-                                                                        <h2 class="govuk-label-wrapper">
-                                                                            <label class="govuk-label govuk-label--m" for="searchArea">
-                                                                                Search again
-                                                                            </label>
-                                                                        </h2>
-                                                                        <div id="searchArea-hint" class="govuk-hint">
-                                                                            <label for="Area">You can search by local authority</label>
-                                                                        </div>
-                                                                        <div id="searchArea-container">
-                                                                            <div id="tt-default" class="autocomplete-wrapper">
-                                                                                <div class="autocomplete__wrapper">
-                                                                                    <div>
-                                                                                        <noscript>
-                                                                                            <input type="text" id="Area" name="Area" class="autocomplete__input"
-                                                                                                   autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                                                                                                   placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
-                                                                                        </noscript>
-                                                                                        
-                                                                                        <div id="@Model.Area" name="@Model.Area"
-                                                                                             role="status" aria-atomic="true"
-                                                                                             aria-live="polite">
+                                                                        @<div class="govuk-form-group">
+                                                                            <h2 class="govuk-label-wrapper">
+                                                                                <label class="govuk-label govuk-label--m" for="searchArea">
+                                                                                    Search again
+                                                                                </label>
+                                                                            </h2>
+                                                                            <div id="searchArea-hint" class="govuk-hint">
+                                                                                <label for="Area">You can search by local authority</label>
+                                                                            </div>
+                                                                            <div id="searchArea-container">
+                                                                                <div id="tt-default" class="autocomplete-wrapper">
+                                                                                    <div class="autocomplete__wrapper">
+                                                                                        <div>
+                                                                                            <noscript>
+                                                                                                <input type="text" id="Area" name="Area" class="autocomplete__input"
+                                                                                                       autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                                                                                       placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
+                                                                                            </noscript>
+
+                                                                                            <div id="@Model.Area" name="@Model.Area"
+                                                                                                 role="status" aria-atomic="true"
+                                                                                                 aria-live="polite">
+                                                                                            </div>
                                                                                         </div>
+                                                                                        <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                                                                                            id="autocomplete-default__listbox"
+                                                                                            role="listbox"></ul>
+                                                                                        <span id="autocomplete-default__assistiveHint" />
                                                                                     </div>
-                                                                                    <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                                                                                        id="autocomplete-default__listbox"
-                                                                                        role="listbox"></ul>
-                                                                                    <span id="autocomplete-default__assistiveHint" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
 })
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
@@ -122,7 +122,10 @@
                 {
                     <div class="counsil-container">
                         <p class="govuk-body">@Model.LocalAuthority.Name may be able to help you find a new home. Contact @Model.LocalAuthority.Name for more information.</p>
-                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
+                        @if (@Model.LocalAuthority.Phone != null)
+                        {
+                            <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
+                        }
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a></p>
                         <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
                     </div>
@@ -130,10 +133,13 @@
                 @foreach (var provider in Model.ProviderModels?.Where(p => !p.IsLocalAuthority) ?? new List<ProviderModel>())
                 {
                     <h2 class="govuk-heading-m">@provider.Name</h2>
-                    <p class="govuk-body">
-                        <span class="govuk-!-font-weight-bold">Telephone:</span>
-                        @provider.Phone
-                    </p>
+                    @if (provider.Phone != null)
+                    {
+                        <p class="govuk-body">
+                            <span class="govuk-!-font-weight-bold">Telephone:</span>
+                            @provider.Phone
+                        </p>
+                    }
                     <p class="govuk-body">
                         <span class="govuk-!-font-weight-bold">Email:</span>
                         <a class="govuk-link" href="mailto:@provider.Email">@provider.Email</a>

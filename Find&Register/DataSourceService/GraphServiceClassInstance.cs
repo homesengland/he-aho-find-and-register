@@ -78,7 +78,7 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
                 var sharepointProvider = new SharepointProviderValue();
                 sharepointProvider.SharedOwnership = Convert.ToBoolean(dataItem.Fields.AdditionalData["SharedOwnership"].ToString());
                 sharepointProvider.CompanyName = dataItem.Fields.AdditionalData["CompanyName"].ToString();
-                sharepointProvider.ContactNumber = dataItem.Fields.AdditionalData["ContactNumber"].ToString();
+                sharepointProvider.ContactNumber = GetOptionalValueFromSharepointDictionary(dataItem.Fields.AdditionalData, "ContactNumber");
                 sharepointProvider.Email = dataItem.Fields.AdditionalData["Email"].ToString();
                 sharepointProvider.WebsiteName = dataItem.Fields.AdditionalData["URL"].ToString();
                 sharepointProvider.WebsiteUrl = CorrectUrl(dataItem.Fields.AdditionalData["URL"].ToString());
@@ -87,8 +87,6 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
                 sharepointProvider.LocalAuthorities = dataItem.Fields.AdditionalData["LocalAuthorities"].ToString();
                 sharepointProvider.OPSO = Convert.ToBoolean(dataItem.Fields.AdditionalData["OPSO"].ToString());
                 sharepointProvider.RentToBuy = Convert.ToBoolean(dataItem.Fields.AdditionalData["RentToBuy"].ToString());
-
-
 
                 providerResult.Add(new ProviderModel(sharepointProvider));
             }
@@ -99,6 +97,10 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
             }
         }
         return providerResult;
+    }
+
+    private static string? GetOptionalValueFromSharepointDictionary(IDictionary<string, object> collection, string key) {
+        return collection.TryGetValue(key, out var value) ? value.ToString() : null;
     }
 
     private string CorrectUrl(string? originalUri)
