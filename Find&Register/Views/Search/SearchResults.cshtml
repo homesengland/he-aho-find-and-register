@@ -66,10 +66,10 @@
                 }
 
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>@Model.GetSharedOwnershipCount() have shared ownership homes</li>
-                    <li>@Model.GetHoldCount() offer Home Ownership for People with Long Term Disabilities (HOLD)</li>
-                    <li>@Model.GetOpsoCount() have Older Persons Shared Ownership (OPSO) homes</li>
-                    <li>@Model.GetRentToBuyCount() has Rent to Buy homes</li>
+                    <li>@Model.GetSharedOwnershipCount() shared ownership</li>
+                    <li>@Model.GetHoldCount() home ownership for people with long term disabilities (HOLD)</li>
+                    <li>@Model.GetOpsoCount() older persons shared ownership (OPSO)</li>
+                    <li>@Model.GetRentToBuyCount() rent to buy</li>
                 </ul>
                 <form method="get" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
