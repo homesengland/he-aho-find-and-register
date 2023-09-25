@@ -56,14 +56,14 @@ namespace FindAndRegisterIntegrationTests
             
             driver.FindElement(By.Id("Contact_link")).Click();
 
-            var emailLink = driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("href");
+            var emailLink = driver.FindElement(By.Id("contact-us-email")).GetAttribute("href");
             Assert.Contains("mailto:", emailLink);
 
-            emailLink = driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("href");
-            Assert.Contains("mailto:", emailLink);
+            //emailLink = driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("href");
+            //Assert.Contains("mailto:", emailLink);
 
-            emailLink = driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("href");
-            Assert.Contains("mailto:", emailLink);
+            //emailLink = driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("href");
+            //Assert.Contains("mailto:", emailLink);
 
             var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
             Assert.Empty(axeResult.Violations);
