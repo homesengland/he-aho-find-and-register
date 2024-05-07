@@ -18,13 +18,15 @@
     }
 </script>
 
-<script nonce="@Nonces.GaNonce" type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
+<script nonce="@Nonces.GaNonce" type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
         var element = document.querySelector('#tt-default')
         var id = 'Area'
         accessibleAutocomplete({
             element: element,
             id: id,
-            source: countries
+            source: countries,
+            defaultValue: '@Model.Area'
         })
     })</script>
 <div class="govuk-width-container govuk-body">
@@ -66,53 +68,65 @@
                 }
 
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>@Model.GetSharedOwnershipCount() shared ownership</li>
-                    <li>@Model.GetHoldCount() home ownership for people with long term disabilities (HOLD)</li>
-                    <li>@Model.GetOpsoCount() older persons shared ownership (OPSO)</li>
-                    <li>@Model.GetRentToBuyCount() rent to buy</li>
+                    @if (Model.IsSharedOwnershipSelected)
+                    {
+                        <li>@Model.GetSharedOwnershipCount() shared ownership</li>
+                    }
+                    @if (Model.IsHoldSelected)
+                    {
+                        <li>@Model.GetHoldCount() home ownership for people with long term disabilities (HOLD)</li>
+                    }
+                    @if (Model.IsOpsoSelected)
+                    {
+                        <li>@Model.GetOpsoCount() older persons shared ownership (OPSO)</li>
+                    }
+                    @if (Model.IsRentToBuySelected)
+                    {
+                        <li>@Model.GetRentToBuyCount() rent to buy</li>
+                    }
                 </ul>
                 <form method="get" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
-                        {
+               {
 
-                           ValidationMessage = Html.ValidationMessageFor(m => m.Area),
+                   ValidationMessage = Html.ValidationMessageFor(m => m.Area),
 
-                           Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                   Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
 
-                           Content =
-                                                                        @<div class="govuk-form-group">
-                                                                            <h2 class="govuk-label-wrapper">
-                                                                                <label class="govuk-label govuk-label--m" for="searchArea">
-                                                                                    Search again
-                                                                                </label>
-                                                                            </h2>
-                                                                            <div id="searchArea-hint" class="govuk-hint">
-                                                                                <label for="Area">You can search by local authority</label>
-                                                                            </div>
-                                                                            <div id="searchArea-container">
-                                                                                <div id="tt-default" class="autocomplete-wrapper">
-                                                                                    <div class="autocomplete__wrapper">
-                                                                                        <div>
-                                                                                            <noscript>
-                                                                                                <input type="text" id="Area" name="Area" class="autocomplete__input"
-                                                                                                       autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                                                                                                       placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox"/>
-                                                                                            </noscript>
-
-                                                                                            <div id="@Model.Area" name="@Model.Area"
-                                                                                                 role="status" aria-atomic="true"
-                                                                                                 aria-live="polite">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                                                                                            id="autocomplete-default__listbox"
-                                                                                            role="listbox"></ul>
-                                                                                        <span id="autocomplete-default__assistiveHint" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-})
+                   Content =
+                        @<text>
+                            <div class="govuk-form-group">
+                                <h2 class="govuk-label-wrapper">
+                                    <label class="govuk-label govuk-label--m" for="searchArea">
+                                        Search again
+                                    </label>
+                                </h2>
+                                <div id="searchArea-hint" class="govuk-hint">
+                                    <label for="Area">You can search by local authority</label>
+                                </div>
+                                <div id="searchArea-container">
+                                    <div id="tt-default" class="autocomplete-wrapper">
+                                        <div class="autocomplete__wrapper">
+                                            <div>
+                                                <noscript>
+                                                    <input type="text" id="Area" name="Area" class="autocomplete__input"
+                                                           autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                                           placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
+                                                </noscript>
+                                                <div id="@Model.Area" name="@Model.Area" role="status" aria-atomic="true" aria-live="polite">
+                                                </div>
+                                            </div>
+                                            <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                                                id="autocomplete-default__listbox"
+                                                role="listbox"></ul>
+                                            <span id="autocomplete-default__assistiveHint" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <partial name="ProductsPartial" />
+                        </text>
+               })
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
                     </button>

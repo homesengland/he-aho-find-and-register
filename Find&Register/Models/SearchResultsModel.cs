@@ -10,9 +10,16 @@ namespace Find_Register.Models
         [Required(ErrorMessage = "Enter a local authority")]
         public string? Area { get; set; }
 
+        public List<string> Products { get; set; } = new();
+
         public ProviderModel? LocalAuthority { get; set; }
         public IEnumerable<ProviderModel>? ProviderModels {get;set;}
         public List<LocationModel>? LocationModels { get; set; }
+
+        public bool IsHoldSelected => Products?.Contains("Hold") ?? false;
+        public bool IsOpsoSelected => Products?.Contains("Opso") ?? false;
+        public bool IsRentToBuySelected => Products?.Contains("RentToBuy") ?? false;
+        public bool IsSharedOwnershipSelected => Products?.Contains("SharedOwnership") ?? false;
 
         public int GetOpsoCount() => ProviderModels?.Count(p => p.Opso) ?? 0;
         public int GetHoldCount() => ProviderModels?.Count(p => p.Hold) ?? 0;

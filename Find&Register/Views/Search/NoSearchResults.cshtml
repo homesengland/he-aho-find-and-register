@@ -23,7 +23,8 @@
         accessibleAutocomplete({
             element: element,
             id: id,
-            source: countries
+            source: countries,
+            defaultValue: '@Model.Area'
         })
     })</script>
 <div class="govuk-width-container govuk-body">
@@ -105,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+                    <partial name="ProductsPartial" />
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
                     </button>

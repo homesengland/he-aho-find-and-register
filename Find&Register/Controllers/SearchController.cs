@@ -57,6 +57,21 @@ public class SearchController : BaseControllerWithShareStaticPages
 
         var providers = gssCode != null ?
             _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode) : new List<ProviderModel>();
+
+        if (model!.Products != null && model!.Products.Any())
+        {
+            var sharedOwnershipProviders = providers!.Where(p => model!.Products.Contains("SharedOwnership") && p.SharedOwnership);
+            var holdProviders = providers!.Where(p => model!.Products.Contains("Hold") && p.Hold);
+            var opsoProviders = providers!.Where(p => model!.Products.Contains("Opso") && p.Opso);
+            var rentToBuyProviders = providers!.Where(p => model!.Products.Contains("RentToBuy") && p.RentToBuy);
+
+            providers = sharedOwnershipProviders
+                .Union(holdProviders)
+                .Union(opsoProviders)
+                .Union(rentToBuyProviders)
+                .Distinct();
+        }
+
         model.LocalAuthority = providers?.FirstOrDefault(p => p.IsLocalAuthority);
         model.ProviderModels = providers?.Where(p => !p.IsLocalAuthority);        
 

@@ -1,0 +1,37 @@
+﻿@model SearchResultsModel
+<div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" aria-describedby="Products-hint">
+        <legend class="govuk-fieldset__legend">
+            Are you looking for a particular product? (optional)
+        </legend>
+        <div id="Products-hint" class="govuk-hint">
+            Select all that apply
+        </div>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+                <input type="checkbox" class="govuk-checkboxes__input" id="SharedOwnership" name="Products" value="SharedOwnership" checked="@(Model.IsSharedOwnershipSelected ? "checked" : null)" />
+                <label class="govuk-label govuk-checkboxes__label" for="SharedOwnership">
+                    Shared ownership
+                </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+                <input type="checkbox" class="govuk-checkboxes__input" id="Hold" name="Products" value="Hold" checked="@(Model.IsHoldSelected ? "checked" : null)" />
+                <label class="govuk-label govuk-checkboxes__label" for="Hold">
+                    Home ownership for people with long term disabilities (HOLD)
+                </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+                <input type="checkbox" class="govuk-checkboxes__input" id="Opso" name="Products" value="Opso" checked="@(Model.IsOpsoSelected ? "checked" : null)" />
+                <label class="govuk-label govuk-checkboxes__label" for="Opso">
+                    Older persons shared ownership (OPSO)
+                </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+                <input type="checkbox" class="govuk-checkboxes__input" id="RentToBuy" name="Products" value="RentToBuy" checked="@(Model.IsRentToBuySelected ? "checked" : null)" />
+                <label class="govuk-label govuk-checkboxes__label" for="RentToBuy">
+                    Rent to buy
+                </label>
+            </div>
+        </div>
+    </fieldset>
+</div>
