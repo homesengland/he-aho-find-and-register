@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Find_Register.Filters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Find_Register.Cookies;
 using Find_Register.DataSourceService;
+using Find_Register.Filters;
 using Find_Register.Models;
-using Find_Register.Cookies;
 using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Find_Register.Controllers;
 

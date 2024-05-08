@@ -35,7 +35,7 @@
     </div>
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds search-results-wrap-anywhere">
+            <div class="govuk-grid-column-two-thirds-from-desktop search-results-wrap-anywhere">
                 @if (ViewContext.HttpContext.Items["errorsBool"] as bool? == true)
                 {
                     @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
@@ -90,42 +90,8 @@
                {
 
                    ValidationMessage = Html.ValidationMessageFor(m => m.Area),
-
                    Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-
-                   Content =
-                        @<text>
-                            <div class="govuk-form-group">
-                                <h2 class="govuk-label-wrapper">
-                                    <label class="govuk-label govuk-label--m" for="searchArea">
-                                        Search again
-                                    </label>
-                                </h2>
-                                <div id="searchArea-hint" class="govuk-hint">
-                                    <label for="Area">You can search by local authority</label>
-                                </div>
-                                <div id="searchArea-container">
-                                    <div id="tt-default" class="autocomplete-wrapper">
-                                        <div class="autocomplete__wrapper">
-                                            <div>
-                                                <noscript>
-                                                    <input type="text" id="Area" name="Area" class="autocomplete__input"
-                                                           autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                                                           placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
-                                                </noscript>
-                                                <div id="@Model.Area" name="@Model.Area" role="status" aria-atomic="true" aria-live="polite">
-                                                </div>
-                                            </div>
-                                            <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                                                id="autocomplete-default__listbox"
-                                                role="listbox"></ul>
-                                            <span id="autocomplete-default__assistiveHint" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <partial name="ProductsPartial" />
-                        </text>
+                   Content = @<partial name="SearchFormPartial" />
                })
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
@@ -146,6 +112,7 @@
                 }
                 @foreach (var provider in Model.ProviderModels?.Where(p => !p.IsLocalAuthority) ?? new List<ProviderModel>())
                 {
+                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
                     <h2 class="govuk-heading-m">@provider.Name</h2>
                     @if (provider.Phone != null)
                     {
@@ -183,10 +150,6 @@
                                 <li>Rent to Buy</li>
                             }
                         </ul>
-                    }
-                    if (Model?.ProviderModels?.Last().Equals(provider) != true)
-                    {
-                        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
                     }
                 }
             </div>
