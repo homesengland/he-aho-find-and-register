@@ -55,11 +55,16 @@ public class SearchController : BaseControllerWithShareStaticPages
             _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode) : new List<ProviderModel>();
 
         if (model!.Products != null && model!.Products.Any())
-        {
-            var sharedOwnershipProviders = providers!.Where(p => model!.Products.Contains("SharedOwnership") && p.SharedOwnership);
-            var holdProviders = providers!.Where(p => model!.Products.Contains("Hold") && p.Hold);
-            var opsoProviders = providers!.Where(p => model!.Products.Contains("Opso") && p.Opso);
-            var rentToBuyProviders = providers!.Where(p => model!.Products.Contains("RentToBuy") && p.RentToBuy);
+        { 
+            var hasSharedOwnershipProviders = model.Products.Contains(nameof(ProviderModel.SharedOwnership));
+            var hasHoldProviders = model.Products.Contains(nameof(ProviderModel.Hold));
+            var hasOpsoProviders = model.Products.Contains(nameof(ProviderModel.Opso));
+            var hasRentToBuyProviders = model.Products.Contains(nameof(ProviderModel.RentToBuy));
+
+            var sharedOwnershipProviders = providers!.Where(p => hasSharedOwnershipProviders && p.SharedOwnership);
+            var holdProviders = providers!.Where(p => hasHoldProviders && p.Hold);
+            var opsoProviders = providers!.Where(p => hasOpsoProviders && p.Opso);
+            var rentToBuyProviders = providers!.Where(p => hasRentToBuyProviders && p.RentToBuy);
 
             providers = sharedOwnershipProviders
                 .Union(holdProviders)

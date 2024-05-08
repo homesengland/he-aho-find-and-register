@@ -68,19 +68,19 @@
                 }
 
                 <ul class="govuk-list govuk-list--bullet">
-                    @if (Model.IsSharedOwnershipSelected)
+                    @if (!Model.IsAnyProductSelected || Model.IsSharedOwnershipSelected)
                     {
                         <li>@Model.GetSharedOwnershipCount() shared ownership</li>
                     }
-                    @if (Model.IsHoldSelected)
+                    @if (!Model.IsAnyProductSelected || Model.IsHoldSelected)
                     {
                         <li>@Model.GetHoldCount() home ownership for people with long term disabilities (HOLD)</li>
                     }
-                    @if (Model.IsOpsoSelected)
+                    @if (!Model.IsAnyProductSelected || Model.IsOpsoSelected)
                     {
                         <li>@Model.GetOpsoCount() older persons shared ownership (OPSO)</li>
                     }
-                    @if (Model.IsRentToBuySelected)
+                    @if (!Model.IsAnyProductSelected || Model.IsRentToBuySelected)
                     {
                         <li>@Model.GetRentToBuyCount() rent to buy</li>
                     }
