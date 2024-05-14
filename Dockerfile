@@ -19,4 +19,9 @@ RUN dotnet publish "Find&Register.csproj" -c Release -o /app/publish --no-restor
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Creating and using a non-root user
+RUN useradd -m -s /bin/bash appuser
+USER appuser
+
 ENTRYPOINT ["dotnet", "Find&Register.dll"]
