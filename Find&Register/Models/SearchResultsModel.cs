@@ -20,7 +20,8 @@ namespace Find_Register.Models
         public bool IsHoldSelected => Products?.Contains(nameof(ProviderModel.Hold)) ?? false;
         public bool IsOpsoSelected => Products?.Contains(nameof(ProviderModel.Opso)) ?? false;
         public bool IsRentToBuySelected => Products?.Contains(nameof(ProviderModel.RentToBuy)) ?? false;
-        public bool IsAnyProductSelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected || IsRentToBuySelected;
+        public bool AreAnyProductsSelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected || IsRentToBuySelected;
+        public bool AreAnyNonRentToBuySelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected;
 
         public int GetOpsoCount() => ProviderModels?.Count(p => p.Opso) ?? 0;
         public int GetHoldCount() => ProviderModels?.Count(p => p.Hold) ?? 0;

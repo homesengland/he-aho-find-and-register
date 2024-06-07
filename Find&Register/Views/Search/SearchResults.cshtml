@@ -1,7 +1,12 @@
 @model SearchResultsModel
 @inject NonceModel Nonces
 @{
-    ViewBag.Title = $"These organisations sell shared ownership homes in {Model.Area}";
+    List<string> homeTypes = new();
+
+    if (!Model.AreAnyProductsSelected || Model.AreAnyNonRentToBuySelected) homeTypes.Add("shared ownership");
+    if (!Model.AreAnyProductsSelected || Model.IsRentToBuySelected) homeTypes.Add("rent to buy");
+
+    ViewBag.Title = $"These organisations offer {string.Join(" and/or ", homeTypes)} homes in {Model.Area}";
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
 @section Scripts {
@@ -34,125 +39,127 @@
         <a href="@Url.Action("Index", "Search")" class="govuk-back-link">Back</a>
     </div>
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds-from-desktop search-results-wrap-anywhere">
-                @if (ViewContext.HttpContext.Items["errorsBool"] as bool? == true)
-                {
-                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
-                }
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        These organisations sell shared ownership homes in @Model.Area
-                    </h1>
-                </legend>
-                @switch (Model.ProviderModels?.Count())
-                {
-                    case > 0:
-                        <div class="govuk-inset-text">
-                            <p>This is a new service and we are still adding organisations to this list.</p>
-                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
-                        </div>
-                        break;
-                    case 0 when Model.LocalAuthority != null:
-                        <div class="govuk-inset-text">
-                            <p>This is a new service and we are still adding organisations to this list. </p>
-                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
-                        </div>
-                        break;
-                    case 0 when Model.LocalAuthority == null:
-                        <div class="govuk-inset-text">
-                            <p>This is a new service and we are still adding organisations to this list.</p>
-                            <p>The next time you use this service you may see more organisations with homes for sale.</p>
-                        </div>
-                        break;
-                }
+        <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-fieldset__heading">
+                    @ViewBag.Title
+                </h1>
+            </legend>
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds-from-desktop search-results-wrap-anywhere">
+                    @if (ViewContext.HttpContext.Items["errorsBool"] as bool? == true)
+                    {
+                        @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                    }
+                    @switch (Model.ProviderModels?.Count())
+                    {
+                        case > 0:
+                            <div class="govuk-inset-text">
+                                <p>This is a new service and we are still adding organisations to this list.</p>
+                                <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                            </div>
+                            break;
+                        case 0 when Model.LocalAuthority != null:
+                            <div class="govuk-inset-text">
+                                <p>This is a new service and we are still adding organisations to this list. </p>
+                                <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                            </div>
+                            break;
+                        case 0 when Model.LocalAuthority == null:
+                            <div class="govuk-inset-text">
+                                <p>This is a new service and we are still adding organisations to this list.</p>
+                                <p>The next time you use this service you may see more organisations with homes for sale.</p>
+                            </div>
+                            break;
+                    }
 
-                <ul class="govuk-list govuk-list--bullet">
-                    @if (!Model.IsAnyProductSelected || Model.IsSharedOwnershipSelected)
-                    {
-                        <li>@Model.GetSharedOwnershipCount() shared ownership</li>
-                    }
-                    @if (!Model.IsAnyProductSelected || Model.IsHoldSelected)
-                    {
-                        <li>@Model.GetHoldCount() home ownership for people with long term disabilities (HOLD)</li>
-                    }
-                    @if (!Model.IsAnyProductSelected || Model.IsOpsoSelected)
-                    {
-                        <li>@Model.GetOpsoCount() older persons shared ownership (OPSO)</li>
-                    }
-                    @if (!Model.IsAnyProductSelected || Model.IsRentToBuySelected)
-                    {
-                        <li>@Model.GetRentToBuyCount() rent to buy</li>
-                    }
-                </ul>
-                <form method="get" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
-                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
-               {
-
-                   ValidationMessage = Html.ValidationMessageFor(m => m.Area),
-                   Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                   Content = @<partial name="SearchFormPartial" />
-               })
-                    <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
-                        Search
-                    </button>
-                </form>
-
-                @if (Model.LocalAuthority != null)
-                {
-                    <div class="counsil-container">
-                        <p class="govuk-body">@Model.LocalAuthority.Name may be able to help you find a new home. Contact @Model.LocalAuthority.Name for more information.</p>
-                        @if (@Model.LocalAuthority.Phone != null)
+                    <ul class="govuk-list govuk-list--bullet">
+                        @if (!Model.AreAnyProductsSelected || Model.IsSharedOwnershipSelected)
                         {
-                            <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
+                            <li>@Model.GetSharedOwnershipCount() shared ownership</li>
                         }
-                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a></p>
-                        <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
-                    </div>
-                }
-                @foreach (var provider in Model.ProviderModels?.Where(p => !p.IsLocalAuthority) ?? new List<ProviderModel>())
-                {
-                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-                    <h2 class="govuk-heading-m">@provider.Name</h2>
-                    @if (provider.Phone != null)
+                        @if (!Model.AreAnyProductsSelected || Model.IsHoldSelected)
+                        {
+                            <li>@Model.GetHoldCount() home ownership for people with long term disabilities (HOLD)</li>
+                        }
+                        @if (!Model.AreAnyProductsSelected || Model.IsOpsoSelected)
+                        {
+                            <li>@Model.GetOpsoCount() older persons shared ownership (OPSO)</li>
+                        }
+                        @if (!Model.AreAnyProductsSelected || Model.IsRentToBuySelected)
+                        {
+                            <li>@Model.GetRentToBuyCount() rent to buy</li>
+                        }
+                    </ul>
+                    <form method="get" action="@Url.Action("SearchResults", "Search")" autocomplete="off">
+                        @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                   {
+
+                       ValidationMessage = Html.ValidationMessageFor(m => m.Area),
+                       Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                       Content = @<partial name="SearchFormPartial" />
+                   })
+                        <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
+                            Search
+                        </button>
+                    </form>
+
+                    @if (Model.LocalAuthority != null)
                     {
+                        <div class="counsil-container">
+                            <p class="govuk-body">@Model.LocalAuthority.Name may be able to help you find a new home. Contact @Model.LocalAuthority.Name for more information.</p>
+                            @if (@Model.LocalAuthority.Phone != null)
+                            {
+                                <p class="govuk-body"><span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone</p>
+                            }
+                            <p class="govuk-body"><span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a></p>
+                            <p class="govuk-body"><span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a></p>
+                        </div>
+                    }
+                    @foreach (var provider in Model.ProviderModels?.Where(p => !p.IsLocalAuthority) ?? new List<ProviderModel>())
+                    {
+                        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                        <h2 class="govuk-heading-m">@provider.Name</h2>
+                        @if (provider.Phone != null)
+                        {
+                            <p class="govuk-body">
+                                <span class="govuk-!-font-weight-bold">Telephone:</span>
+                                @provider.Phone
+                            </p>
+                        }
                         <p class="govuk-body">
-                            <span class="govuk-!-font-weight-bold">Telephone:</span>
-                            @provider.Phone
+                            <span class="govuk-!-font-weight-bold">Email:</span>
+                            <a class="govuk-link" href="mailto:@provider.Email">@provider.Email</a>
                         </p>
+                        <p class="govuk-body">
+                            <span class="govuk-!-font-weight-bold">Website:</span>
+                            <a class="govuk-link" href="@provider.WebsiteUrl">@provider.Website</a>
+                        </p>
+                        if (provider.SharedOwnership || provider.Opso || provider.Hold || provider.RentToBuy)
+                        {
+                            <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes through: </h3>
+                            <ul class="govuk-list govuk-list--bullet">
+                                @if (provider.SharedOwnership)
+                                {
+                                    <li>Shared Ownership</li>
+                                }
+                                @if (provider.Opso)
+                                {
+                                    <li>Older Persons Shared Ownership (OPSO)</li>
+                                }
+                                @if (provider.Hold)
+                                {
+                                    <li>Home Ownership for People with Long Term Disabilities (HOLD)</li>
+                                }
+                                @if (provider.RentToBuy)
+                                {
+                                    <li>Rent to Buy</li>
+                                }
+                            </ul>
+                        }
                     }
-                    <p class="govuk-body">
-                        <span class="govuk-!-font-weight-bold">Email:</span>
-                        <a class="govuk-link" href="mailto:@provider.Email">@provider.Email</a>
-                    </p>
-                    <p class="govuk-body">
-                        <span class="govuk-!-font-weight-bold">Website:</span>
-                        <a class="govuk-link" href="@provider.WebsiteUrl">@provider.Website</a>
-                    </p>
-                    if (provider.SharedOwnership || provider.Opso || provider.Hold || provider.RentToBuy)
-                    {
-                        <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes through: </h3>
-                        <ul class="govuk-list govuk-list--bullet">
-                            @if (provider.SharedOwnership)
-                            {
-                                <li>Shared Ownership</li>
-                            }
-                            @if (provider.Opso)
-                            {
-                                <li>Older Persons Shared Ownership (OPSO)</li>
-                            }
-                            @if (provider.Hold)
-                            {
-                                <li>Home Ownership for People with Long Term Disabilities (HOLD)</li>
-                            }
-                            @if (provider.RentToBuy)
-                            {
-                                <li>Rent to Buy</li>
-                            }
-                        </ul>
-                    }
-                }
+                </div>
             </div>
-        </div>
+        </fieldset>
     </main>
 </div>
