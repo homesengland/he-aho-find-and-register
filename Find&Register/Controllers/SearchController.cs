@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Find_Register.Filters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Find_Register.Cookies;
 using Find_Register.DataSourceService;
+using Find_Register.Filters;
 using Find_Register.Models;
-using Find_Register.Cookies;
 using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Find_Register.Controllers;
 
@@ -57,6 +53,26 @@ public class SearchController : BaseControllerWithShareStaticPages
 
         var providers = gssCode != null ?
             _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode) : new List<ProviderModel>();
+
+        if (model!.Products != null && model!.Products.Any())
+        { 
+            var hasSharedOwnershipProviders = model.Products.Contains(nameof(ProviderModel.SharedOwnership));
+            var hasHoldProviders = model.Products.Contains(nameof(ProviderModel.Hold));
+            var hasOpsoProviders = model.Products.Contains(nameof(ProviderModel.Opso));
+            var hasRentToBuyProviders = model.Products.Contains(nameof(ProviderModel.RentToBuy));
+
+            var sharedOwnershipProviders = providers!.Where(p => hasSharedOwnershipProviders && p.SharedOwnership);
+            var holdProviders = providers!.Where(p => hasHoldProviders && p.Hold);
+            var opsoProviders = providers!.Where(p => hasOpsoProviders && p.Opso);
+            var rentToBuyProviders = providers!.Where(p => hasRentToBuyProviders && p.RentToBuy);
+
+            providers = sharedOwnershipProviders
+                .Union(holdProviders)
+                .Union(opsoProviders)
+                .Union(rentToBuyProviders)
+                .Distinct();
+        }
+
         model.LocalAuthority = providers?.FirstOrDefault(p => p.IsLocalAuthority);
         model.ProviderModels = providers?.Where(p => !p.IsLocalAuthority);        
 

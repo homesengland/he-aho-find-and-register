@@ -44,7 +44,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="Middleware\" />
     <Folder Include="Views\Eligibility\" />
-    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="FindAndRegisterUnitTests" />

@@ -9,19 +9,21 @@
 }
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     var countries = [];
-    @if(Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
-    {
-        @:countries.push("@location.LocalAuthority");
-    }
+    @if (Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+        {
+            @:countries.push("@location.LocalAuthority");
+        }
 </script>
 
-<script nonce="@Nonces.GaNonce" type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
+<script nonce="@Nonces.GaNonce" type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
         var element = document.querySelector('#tt-default')
         var id = 'Area'
         accessibleAutocomplete({
             element: element,
             id: id,
-            source: countries
+            source: countries,
+            defaultValue: '@Model.Area'
         })
     })</script>
 <div class="govuk-width-container govuk-body">
@@ -30,47 +32,19 @@
     </div>
     <main class="govuk-main-wrapper">
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
-                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        Where do you want to buy a home?
-                    </h1>
-                </legend>
+            <div class="govuk-grid-column-two-thirds-from-desktop">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)
+                {
+                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                }
                 <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
-                        {
+               {
+                   ValidationMessage = Html.ValidationMessageFor(m => m.Area),
 
-                           ValidationMessage = Html.ValidationMessageFor(m => m.Area),
-
-                           Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                           Content =
-                                                @<div class="govuk-form-group">
-                                                    <div id="searchArea-hint" class="govuk-hint">
-                                                        <label for="Area">You can search by local authority</label>
-                                                    </div>
-                                                    <div id="searchArea-container">
-                                                        <div id="tt-default" class="autocomplete-wrapper">
-                                                            <div class="autocomplete__wrapper">
-                                                                <div>
-                                                                    <noscript>
-                                                                        <input type="text" id="Area" name="Area" class="autocomplete__input"
-                                                                               autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                                                                               placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
-                                                                    </noscript>
-
-                                                                    <div id="@Model.Area" name="@Model.Area" role="status" aria-atomic="true"
-                                                                         aria-live="polite"></div>
-                                                                </div>
-                                                                <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                                                                    id="autocomplete-default__listbox" role="listbox"></ul>
-                                                                <span id="autocomplete-default__assistiveHint"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-})
-
+                   Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                   Content = @<partial name="SearchFormPartial" />
+               })
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
                     </button>

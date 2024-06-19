@@ -10,9 +10,18 @@ namespace Find_Register.Models
         [Required(ErrorMessage = "Enter a local authority")]
         public string? Area { get; set; }
 
+        public List<string> Products { get; set; } = new();
+
         public ProviderModel? LocalAuthority { get; set; }
         public IEnumerable<ProviderModel>? ProviderModels {get;set;}
         public List<LocationModel>? LocationModels { get; set; }
+
+        public bool IsSharedOwnershipSelected => Products?.Contains(nameof(ProviderModel.SharedOwnership)) ?? false;
+        public bool IsHoldSelected => Products?.Contains(nameof(ProviderModel.Hold)) ?? false;
+        public bool IsOpsoSelected => Products?.Contains(nameof(ProviderModel.Opso)) ?? false;
+        public bool IsRentToBuySelected => Products?.Contains(nameof(ProviderModel.RentToBuy)) ?? false;
+        public bool AreAnyProductsSelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected || IsRentToBuySelected;
+        public bool AreAnyNonRentToBuySelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected;
 
         public int GetOpsoCount() => ProviderModels?.Count(p => p.Opso) ?? 0;
         public int GetHoldCount() => ProviderModels?.Count(p => p.Hold) ?? 0;
