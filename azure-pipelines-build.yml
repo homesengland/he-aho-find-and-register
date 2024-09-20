@@ -18,7 +18,7 @@ resources:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
-    ref: 'main'
+    ref: 'feature/semver'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
