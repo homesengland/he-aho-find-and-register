@@ -10,7 +10,6 @@ resources:
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
-    ref: 'feature/semver-increment-check'
 
 stages:
 - template: semver-increment-check.yml@templates
