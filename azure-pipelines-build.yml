@@ -18,8 +18,8 @@ parameters:
   default: false
 
 variables:
-  buildMajor: 0
-  buildMinor: 0
+  buildMajor: 1
+  buildMinor: 1
   buildBranch: $[replace(variables['Build.SourceBranch'], '/', '.')]
 
 pool: "vmss-ado-chs-nonprod-001"
@@ -31,7 +31,6 @@ resources:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
-    ref: 'feature/semver'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
