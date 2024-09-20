@@ -6,6 +6,11 @@
 trigger:
 - none
 
+variables:
+  buildMajor: 1
+  buildMinor: 1
+  buildBranch: $[replace(variables['Build.SourceBranch'], '/', '.')]
+
 pool: "vmss-ado-chs-nonprod-001"
           
 resources:
@@ -20,4 +25,6 @@ resources:
     ref: 'master'
 
 stages:
-- template: azure-pipelines-1.yml@he-ahofr-deployment
+- template: azure-pipelines-build.yml@he-ahofr-deployment
+  parameters:
+    forcePushToProd: ${{ parameters.forcePushToProd }}
