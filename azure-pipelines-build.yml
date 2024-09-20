@@ -6,18 +6,37 @@
 trigger:
 - none
 
+pr:
+  branches:
+    include:
+    - main
+
+parameters:
+- name: forcePushToProd
+  displayName: Force Push to Production
+  type: boolean
+  default: false
+
+variables:
+  buildMajor: 1
+  buildMinor: 1
+  buildBranch: $[replace(variables['Build.SourceBranch'], '/', '.')]
+
 pool: "vmss-ado-chs-nonprod-001"
-          
+
+name: $(buildMajor).$(buildMinor).$(Rev:r)-$(buildBranch)
+
 resources:
   repositories:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
-    ref: 'main'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
     ref: 'master'
 
 stages:
-- template: azure-pipelines-1.yml@he-ahofr-deployment
+- template: azure-pipelines-build.yml@he-ahofr-deployment
+  parameters:
+    forcePushToProd: ${{ parameters.forcePushToProd }}
