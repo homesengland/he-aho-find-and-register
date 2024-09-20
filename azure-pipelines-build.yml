@@ -15,7 +15,7 @@ parameters:
 - name: forcePushToProd
   displayName: Force Push to Production
   type: boolean
-  default: true
+  default: false
 
 variables:
   buildMajor: 0
