@@ -42,7 +42,7 @@ resources:
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
-    ref: 'master'
+    ref: 'feature/nightlies'
 
 stages:
 - template: azure-pipelines-build.yml@he-ahofr-deployment
