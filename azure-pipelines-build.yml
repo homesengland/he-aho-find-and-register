@@ -12,11 +12,11 @@ pr:
     - main
 
 schedules:
-- cron: "12 16 * * Mon,Tue,Wed,Thu,Fri"
+- cron: "0 4 * * Mon,Tue,Wed,Thu,Fri"
   displayName: Nightly Test Run
   branches:
     include:
-    - feature/nightlies
+    - main
   always: true
   
 parameters:
@@ -39,7 +39,6 @@ resources:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
-    ref: 'feature/nightlies'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
