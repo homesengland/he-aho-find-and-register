@@ -32,8 +32,7 @@ variables:
 
 pool: "vmss-ado-chs-nonprod-001"
 
-${{ if not(startsWith(variables['Build.Reason'], 'Schedule')) }}: 
-  name: $(buildMajor).$(buildMinor).$(Rev:r)-$(buildBranch)
+name: $(buildMajor).$(buildMinor).$(Rev:r)-$(buildBranch)
 
 resources:
   repositories:
