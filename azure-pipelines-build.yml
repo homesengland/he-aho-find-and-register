@@ -12,7 +12,7 @@ pr:
     - main
 
 schedules:
-- cron: "12 14 * * Mon,Tue,Wed,Thu,Fri"
+- cron: "12 16 * * Mon,Tue,Wed,Thu,Fri"
   displayName: Nightly Test Run
   branches:
     include:
