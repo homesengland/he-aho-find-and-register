@@ -13,7 +13,7 @@ pr:
 
 schedules:
 - cron: "09 14 * * Mon,Tue,Wed,Thu,Fri"
-  displayName: Portal Nightly Test Run
+  displayName: Nightly Test Run
   branches:
     include:
     - feature/nightlies
