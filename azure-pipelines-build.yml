@@ -11,6 +11,14 @@ pr:
     include:
     - main
 
+schedules:
+- cron: "45 14 * * Mon,Tue,Wed,Thu,Fri"
+  displayName: Portal Nightly Test Run
+  branches:
+    include:
+    - feature/nightlies
+  always: true
+  
 parameters:
 - name: forcePushToProd
   displayName: Force Push to Production
