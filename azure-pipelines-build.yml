@@ -12,7 +12,7 @@ pr:
     - main
 
 schedules:
-- cron: "55 13 * * Mon,Tue,Wed,Thu,Fri"
+- cron: "59 13 * * Mon,Tue,Wed,Thu,Fri"
   displayName: Portal Nightly Test Run
   branches:
     include:
@@ -39,10 +39,11 @@ resources:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
+    ref: 'feature/nightlies'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
-    ref: 'feature/nightlies'
+  
 
 stages:
 - template: azure-pipelines-build.yml@he-ahofr-deployment
