@@ -46,7 +46,11 @@ public abstract class BaseControllerWithShareStaticPages : Controller
         }
         applicationCookie.AnalyticSettings.Value = analyticSettings;
 
-        return Redirect(model.BackUrl ?? ".");
+        if (Url.IsLocalUrl(model.BackUrl))
+        {
+            return Redirect(model.BackUrl);
+        }
+        return Redirect(".");
     }
 
     [HttpGet]
