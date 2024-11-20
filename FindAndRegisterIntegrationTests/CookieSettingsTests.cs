@@ -3,9 +3,13 @@ using System.Web;
 using Find_Register.Models;
 using FindAndRegisterIntegrationTests;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
+using Microsoft.Graph;
+using Microsoft.Graph.TermStore;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace FindAndRegisterIntegrationTests;
 
@@ -288,5 +292,57 @@ public class CookieSettingsTests : SeleniumTestsBase
         // note:
         // scripts should additionally be manually tested in online environments as the
         // infrastructure may cause changes to the headers affecting script performance
+    }
+
+    [Fact]
+    [Trait("Selenium", "Smoke")]
+    public async Task CookieSettings_Post_RedirectsToLocalUrl_WhenBackUrlIsLocal()
+    {
+        // Arrange
+        using IWebDriver driver = new ChromeDriver();
+        var actions = new Actions(driver);
+        var localBackUrl = SearchUrl;
+
+        // Navigate to the Cookie Settings page
+        driver.Navigate().GoToUrl($"{SearchUrl}cookie-settings");
+
+        var backUrl = driver.FindElement(By.Name("BackUrl"));
+
+        // Fill out the form
+        actions.ScrollByAmount(0, 500).Perform();
+        driver.FindElement(By.Id("accept-yes")).Click();
+        ((IJavaScriptExecutor)driver).ExecuteScript($"arguments[0].setAttribute('value', '{localBackUrl}');", backUrl);
+        driver.FindElement(By.CssSelector("button.govuk-button[data-module='govuk-button']")).Click();
+
+        // Wait for the redirect
+        await Task.Delay(1000); // Adjust as needed
+
+        // Assert
+        Assert.Equal(SearchUrl, driver.Url);
+    }
+
+    [Fact]
+    public async Task CookieSettings_Post_RedirectsToHome_WhenBackUrlIsExternal()
+    {
+        // Arrange
+        using IWebDriver driver = new ChromeDriver();
+        var actions = new Actions(driver);
+        var externalBackUrl = "http://malicious.com";
+
+        // Navigate to the Cookie Settings page
+        driver.Navigate().GoToUrl($"{SearchUrl}cookie-settings");
+
+        var backUrl = driver.FindElement(By.Name("BackUrl"));
+        // Fill out the form
+        actions.ScrollByAmount(0, 500).Perform();
+        driver.FindElement(By.Id("accept-yes")).Click();
+        ((IJavaScriptExecutor)driver).ExecuteScript($"arguments[0].setAttribute('value', '{externalBackUrl}');", backUrl);
+        driver.FindElement(By.CssSelector("button.govuk-button[data-module='govuk-button']")).Click();
+
+        // Wait for the redirect
+        await Task.Delay(1000); // Adjust as needed
+
+        // Assert
+        Assert.Equal(SearchUrl, driver.Url);
     }
 }
