@@ -56,13 +56,7 @@ namespace FindAndRegisterIntegrationTests
             
             driver.FindElement(By.Id("Contact_link")).Click();
 
-            var emailLink = driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("href");
-            Assert.Contains("mailto:", emailLink);
-
-            emailLink = driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("href");
-            Assert.Contains("mailto:", emailLink);
-
-            emailLink = driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("href");
+            var emailLink = driver.FindElement(By.Id("contact-us-email")).GetAttribute("href");
             Assert.Contains("mailto:", emailLink);
 
             var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
@@ -78,9 +72,7 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
             driver.FindElement(By.Id("Contact_link")).Click();
 
-            Assert.Contains(driver.FindElement(By.Id("contact-us-north-email")).GetAttribute("class"), "govuk-link");
-            Assert.Contains(driver.FindElement(By.Id("contact-us-midlands-email")).GetAttribute("class"), "govuk-link");
-            Assert.Contains(driver.FindElement(By.Id("contact-us-south-email")).GetAttribute("class"), "govuk-link");
+            Assert.Contains(driver.FindElement(By.Id("contact-us-email")).GetAttribute("class"), "govuk-link");
         }
 
         [Fact]
