@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Selenium.Axe;
+using Deque.AxeCore.Selenium;
 
 namespace FindAndRegisterIntegrationTests
 {
@@ -44,7 +44,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("submit-search")).Click();
 
             var pageName = driver.FindElement(By.CssSelector("div.container H1")).Text;
-            Assert.Equal("These organisations sell shared ownership homes in Adur", pageName);
+            Assert.Equal("These organisations offer shared ownership and/or rent to buy homes in Adur", pageName);
 
             var axeResult = new AxeBuilder(driver).WithTags("wcag21aa", "best-practice").Analyze();
             Assert.Empty(axeResult.Violations);
@@ -89,12 +89,12 @@ namespace FindAndRegisterIntegrationTests
         [Trait("Selenium", "Smoke")]
         public void SearchingReturnsResultsForProvidersWithoutAPhoneNumber()
         {
-            var relativeUrl = "/organisations-that-sell-shared-ownership-homes?Area=Allerdale";
+            var relativeUrl = "/organisations-that-sell-shared-ownership-homes?Area=Cambridge";
 
             using IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl(Host + relativeUrl);
                 
-            Assert.Contains("Above Derwent Community Land Trust", driver.FindElement(By.Id("main-content")).Text);
+            Assert.Contains("bpha (Domovo)", driver.FindElement(By.Id("main-content")).Text);
         }
     }
 }

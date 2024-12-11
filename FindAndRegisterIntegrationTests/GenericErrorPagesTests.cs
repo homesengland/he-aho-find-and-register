@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Selenium.Axe;
+using Deque.AxeCore.Selenium;
 
 namespace FindAndRegisterIntegrationTests
 {
@@ -39,7 +39,7 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host + "GenericErrors/PageNotFound");
             string PageNotFound = Host + "GenericErrors/PageNotFound";
             Assert.Equal(PageNotFound, driver.Url);
-            Assert.Null(axeResult.Error);
+            Assert.Empty(axeResult.Violations);
 
             driver.Navigate().GoToUrl(Host + "GenericErrors/InternalServerError");
             string InternalServerError = Host + "GenericErrors/InternalServerError";

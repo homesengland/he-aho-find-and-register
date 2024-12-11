@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Selenium.Axe;
+using Deque.AxeCore.Selenium;
 
 
 namespace FindAndRegisterIntegrationTests

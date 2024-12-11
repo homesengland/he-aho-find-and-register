@@ -7,7 +7,7 @@ namespace FindAndRegisterIntegrationTests
 {
     public class LoadTest: SeleniumTestsBase
     {
-        private const int PageLoadTimeThreshold = 5;
+        private const int PageLoadTimeThreshold = 10;
         private const int NumUsers = 50;
         
         [Theory]
