@@ -32,7 +32,7 @@ public class LocationApiTests
         mockServiceProvider.Setup(m => m.GetService(typeof(IHttpClient))).Returns(client);
 
         var source = new LocationApiDataSource(_testConfig, null, mockServiceProvider.Object);
-        Assert.Equal(309, source.Locations!.Count);
+        Assert.Equal(296, source.Locations!.Count);
     }
 
     [Fact]

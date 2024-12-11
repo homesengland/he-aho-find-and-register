@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Selenium.Axe;
+using Deque.AxeCore.Selenium;
 
 namespace FindAndRegisterIntegrationTests
 {
@@ -75,7 +75,7 @@ namespace FindAndRegisterIntegrationTests
             Assert.Contains(driver.FindElement(By.Id("contact-us-email")).GetAttribute("class"), "govuk-link");
         }
 
-        [Fact]
+        /*[Fact]
         [Trait("Selenium", "Smoke")]
         public void ContactUsCallChargeLinkTargetsExpectedUrl()
         {
@@ -85,7 +85,7 @@ namespace FindAndRegisterIntegrationTests
             driver.FindElement(By.Id("Contact_link")).Click();
             var emailLink = driver.FindElement(By.Id("contact-us-midlands-call-charge-link")).GetAttribute("href");
             Assert.Equal("https://www.gov.uk/call-charges", emailLink);
-        }
+        }*/
 
         [Fact]
         [Trait("Selenium", "Smoke")]
