@@ -50,3 +50,4 @@ stages:
 - template: azure-pipelines-build.yml@he-ahofr-deployment
   parameters:
     forcePushToProd: ${{ parameters.forcePushToProd }}
+    identifier: $(identifier)
