@@ -24,9 +24,6 @@ parameters:
   displayName: Force Push to Production
   type: boolean
   default: false
-- name: identifier
-  type: string
-  default: he_ahofr
 
 variables:
   buildMajor: 1
@@ -53,4 +50,3 @@ stages:
 - template: azure-pipelines-build.yml@he-ahofr-deployment
   parameters:
     forcePushToProd: ${{ parameters.forcePushToProd }}
-    identifier: $(identifier)
