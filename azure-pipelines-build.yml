@@ -26,6 +26,7 @@ parameters:
   default: false
 - name: identifier
   type: string
+  default: he_ahofr
 
 variables:
   buildMajor: 1
