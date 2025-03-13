@@ -41,7 +41,6 @@ resources:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
-    ref: 'feature/clean-repos-backlog'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
