@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cookies\" />
-    <Folder Include="Extensions\" />
     <Folder Include="Middleware\" />
     <Folder Include="Views\Eligibility\" />
   </ItemGroup>

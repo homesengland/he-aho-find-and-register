@@ -4,6 +4,9 @@ using Find_Register.Filters;
 using Find_Register.Models;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System;
+using Find_Register.Extensions;
 
 namespace Find_Register.Controllers;
 
@@ -13,14 +16,14 @@ namespace Find_Register.Controllers;
 public class SearchController : BaseControllerWithShareStaticPages
 {
     private readonly ILogger<SearchController> _logger;
-    private readonly IDataSources _locationDataSource;
+    private readonly ISearchService _searchService;
     private readonly IAntiforgery _antiforgery;
 
     // GET: /<controller>/
-    public SearchController(ILogger<SearchController> logger, IDataSources locationDataSource, ICookieHelper cookieHelper, IAntiforgery antiforgery) : base(cookieHelper)
+    public SearchController(ILogger<SearchController> logger, ISearchService searchService, ICookieHelper cookieHelper, IAntiforgery antiforgery) : base(cookieHelper)
     {
         _logger = logger;
-        _locationDataSource = locationDataSource;
+        _searchService = searchService;
         _antiforgery = antiforgery;
     }
 
@@ -28,9 +31,8 @@ public class SearchController : BaseControllerWithShareStaticPages
     [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult Index()
     {
-        var locations = _locationDataSource.GetLocationDataSource.Locations;
-
-        return View(new SearchResultsModel { LocationModels = locations });
+        var model = _searchService.InitializeSearchModel();
+        return View(model);
     }
 
     [HttpGet]
@@ -38,47 +40,25 @@ public class SearchController : BaseControllerWithShareStaticPages
     [Route("organisations-that-sell-shared-ownership-homes")]
     public IActionResult SearchResults(SearchResultsModel model)
     {
-        var locations = _locationDataSource.GetLocationDataSource.Locations;
-        model.LocationModels = locations;
-        model.ValidateLocalAuthorityAreaSearch(ModelState);
+        // Let's remove any binding errors for areas that may be revalidated by our new service/equest.
+        ModelState.Remove(nameof(model.Area1));
+        ModelState.Remove(nameof(model.Area2));
+        ModelState.Remove(nameof(model.Area3));
+
+        model = _searchService.ProcessSearch(model, ModelState);
 
         if (!ModelState.IsValid)
         {
             return InvalidSearchResult(model);
         }
 
-        var matchedLocation = locations?.FirstOrDefault(l => l.LocalAuthority?.Equals(model.Area ?? string.Empty) ?? false);
-        if (matchedLocation?.IsLondon ?? false) { return SearchResultsLondon(model); }
-        var gssCode = matchedLocation?.LocationCode;
-
-        var providers = gssCode != null ?
-            _locationDataSource.GetProviderDataSource.ProvidersActiveInLocalAuthority(gssCode) : new List<ProviderModel>();
-
-        if (model!.Products != null && model!.Products.Any())
-        { 
-            var hasSharedOwnershipProviders = model.Products.Contains(nameof(ProviderModel.SharedOwnership));
-            var hasHoldProviders = model.Products.Contains(nameof(ProviderModel.Hold));
-            var hasOpsoProviders = model.Products.Contains(nameof(ProviderModel.Opso));
-            var hasRentToBuyProviders = model.Products.Contains(nameof(ProviderModel.RentToBuy));
-
-            var sharedOwnershipProviders = providers!.Where(p => hasSharedOwnershipProviders && p.SharedOwnership);
-            var holdProviders = providers!.Where(p => hasHoldProviders && p.Hold);
-            var opsoProviders = providers!.Where(p => hasOpsoProviders && p.Opso);
-            var rentToBuyProviders = providers!.Where(p => hasRentToBuyProviders && p.RentToBuy);
-
-            providers = sharedOwnershipProviders
-                .Union(holdProviders)
-                .Union(opsoProviders)
-                .Union(rentToBuyProviders)
-                .Distinct();
-        }
-
-        model.LocalAuthority = providers?.FirstOrDefault(p => p.IsLocalAuthority);
-        model.ProviderModels = providers?.Where(p => !p.IsLocalAuthority);        
-
-        if ((model.ProviderModels?.Count() ?? 0)== 0)
+        // If no provider results exist, then we show a dedicated view.
+        if (!model.OpsoProviderModels.Any() &&
+            !model.HoldProviderModels.Any() &&
+            !model.SharedOwnershipProviderModels.Any() &&
+            !model.RentToBuyProviderModels.Any())
         {
-            return NoSearchResults(model);
+            return View("NoSearchResults", model);
         }
 
         return View(model);

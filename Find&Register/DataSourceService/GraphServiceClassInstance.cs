@@ -87,6 +87,7 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
                 sharepointProvider.LocalAuthorities = dataItem.Fields.AdditionalData["LocalAuthorities"].ToString();
                 sharepointProvider.OPSO = Convert.ToBoolean(dataItem.Fields.AdditionalData["OPSO"].ToString());
                 sharepointProvider.RentToBuy = Convert.ToBoolean(dataItem.Fields.AdditionalData["RentToBuy"].ToString());
+                sharepointProvider.Archived = Convert.ToBoolean(dataItem.Fields.AdditionalData["Archived"].ToString());
 
                 providerResult.Add(new ProviderModel(sharepointProvider));
             }

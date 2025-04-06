@@ -6,7 +6,7 @@
     if (!Model.AreAnyProductsSelected || Model.AreAnyNonRentToBuySelected) homeTypes.Add("shared ownership");
     if (!Model.AreAnyProductsSelected || Model.IsRentToBuySelected) homeTypes.Add("rent to buy");
 
-    ViewBag.Title = $"We cannot find any organisations that offer {string.Join(" or ", homeTypes)} homes in {Model.Area}";
+    ViewBag.Title = $"We cannot find any organisations that offer {string.Join(" or ", homeTypes)} homes in {Model.Area1}";
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
 
@@ -24,15 +24,36 @@
 
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var element = document.querySelector('#tt-default')
-        var id = 'Area'
+        var element = document.querySelector('#tt-default');
+        var id = 'Area1';
         accessibleAutocomplete({
             element: element,
             id: id,
+            name: id,
             source: countries,
-            defaultValue: '@Model.Area'
-        })
-    })</script>
+            defaultValue: '@Model.Area1'
+        });
+        var element2 = document.querySelector('#tt-default2');
+        var id2 = 'Area2';
+        accessibleAutocomplete({
+            element: element2,
+            id: id2,
+            name: id2,
+            source: countries,
+            defaultValue: '@Model.Area2'
+        });
+
+        var element3 = document.querySelector('#tt-default3');
+        var id3 = 'Area3';
+        accessibleAutocomplete({
+            element: element3,
+            id: id3,
+            name: id3,
+            source: countries,
+            defaultValue: '@Model.Area3'
+        });
+    });
+</script>
 <div class="govuk-width-container govuk-body">
     <div role="navigation" aria-label="navigate back">
         <a href="@Url.Action("Index", "Search")" class="govuk-back-link">Back</a>

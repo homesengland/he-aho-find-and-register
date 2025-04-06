@@ -1,12 +1,13 @@
 @model SearchResultsModel
 @inject NonceModel Nonces
+@using Newtonsoft.Json
 @{
     List<string> homeTypes = new();
 
     if (!Model.AreAnyProductsSelected || Model.AreAnyNonRentToBuySelected) homeTypes.Add("shared ownership");
     if (!Model.AreAnyProductsSelected || Model.IsRentToBuySelected) homeTypes.Add("rent to buy");
 
-    ViewBag.Title = $"These organisations offer {string.Join(" and/or ", homeTypes)} homes in {Model.Area}";
+    ViewBag.Title = $"These organisations offer {string.Join(" and/or ", homeTypes)} homes in {Model.Area1}";
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
 @section Scripts {
@@ -25,15 +26,36 @@
 
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var element = document.querySelector('#tt-default')
-        var id = 'Area'
+        var element = document.querySelector('#tt-default');
+        var id = 'Area1';
         accessibleAutocomplete({
             element: element,
             id: id,
+            name: id,
             source: countries,
-            defaultValue: '@Model.Area'
-        })
-    })</script>
+            defaultValue: '@Model.Area1'
+        });
+        var element2 = document.querySelector('#tt-default2');
+        var id2 = 'Area2';
+        accessibleAutocomplete({
+            element: element2,
+            id: id2,
+            name: id2,
+            source: countries,
+            defaultValue: '@Model.Area2'
+        });
+
+        var element3 = document.querySelector('#tt-default3');
+        var id3 = 'Area3';
+        accessibleAutocomplete({
+            element: element3,
+            id: id3,
+            name: id3,
+            source: countries,
+            defaultValue: '@Model.Area3'
+        });
+    });
+</script>
 <div class="govuk-width-container govuk-body">
     <div role="navigation" aria-label="navigate back">
         <a href="@Url.Action("Index", "Search")" class="govuk-back-link">Back</a>
@@ -95,7 +117,7 @@
                         @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                    {
 
-                       ValidationMessage = Html.ValidationMessageFor(m => m.Area),
+                       // ValidationMessage = Html.ValidationMessageFor(m => m.Area1),
                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
                        Content = @<partial name="SearchFormPartial" />
                    })
@@ -158,6 +180,16 @@
                             </ul>
                         }
                     }
+
+                    <h2 class="govuk-heading-m">Sample view for Shared Ownership</h2>
+                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.SharedOwnershipProviderModels, Formatting.Indented))</pre>
+                    <h2 class="govuk-heading-m">Sample view for Opso</h2>
+                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.OpsoProviderModels, Formatting.Indented))</pre>
+                    <h2 class="govuk-heading-m">Sample view for Hold</h2>
+                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.HoldProviderModels, Formatting.Indented))</pre>
+                    <h2 class="govuk-heading-m">Sample view for Rent2Buy</h2>
+                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.RentToBuyProviderModels, Formatting.Indented))</pre>
+
                 </div>
             </div>
         </fieldset>
