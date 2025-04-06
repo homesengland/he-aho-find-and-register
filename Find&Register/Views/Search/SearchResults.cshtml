@@ -8,6 +8,11 @@
     if (!Model.AreAnyProductsSelected || Model.IsRentToBuySelected) homeTypes.Add("rent to buy");
 
     ViewBag.Title = $"These organisations offer {string.Join(" and/or ", homeTypes)} homes in {Model.Area1}";
+    ViewBag.SharedOwnership = JsonConvert.SerializeObject(Model.SharedOwnershipProviderModels, Formatting.Indented);
+    ViewBag.Hold = JsonConvert.SerializeObject(Model.HoldProviderModels, Formatting.Indented);
+    ViewBag.Opso = JsonConvert.SerializeObject(Model.OpsoProviderModels, Formatting.Indented);
+    ViewBag.Rent2Buy = JsonConvert.SerializeObject(Model.RentToBuyProviderModels, Formatting.Indented);
+
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
 @section Scripts {
@@ -182,13 +187,13 @@
                     }
 
                     <h2 class="govuk-heading-m">Sample view for Shared Ownership</h2>
-                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.SharedOwnershipProviderModels, Formatting.Indented))</pre>
+                    <pre>@ViewBag.SharedOwnership</pre>
                     <h2 class="govuk-heading-m">Sample view for Opso</h2>
-                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.OpsoProviderModels, Formatting.Indented))</pre>
+                    <pre>@ViewBag.Opso</pre>
                     <h2 class="govuk-heading-m">Sample view for Hold</h2>
-                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.HoldProviderModels, Formatting.Indented))</pre>
+                    <pre>@ViewBag.Hold</pre>
                     <h2 class="govuk-heading-m">Sample view for Rent2Buy</h2>
-                    <pre>@Html.Raw(JsonConvert.SerializeObject(Model.RentToBuyProviderModels, Formatting.Indented))</pre>
+                    <pre>@ViewBag.Rent2Buy</pre>
 
                 </div>
             </div>
