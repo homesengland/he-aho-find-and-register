@@ -26,9 +26,9 @@ parameters:
   default: false
 
 variables:
-  buildMajor: 1
-  buildMinor: 10
-  buildPatch: 1
+  buildMajor: 2
+  buildMinor: 0
+  buildPatch: 0
   buildBranch: $[replace(replace(variables['Build.SourceBranch'], 'refs/heads/', ''), '/', '.')]
   identifier: he_ahofr
 
