@@ -9,6 +9,7 @@ public class ProviderModel
 {
     public ProviderModel(){
         Locations = new List<string>();
+        LaLocations = new List<string>();
     }
 
     public ProviderModel(SharepointProviderValue providers) {
@@ -24,6 +25,7 @@ public class ProviderModel
         IsLocalAuthority = providers.IsLocalAuthority;
         Locations = new List<string>();
         Archived = providers.Archived;
+        LaLocations = new List<string>();
 
         if (!string.IsNullOrWhiteSpace(providers.LocalAuthorities))
         {
@@ -67,7 +69,7 @@ public class ProviderModel
     public bool IsLocalAuthority { get; set; }    
 
     /// <summary>
-    /// Collection of Local authority names this provider operates in
+    /// Collection of Local authority codes this provider operates in
     /// </summary>
     public List<string> Locations {get; set;}
 
@@ -76,6 +78,11 @@ public class ProviderModel
     /// Indicates that this provider has been archived or still active
     /// </summary>
     public bool Archived { get; set; }
+
+    /// <summary>
+    /// Collection of Local authority names this provider operates in
+    /// </summary>
+    public List<string> LaLocations { get; set; }
 }
 
 public class ProviderFileModel

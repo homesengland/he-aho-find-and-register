@@ -13,7 +13,6 @@ public class ProviderDataSource : IProviderDataSource
         var logger = serviceProvider.GetService<ILogger>();
         try
         {
-
             var config = serviceProvider.GetRequiredService<IConfiguration>();
             var locationFile = config[ProviderPathConfigKey];
             var jsonString = System.IO.File.ReadAllText(locationFile);

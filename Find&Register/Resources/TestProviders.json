@@ -6,9 +6,11 @@
       "Phone": "01901003156",
       "Website": "https://www.hartlepoolbuildingcompany.co.uk",
       "OPSO": true,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000001" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Middlesbrough Building Company",
@@ -16,9 +18,11 @@
       "Phone": "01981116119",
       "Website": "https://www.middlesbroughbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000002" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Redcar and Cleveland Building Company",
@@ -26,9 +30,11 @@
       "Phone": "01994498800",
       "Website": "https://www.redcarclevelandbuildingcompany.co.uk",
       "OPSO": true,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000003" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Stockton-on-Tees Building Company",
@@ -36,9 +42,11 @@
       "Phone": "01860802675",
       "Website": "https://www.stocktonbuildingcompany.co.uk",
       "OPSO": true,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000004" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Darlington Building Company",
@@ -46,9 +54,11 @@
       "Phone": "01352414229",
       "Website": "https://www.darlingtonbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000005" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Halton Building Company",
@@ -56,9 +66,11 @@
       "Phone": "01870550150",
       "Website": "https://www.haltonbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000006" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Warrington Building Company",
@@ -66,9 +78,11 @@
       "Phone": "01130886536",
       "Website": "https://www.warringtonbuildingcompany.co.uk",
       "OPSO": true,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000007" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Blackburn with Darwen Building Company",
@@ -76,9 +90,11 @@
       "Phone": "01316151288",
       "Website": "https://www.blackburnbuildingcompany.co.uk",
       "OPSO": true,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000008" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Blackpool Building Company",
@@ -86,9 +102,11 @@
       "Phone": "01671020059",
       "Website": "https://www.blackpoolbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000009" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Kingston Upon Hull Building Company",
@@ -96,9 +114,11 @@
       "Phone": "01954214015",
       "Website": "https://www.kingstonuponhullbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000010" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "East Riding of Yorkshire Building Company",
@@ -106,9 +126,11 @@
       "Phone": "01979856760",
       "Website": "https://www.eastridingbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000011" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "North East Lincolnshire Building Company",
@@ -116,9 +138,11 @@
       "Phone": "01753611547",
       "Website": "https://www.nelincolnshirebuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000012" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "North Lincolnshire Building Company",
@@ -126,9 +150,11 @@
       "Phone": "01694273632",
       "Website": "https://www.northlincolnshirebuildingcompany.co.uk",
       "OPSO": true,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000013" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "York Building Company",
@@ -136,9 +162,11 @@
       "Phone": "01696877765",
       "Website": "https://www.yorkbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000014" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Derby Building Company",
@@ -146,9 +174,11 @@
       "Phone": "01663805687",
       "Website": "https://www.derbybuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000015" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Leicester Building Company",
@@ -156,9 +186,11 @@
       "Phone": "01711695719",
       "Website": "https://www.leicesterbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000016" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Rutland Building Company",
@@ -166,9 +198,11 @@
       "Phone": "01761017665",
       "Website": "https://www.rutlandbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000017" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Nottingham Building Company",
@@ -176,9 +210,11 @@
       "Phone": "01766373875",
       "Website": "https://www.nottinghambuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [ "E06000018" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Herefordshire Building Company",
@@ -186,9 +222,11 @@
       "Phone": "01423940847",
       "Website": "https://www.herefordshirebuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000019" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Telford and Wrekin Building Company",
@@ -196,9 +234,11 @@
       "Phone": "01192132274",
       "Website": "https://www.telfordbuildingcompany.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [ "E06000020" ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "English Homes",
@@ -206,7 +246,8 @@
       "Phone": "01711144336",
       "Website": "https://www.englishhomes.co.uk",
       "OPSO": true,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [
         "E06000001",
         "E06000002",
@@ -229,7 +270,8 @@
         "E06000019",
         "E06000020"
       ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "British Constructions",
@@ -237,7 +279,8 @@
       "Phone": "01234443211",
       "Website": "https://www.britishconstructions.co.uk",
       "OPSO": false,
-      "HOLD": true, "RentToBuy": true,
+      "HOLD": true,
+      "RentToBuy": true,
       "Locations": [
         "E06000001",
         "E06000002",
@@ -260,7 +303,8 @@
         "E06000019",
         "E06000020"
       ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "National Builders United",
@@ -268,7 +312,8 @@
       "Phone": "0194324589864",
       "Website": "https://www.nbu.co.uk",
       "OPSO": true,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [
         "E06000001",
         "E06000002",
@@ -291,7 +336,8 @@
         "E06000019",
         "E06000020"
       ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     },
     {
       "Name": "Houses Without Borders",
@@ -299,7 +345,8 @@
       "Phone": "012345678910",
       "Website": "https://www.hwb.co.uk",
       "OPSO": false,
-      "HOLD": false, "RentToBuy": false,
+      "HOLD": false,
+      "RentToBuy": false,
       "Locations": [
         "E06000001",
         "E06000002",
@@ -322,7 +369,8 @@
         "E06000019",
         "E06000020"
       ],
-      "LocalAuthority": false
+      "LocalAuthority": false,
+      "Archived": false
     }
   ]
 }

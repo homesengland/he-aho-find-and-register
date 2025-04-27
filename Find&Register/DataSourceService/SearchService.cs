@@ -29,12 +29,10 @@ public class SearchService : ISearchService
         model.LocationModels = locations;
 
         // here we build list of non-empty local authority inputs.
-        var inputAreas = new List<string> { model.Area1, model.Area2, model.Area3 }
-            .Where(a => !string.IsNullOrWhiteSpace(a))
-            .ToList();
+        var inputAreas = new List<string> { model.Area1, model.Area2, model.Area3 };
 
         // then we validate that at least one authority was entered.
-        if (!inputAreas.Any())
+        if (!inputAreas.Where(a => !string.IsNullOrWhiteSpace(a)).Any())
         {
             modelState.AddModelError(nameof(model.Area1), "Enter at least one local authority");
             return model;
@@ -42,9 +40,10 @@ public class SearchService : ISearchService
 
         // then we validate that each entered authority exists in the location data.
         var invalidAreas = inputAreas.Select((value, index) => new { index, value })
-            .Where(x => !locations!.Any(l => l.LocalAuthority!.Equals(x.value, StringComparison.OrdinalIgnoreCase)))
+            .Where(x => !string.IsNullOrWhiteSpace(x.value) && !locations!.Any(l => l.LocalAuthority!.Equals(x.value, StringComparison.OrdinalIgnoreCase)))
             .ToList();
 
+        var j = 1;
         foreach (var invalid in invalidAreas)
         {
             string propertyName = invalid.index switch
@@ -54,15 +53,10 @@ public class SearchService : ISearchService
                 2 => nameof(model.Area3),
                 _ => nameof(model.Area1)
             };
-            string ordinal = invalid.index switch
-            {
-                0 => "1st",
-                1 => "2nd",
-                2 => "3rd",
-                _ => ""
-            };
 
-            modelState.AddModelError(propertyName, $"Enter a valid local authority on {ordinal} input box");
+            modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)} {(j < invalidAreas.Count ? ", OR" : "")}");
+            
+            j++;
         }
         if (!modelState.IsValid)
         {
@@ -70,8 +64,10 @@ public class SearchService : ISearchService
         }
 
         // so here we find matching locations, excluding London if needed.
+        inputAreas = inputAreas.Where(a => !string.IsNullOrWhiteSpace(a)).Distinct().ToList();
         var matchedLocations = locations!
             .Where(l => inputAreas.Contains(l.LocalAuthority, StringComparer.OrdinalIgnoreCase) && !l.IsLondon)
+            .OrderBy(x => inputAreas.ToList().IndexOf(x.LocalAuthority!))
             .ToList();
 
         // we get the unique location codes.
@@ -89,28 +85,25 @@ public class SearchService : ISearchService
         }
 
         // then we group providers into the appropriate categories.
+        model.SharedOwnershipProviderModels = providers
+            .Where(p => p.SharedOwnership && !p.IsLocalAuthority)
+            .Distinct();
         model.OpsoProviderModels = providers
             .Where(p => p.Opso && !p.IsLocalAuthority)
             .DistinctBy(p => p.Name);
         model.HoldProviderModels = providers
             .Where(p => p.Hold && !p.IsLocalAuthority)
             .Distinct();
-        model.SharedOwnershipProviderModels = providers
-            .Where(p => p.SharedOwnership && !p.IsLocalAuthority)
-            .Distinct();
         model.RentToBuyProviderModels = providers
             .Where(p => p.RentToBuy && !p.IsLocalAuthority)
             .Distinct();
 
         // we populate local authority names for each provider.
+        model.SharedOwnershipProviderModels.GetListOfLaNamesFromLocations(matchedLocations);
         model.OpsoProviderModels.GetListOfLaNamesFromLocations(matchedLocations);
         model.HoldProviderModels.GetListOfLaNamesFromLocations(matchedLocations);
-        model.SharedOwnershipProviderModels.GetListOfLaNamesFromLocations(matchedLocations);
         model.RentToBuyProviderModels.GetListOfLaNamesFromLocations(matchedLocations);
-
-        var old_providers = new List<ProviderModel>(); // will be redundant -> after result PBI
-        model.LocalAuthority = old_providers?.FirstOrDefault(p => p.IsLocalAuthority); // will be redundant -> after result PBI  
-        model.ProviderModels = old_providers?.Where(p => !p.IsLocalAuthority); // will be redundant -> after result PBI  
+        model.OrganisationsInAreas.SetListOfOragnisationCountsInLocations(matchedLocations, providers);
 
         // Set local authority providers.
         model.LaModels = providers

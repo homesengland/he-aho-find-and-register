@@ -7,6 +7,7 @@ using Find_Register.Controllers;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Find_Register.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace Find_RegisterTest.ControllerTests;
 
@@ -16,6 +17,9 @@ public class SearchControllerTests
     private readonly Mock<ILogger<SearchController>> _loggerMock;
     private readonly Mock<IAntiforgery> _antiforgeryMock;
     private readonly Mock<ICookieHelper> _cookieHelperMock;
+    private readonly Mock<IDataSources> _dataSourceMock;
+    private readonly Mock<ILocationDataSource> _locationDataSourceMock;
+    private readonly Mock<IProviderDataSource> _providerDataSourceMock;
     private readonly SearchController _controller;
 
     public SearchControllerTests()
@@ -24,6 +28,10 @@ public class SearchControllerTests
         _loggerMock = new Mock<ILogger<SearchController>>();
         _antiforgeryMock = new Mock<IAntiforgery>();
         _cookieHelperMock = new Mock<ICookieHelper>();
+
+        _dataSourceMock = new Mock<IDataSources>();
+        _locationDataSourceMock = new Mock<ILocationDataSource>();
+        _providerDataSourceMock = new Mock<IProviderDataSource>();
 
         _controller = new SearchController(
             _loggerMock.Object,
@@ -213,6 +221,54 @@ public class SearchControllerTests
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
         Assert.Equal("NoSearchResults", viewResult.ViewName);
+    }
+
+    [Theory]
+    [InlineData("SomeArea1", null, null)]
+    [InlineData(null, "SomeArea2", null)]
+    [InlineData(null, null, "SomeArea3")]
+    [InlineData("SomeArea1", null, "SomeArea3")]
+    public void SearchResults_WhenNoValidLAModelStateIsInvalid_ReturnsIndexView(string area1, string area2, string area3)
+    {
+        // Arrange
+        var inputModel = new SearchResultsModel { Area1 = area1, Area2 = area2, Area3 = area3 };
+
+        _dataSourceMock.Setup(s => s.GetLocationDataSource).Returns(_locationDataSourceMock.Object);
+        _dataSourceMock.Setup(s => s.GetProviderDataSource).Returns(_providerDataSourceMock.Object);
+        _locationDataSourceMock.Setup(ls => ls.Locations).Returns(
+            new List<LocationModel> { 
+                new LocationModel {
+                    LocalAuthority = "SomeArea",
+                    LocationCode = "SomeArea"
+                }
+            }
+        );
+
+        _providerDataSourceMock.Setup(ls => ls.Providers).Returns(new List<ProviderModel>());
+        _providerDataSourceMock.Setup(ls => ls.ProvidersActiveInLocalAuthority(It.IsAny<string>())).Returns(new List<ProviderModel>());
+
+        var searchService = new SearchService(_dataSourceMock.Object, new Mock<ILogger<SearchService>>().Object);
+        searchService.InitializeSearchModel();
+        var controller = new SearchController(_loggerMock.Object, searchService, _cookieHelperMock.Object, _antiforgeryMock.Object);
+
+        // Act 
+        var result = controller.SearchResults(inputModel);
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.Equal("Index", viewResult.ViewName);
+        Assert.False(controller.ModelState.IsValid);
+        if (!string.IsNullOrEmpty(area1))
+        {
+            Assert.True(controller.ModelState.ContainsKey(nameof(inputModel.Area1)));
+        }
+        if (!string.IsNullOrEmpty(area2))
+        {
+            Assert.True(controller.ModelState.ContainsKey(nameof(inputModel.Area2)));
+        }
+        if (!string.IsNullOrEmpty(area3))
+        {
+            Assert.True(controller.ModelState.ContainsKey(nameof(inputModel.Area3)));
+        }
+        Assert.Contains(controller.ModelState.Values, v => v.ValidationState == ModelValidationState.Invalid);
     }
 
 }

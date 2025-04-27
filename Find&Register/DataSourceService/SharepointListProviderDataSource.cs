@@ -20,9 +20,16 @@ public class SharepointListProviderDataSource : IProviderDataSource
         get
         {
             var lastModified = _clientInstance.GetLastModified();
-            _logger.Log(LogLevel.Trace, $"Provider list updated {lastModified}, updating cached provider list");
-            _lastModified = lastModified;
-            _providers = _clientInstance.GetAllProviders();
+            if (lastModified != null && (_lastModified == null || lastModified > _lastModified))
+            {
+                _logger.Log(LogLevel.Trace, $"Provider list updated {lastModified}, updating cached provider list");
+                _lastModified = lastModified;
+                _providers = _clientInstance.GetAllProviders();
+            }
+
+            //_logger.Log(LogLevel.Trace, $"Provider list updated {lastModified}, updating cached provider list");
+            //_lastModified = lastModified;
+            //_providers = _clientInstance.GetAllProviders();
             
             return _providers;
         }

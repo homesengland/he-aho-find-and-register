@@ -6,24 +6,26 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Find_Register.Models
 {
-    public class SearchResultsModel//: IValidatableObject
+    public class SearchResultsModel
     {
         public string Area1 { get; set; } = string.Empty;
         public string Area2 { get; set; } = string.Empty;
         public string Area3 { get; set; } = string.Empty;
 
-        public List<string> Products { get; set; } = new(); // will be redundant -> after result PBI
+        public List<OrganisationResultModel> OrganisationsInAreas = new List<OrganisationResultModel>();
 
-        public ProviderModel? LocalAuthority { get; set; } // will be redundant -> after result PBI
-        public IEnumerable<ProviderModel>? ProviderModels {get;set; } // will be redundant -> after result PBI
+        //public List<string> Products { get; set; } = new(); // will be redundant -> after result PBI
+
+        //public ProviderModel? LocalAuthority { get; set; } // will be redundant -> after result PBI
+        //public IEnumerable<ProviderModel>? ProviderModels {get;set; } // will be redundant -> after result PBI
         public List<LocationModel>? LocationModels { get; set; }
 
-        public bool IsSharedOwnershipSelected => Products?.Contains(nameof(ProviderModel.SharedOwnership)) ?? false; // will be redundant -> after result PBI
-        public bool IsHoldSelected => Products?.Contains(nameof(ProviderModel.Hold)) ?? false;// will be redundant -> after result PBI
-        public bool IsOpsoSelected => Products?.Contains(nameof(ProviderModel.Opso)) ?? false;// will be redundant -> after result PBI
-        public bool IsRentToBuySelected => Products?.Contains(nameof(ProviderModel.RentToBuy)) ?? false;// will be redundant -> after result PBI
-        public bool AreAnyProductsSelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected || IsRentToBuySelected;// will be redundant -> after result PBI
-        public bool AreAnyNonRentToBuySelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected; // will be redundant -> after result PBI
+        //public bool IsSharedOwnershipSelected => Products?.Contains(nameof(ProviderModel.SharedOwnership)) ?? false; // will be redundant -> after result PBI
+        //public bool IsHoldSelected => Products?.Contains(nameof(ProviderModel.Hold)) ?? false;// will be redundant -> after result PBI
+        //public bool IsOpsoSelected => Products?.Contains(nameof(ProviderModel.Opso)) ?? false;// will be redundant -> after result PBI
+        //public bool IsRentToBuySelected => Products?.Contains(nameof(ProviderModel.RentToBuy)) ?? false;// will be redundant -> after result PBI
+        //public bool AreAnyProductsSelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected || IsRentToBuySelected;// will be redundant -> after result PBI
+        //public bool AreAnyNonRentToBuySelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected; // will be redundant -> after result PBI
 
         public int GetOpsoCount() => OpsoProviderModels.Distinct().Count();
         public int GetHoldCount() => HoldProviderModels.Distinct().Count();

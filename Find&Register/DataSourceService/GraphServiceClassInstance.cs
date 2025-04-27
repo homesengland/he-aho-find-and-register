@@ -58,7 +58,7 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
                 .Items
                 .Request()
                 .Expand(item => item.Fields)
-                .Top(1000)
+                .Top(2000)
                 .GetAsync());
 
             sharePointData = task.Result;
@@ -84,10 +84,10 @@ public class GraphServiceClientInstance : IGraphServiceClientInstance
                 sharepointProvider.WebsiteUrl = CorrectUrl(dataItem.Fields.AdditionalData["URL"].ToString());
                 sharepointProvider.HOLD = Convert.ToBoolean(dataItem.Fields.AdditionalData["HOLD"].ToString());
                 sharepointProvider.IsLocalAuthority = Convert.ToBoolean(dataItem.Fields.AdditionalData["IsLocalAuthority"].ToString());
-                sharepointProvider.LocalAuthorities = dataItem.Fields.AdditionalData["LocalAuthorities"].ToString();
+                sharepointProvider.LocalAuthorities = dataItem.Fields.AdditionalData.TryGetValue("LocalAuthorities", out var LocalAuthorities) ? LocalAuthorities.ToString() : string.Empty;
                 sharepointProvider.OPSO = Convert.ToBoolean(dataItem.Fields.AdditionalData["OPSO"].ToString());
                 sharepointProvider.RentToBuy = Convert.ToBoolean(dataItem.Fields.AdditionalData["RentToBuy"].ToString());
-                sharepointProvider.Archived = Convert.ToBoolean(dataItem.Fields.AdditionalData["Archived"].ToString());
+                sharepointProvider.Archived = (dataItem.Fields.AdditionalData.TryGetValue("Archived", out var archivedValue) && bool.TryParse(archivedValue?.ToString(), out var isArchived)) ? isArchived: false;
 
                 providerResult.Add(new ProviderModel(sharepointProvider));
             }

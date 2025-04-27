@@ -53,13 +53,13 @@ public class SearchController : BaseControllerWithShareStaticPages
         }
 
         // If no provider results exist, then we show a dedicated view.
-        if (!model.OpsoProviderModels.Any() &&
+        /*if (!model.OpsoProviderModels.Any() &&
             !model.HoldProviderModels.Any() &&
             !model.SharedOwnershipProviderModels.Any() &&
             !model.RentToBuyProviderModels.Any())
         {
             return View("NoSearchResults", model);
-        }
+        }*/
 
         return View(model);
     }
@@ -67,11 +67,6 @@ public class SearchController : BaseControllerWithShareStaticPages
     private IActionResult InvalidSearchResult(SearchResultsModel model)
     {
         return View(nameof(Index), model);
-    }
-
-    private IActionResult NoSearchResults(SearchResultsModel model)
-    {
-        return View(nameof(NoSearchResults), model);
     }
 
     private IActionResult SearchResultsLondon(SearchResultsModel model)
