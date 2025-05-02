@@ -15,7 +15,7 @@ public class SearchResultsModelTests
     {
         var stateDictionary = new ModelStateDictionary();
 
-        var model = new SearchResultsModel { Area = "" };
+        var model = new SearchResultsModel { Area1 = "" , Area2 = "", Area3 = "" };
         Assert.Throws<InvalidDataException>(() => model.ValidateLocalAuthorityAreaSearch(stateDictionary));
     }
 
@@ -23,14 +23,14 @@ public class SearchResultsModelTests
     public void SimplifiedRedirectionModelReturnsSameModelButOnlyWithArea()
     {
         var model = new SearchResultsModel {
-            Area = "Somewhere",
+            Area1 = "Somewhere",
             LocationModels = new List<LocationModel>(),
             ProviderModels = new List<ProviderModel>()
         };
         var simplifiedModel = model.SimplifiedRedirectionModel();
         Assert.Null(simplifiedModel.LocationModels);
         Assert.Null(simplifiedModel.ProviderModels);
-        Assert.Equal("Somewhere", simplifiedModel.Area);
+        Assert.Equal("Somewhere", simplifiedModel.Area1);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class SearchResultsModelTests
     {
         var model = new SearchResultsModel
         {
-            Area = "Somewhere",
+            Area1 = "Somewhere",
             LocationModels = new List<LocationModel>(),
             ProviderModels = new List<ProviderModel> {
                 new ProviderModel{ Hold = true, Opso = true },

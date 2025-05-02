@@ -4,1855 +4,2164 @@
       "version": "202109",
       "gssCode": "E06000001",
       "name": "Hartlepool",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000002",
       "name": "Middlesbrough",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000003",
       "name": "Redcar and Cleveland",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000004",
       "name": "Stockton-on-Tees",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000005",
       "name": "Darlington",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000006",
       "name": "Halton",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000007",
       "name": "Warrington",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000008",
       "name": "Blackburn with Darwen",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000009",
       "name": "Blackpool",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000010",
       "name": "Kingston Upon Hull",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000011",
       "name": "East Riding of Yorkshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000012",
       "name": "North East Lincolnshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000013",
       "name": "North Lincolnshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000014",
       "name": "York",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000015",
       "name": "Derby",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000016",
       "name": "Leicester",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000017",
       "name": "Rutland",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000018",
       "name": "Nottingham",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000019",
       "name": "Herefordshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000020",
       "name": "Telford and Wrekin",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000021",
       "name": "Stoke-on-Trent",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000022",
       "name": "Bath and North East Somerset",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000023",
       "name": "Bristol",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000024",
       "name": "North Somerset",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000025",
       "name": "South Gloucestershire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000026",
       "name": "Plymouth",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000027",
       "name": "Torbay",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000030",
       "name": "Swindon",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000031",
       "name": "Peterborough",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000032",
       "name": "Luton",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000033",
       "name": "Southend-on-Sea",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000034",
       "name": "Thurrock",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000035",
       "name": "Medway Towns",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000036",
       "name": "Bracknell Forest",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000037",
       "name": "West Berkshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000038",
       "name": "Reading",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000039",
       "name": "Slough",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000040",
       "name": "Windsor and Maidenhead",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000041",
       "name": "Wokingham",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000042",
       "name": "Milton Keynes",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000043",
       "name": "Brighton and Hove",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000044",
       "name": "Portsmouth",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000045",
       "name": "Southampton",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000046",
       "name": "Isle of Wight",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000047",
       "name": "County Durham",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000049",
       "name": "Cheshire East",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000050",
       "name": "Cheshire West and Chester",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000051",
       "name": "Shropshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000052",
       "name": "Cornwall",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000053",
       "name": "Isles of Scilly",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000054",
       "name": "Wiltshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000055",
       "name": "Bedford",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000056",
       "name": "Central Bedfordshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000057",
       "name": "Northumberland",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000058",
       "name": "Bournemouth, Christchurch and Poole",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000059",
       "name": "Dorset",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000060",
       "name": "Buckinghamshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000061",
       "name": "North Northamptonshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E06000062",
       "name": "West Northamptonshire",
-      "areaCodeDescription": "Unitary Authority"
+      "areaCodeDescription": "Unitary Authority",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000008",
       "name": "Cambridge",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000009",
       "name": "East Cambridgeshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000010",
       "name": "Fenland",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000011",
       "name": "Huntingdonshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000012",
       "name": "South Cambridgeshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000026",
       "name": "Allerdale",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000027",
       "name": "Barrow-in-Furness",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000028",
       "name": "Carlisle",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000029",
       "name": "Copeland",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000030",
       "name": "Eden",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000031",
       "name": "South Lakeland",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000032",
       "name": "Amber Valley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000033",
       "name": "Bolsover",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000034",
       "name": "Chesterfield",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000035",
       "name": "Derbyshire Dales",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000036",
       "name": "Erewash",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000037",
       "name": "High Peak",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000038",
       "name": "North East Derbyshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000039",
       "name": "South Derbyshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000040",
       "name": "East Devon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000041",
       "name": "Exeter",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000042",
       "name": "Mid Devon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000043",
       "name": "North Devon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000044",
       "name": "South Hams",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000045",
       "name": "Teignbridge",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000046",
       "name": "Torridge",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000047",
       "name": "West Devon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000061",
       "name": "Eastbourne",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000062",
       "name": "Hastings",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000063",
       "name": "Lewes",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000064",
       "name": "Rother",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000065",
       "name": "Wealden",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000066",
       "name": "Basildon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000067",
       "name": "Braintree",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000068",
       "name": "Brentwood",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000069",
       "name": "Castle Point",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000070",
       "name": "Chelmsford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000071",
       "name": "Colchester",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000072",
       "name": "Epping Forest",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000073",
       "name": "Harlow",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000074",
       "name": "Maldon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000075",
       "name": "Rochford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000076",
       "name": "Tendring",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000077",
       "name": "Uttlesford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000078",
       "name": "Cheltenham",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000079",
       "name": "Cotswold",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000080",
       "name": "Forest of Dean",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000081",
       "name": "Gloucester",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000082",
       "name": "Stroud",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000083",
       "name": "Tewkesbury",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000084",
       "name": "Basingstoke and Deane",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000085",
       "name": "East Hampshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000086",
       "name": "Eastleigh",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000087",
       "name": "Fareham",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000088",
       "name": "Gosport",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000089",
       "name": "Hart",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000090",
       "name": "Havant",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000091",
       "name": "New Forest",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000092",
       "name": "Rushmoor",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000093",
       "name": "Test Valley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000094",
       "name": "Winchester",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000095",
       "name": "Broxbourne",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000096",
       "name": "Dacorum",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000098",
       "name": "Hertsmere",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000099",
       "name": "North Hertfordshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000102",
       "name": "Three Rivers",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000103",
       "name": "Watford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000105",
       "name": "Ashford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000106",
       "name": "Canterbury",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000107",
       "name": "Dartford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000108",
       "name": "Dover",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000109",
       "name": "Gravesham",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000110",
       "name": "Maidstone",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000111",
       "name": "Sevenoaks",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000112",
       "name": "Folkestone and Hythe",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000113",
       "name": "Swale",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000114",
       "name": "Thanet",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000115",
       "name": "Tonbridge and Malling",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000116",
       "name": "Tunbridge Wells",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000117",
       "name": "Burnley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000118",
       "name": "Chorley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000119",
       "name": "Fylde",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000120",
       "name": "Hyndburn",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000121",
       "name": "Lancaster",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000122",
       "name": "Pendle",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000123",
       "name": "Preston",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000124",
       "name": "Ribble Valley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000125",
       "name": "Rossendale",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000126",
       "name": "South Ribble",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000127",
       "name": "West Lancashire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000128",
       "name": "Wyre",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000129",
       "name": "Blaby",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000130",
       "name": "Charnwood",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000131",
       "name": "Harborough",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000132",
       "name": "Hinckley and Bosworth",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000133",
       "name": "Melton",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000134",
       "name": "North West Leicestershire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000135",
       "name": "Oadby and Wigston",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000136",
       "name": "Boston",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000137",
       "name": "East Lindsey",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000138",
       "name": "Lincoln",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000139",
       "name": "North Kesteven",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000140",
       "name": "South Holland",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000141",
       "name": "South Kesteven",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000142",
       "name": "West Lindsey",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000143",
       "name": "Breckland",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000144",
       "name": "Broadland",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000145",
       "name": "Great Yarmouth",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000146",
       "name": "Kings Lynn and West Norfolk",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000147",
       "name": "North Norfolk",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000148",
       "name": "Norwich",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000149",
       "name": "South Norfolk",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000163",
       "name": "Craven",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000164",
       "name": "Hambleton",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000165",
       "name": "Harrogate",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000166",
       "name": "Richmondshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000167",
       "name": "Ryedale",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000168",
       "name": "Scarborough",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000169",
       "name": "Selby",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000170",
       "name": "Ashfield",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000171",
       "name": "Bassetlaw",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000172",
       "name": "Broxtowe",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000173",
       "name": "Gedling",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000174",
       "name": "Mansfield",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000175",
       "name": "Newark and Sherwood",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000176",
       "name": "Rushcliffe",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000177",
       "name": "Cherwell",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000178",
       "name": "Oxford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000179",
       "name": "South Oxfordshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000180",
       "name": "Vale of White Horse",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000181",
       "name": "West Oxfordshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000187",
       "name": "Mendip",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000188",
       "name": "Sedgemoor",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000189",
       "name": "South Somerset",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000192",
       "name": "Cannock Chase",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000193",
       "name": "East Staffordshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000194",
       "name": "Lichfield",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000195",
       "name": "Newcastle-under-Lyme",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000196",
       "name": "South Staffordshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000197",
       "name": "Stafford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000198",
       "name": "Staffordshire Moorlands",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000199",
       "name": "Tamworth",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000200",
       "name": "Babergh",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000202",
       "name": "Ipswich",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000203",
       "name": "Mid Suffolk",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000207",
       "name": "Elmbridge",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000208",
       "name": "Epsom and Ewell",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000209",
       "name": "Guildford",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000210",
       "name": "Mole Valley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000211",
       "name": "Reigate and Banstead",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000212",
       "name": "Runnymede",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000213",
       "name": "Spelthorne",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000214",
       "name": "Surrey Heath",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000215",
       "name": "Tandridge",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000216",
       "name": "Waverley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000217",
       "name": "Woking",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000218",
       "name": "North Warwickshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000219",
       "name": "Nuneaton and Bedworth",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000220",
       "name": "Rugby",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000221",
       "name": "Stratford-on-Avon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000222",
       "name": "Warwick",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000223",
       "name": "Adur",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000224",
       "name": "Arun",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000225",
       "name": "Chichester",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000226",
       "name": "Crawley",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000227",
       "name": "Horsham",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000228",
       "name": "Mid Sussex",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000229",
       "name": "Worthing",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000234",
       "name": "Bromsgrove",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000235",
       "name": "Malvern Hills",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000236",
       "name": "Redditch",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000237",
       "name": "Worcester",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000238",
       "name": "Wychavon",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000239",
       "name": "Wyre Forest",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000240",
       "name": "St. Albans",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000241",
       "name": "Welwyn Hatfield",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000242",
       "name": "East Hertfordshire",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000243",
       "name": "Stevenage",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000244",
       "name": "East Suffolk",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000245",
       "name": "West Suffolk",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E07000246",
       "name": "Somerset West and Taunton",
-      "areaCodeDescription": "District"
+      "areaCodeDescription": "District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000001",
       "name": "Bolton",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000002",
       "name": "Bury",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000003",
       "name": "Manchester",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000004",
       "name": "Oldham",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000005",
       "name": "Rochdale",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000006",
       "name": "Salford",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000007",
       "name": "Stockport",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000008",
       "name": "Tameside",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000009",
       "name": "Trafford",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000010",
       "name": "Wigan",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000011",
       "name": "Knowsley",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000012",
       "name": "Liverpool",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000013",
       "name": "St. Helens",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000014",
       "name": "Sefton",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000015",
       "name": "Wirral",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000016",
       "name": "Barnsley",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000017",
       "name": "Doncaster",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000018",
       "name": "Rotherham",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000019",
       "name": "Sheffield",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000021",
       "name": "Newcastle upon Tyne",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000022",
       "name": "North Tyneside",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000023",
       "name": "South Tyneside",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000024",
       "name": "Sunderland",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000025",
       "name": "Birmingham",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000026",
       "name": "Coventry",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000027",
       "name": "Dudley",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000028",
       "name": "Sandwell",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000029",
       "name": "Solihull",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000030",
       "name": "Walsall",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000031",
       "name": "Wolverhampton",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000032",
       "name": "Bradford",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000033",
       "name": "Calderdale",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000034",
       "name": "Kirklees",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000035",
       "name": "Leeds",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000036",
       "name": "Wakefield",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E08000037",
       "name": "Gateshead",
-      "areaCodeDescription": "Metropolitan District"
+      "areaCodeDescription": "Metropolitan District",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000001",
       "name": "City of London",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000002",
       "name": "Barking and Dagenham",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000003",
       "name": "Barnet",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000004",
       "name": "Bexley",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000005",
       "name": "Brent",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000006",
       "name": "Bromley",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000007",
       "name": "Camden",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000008",
       "name": "Croydon",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000009",
       "name": "Ealing",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000010",
       "name": "Enfield",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000011",
       "name": "Greenwich",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000012",
       "name": "Hackney",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000013",
       "name": "Hammersmith and Fulham",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000014",
       "name": "Haringey",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000015",
       "name": "Harrow",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000016",
       "name": "Havering",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000017",
       "name": "Hillingdon",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000018",
       "name": "Hounslow",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000019",
       "name": "Islington",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000020",
       "name": "Kensington and Chelsea",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000021",
       "name": "Kingston upon Thames",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000022",
       "name": "Lambeth",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000023",
       "name": "Lewisham",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000024",
       "name": "Merton",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000025",
       "name": "Newham",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000026",
       "name": "Redbridge",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000027",
       "name": "Richmond upon Thames",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000028",
       "name": "Southwark",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000029",
       "name": "Sutton",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000030",
       "name": "Tower Hamlets",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000031",
       "name": "Waltham Forest",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000032",
       "name": "Wandsworth",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     },
     {
       "version": "202109",
       "gssCode": "E09000033",
       "name": "Westminster",
-      "areaCodeDescription": "London Borough"
+      "areaCodeDescription": "London Borough",
+      "IsLondon": false
     }
   ]
 }

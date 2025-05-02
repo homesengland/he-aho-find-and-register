@@ -17,18 +17,39 @@
 
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var element = document.querySelector('#tt-default')
-        var id = 'Area'
+        var element = document.querySelector('#tt-default');
+        var id = 'Area1';
         accessibleAutocomplete({
             element: element,
             id: id,
+            name: id,
             source: countries,
-            defaultValue: '@Model.Area'
-        })
-    })</script>
+            defaultValue: '@Model.Area1'
+        });
+        var element2 = document.querySelector('#tt-default2');
+        var id2 = 'Area2';
+        accessibleAutocomplete({
+            element: element2,
+            id: id2,
+            name: id2,
+            source: countries,
+            defaultValue: '@Model.Area2'
+        });
+
+        var element3 = document.querySelector('#tt-default3');
+        var id3 = 'Area3';
+        accessibleAutocomplete({
+            element: element3,
+            id: id3,
+            name: id3,
+            source: countries,
+            defaultValue: '@Model.Area3'
+        });
+    });
+    </script>
 <div class="govuk-width-container govuk-body">
     <div role="navigation" aria-label="navigate back">
-        <a href="https://www.gov.uk/shared-ownership-scheme/finding-shared-ownership-home" class="govuk-back-link">Back</a>
+        <a onclick="window.history.back()" class="govuk-back-link">Back</a>
     </div>
     <main class="govuk-main-wrapper">
         <div class="govuk-grid-row">
@@ -39,12 +60,11 @@
                 }
                 <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
-               {
-                   ValidationMessage = Html.ValidationMessageFor(m => m.Area),
-
-                   Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                   Content = @<partial name="SearchFormPartial" />
-               })
+                       {
+                           // ValidationMessage = Html.ValidationMessageFor(m => m.Area1),
+                           Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                           Content = @<partial name="SearchFormPartial" />
+                       })
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
                     </button>
