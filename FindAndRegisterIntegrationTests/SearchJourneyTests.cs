@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using Deque.AxeCore.Selenium;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using OpenQA.Selenium.Interactions;
 
 namespace FindAndRegisterIntegrationTests
 {
@@ -35,6 +36,20 @@ namespace FindAndRegisterIntegrationTests
             driver.Navigate().GoToUrl(Host);
 
             DoGDSTestsOnSearchPage(driver);
+        }
+
+        [Fact]
+        [Trait("Selenium", "Smoke")]
+        public void SearchJourneyBackButtonRedirectsToPreviousPag()
+        {
+            using IWebDriver driver = new ChromeDriver();
+            var actions = new Actions(driver);
+
+            driver.Navigate().GoToUrl("https://www.google.com/");
+            actions.ScrollByAmount(0, 1000);
+            driver.Navigate().GoToUrl(Host);
+            driver.FindElement(By.ClassName("govuk-back-link")).Click();
+            Assert.Equal("https://www.google.com/", driver.Url);
         }
 
         [Theory]

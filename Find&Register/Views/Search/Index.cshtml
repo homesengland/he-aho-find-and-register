@@ -45,11 +45,19 @@
             source: countries,
             defaultValue: '@Model.Area3'
         });
+
+        const backButton = document.getElementById("backButton");
+        if (backButton) {
+          backButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            history.back();
+          });
+        }
     });
     </script>
 <div class="govuk-width-container govuk-body">
     <div role="navigation" aria-label="navigate back">
-        <a onclick="window.history.back()" class="govuk-back-link">Back</a>
+        <a href="#" id="backButton" class="govuk-back-link">Back</a>
     </div>
     <main class="govuk-main-wrapper">
         <div class="govuk-grid-row">
