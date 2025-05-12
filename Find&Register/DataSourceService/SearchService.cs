@@ -87,16 +87,16 @@ public class SearchService : ISearchService
         // then we group providers into the appropriate categories.
         model.SharedOwnershipProviderModels = providers
             .Where(p => p.SharedOwnership && !p.IsLocalAuthority)
-            .Distinct();
+            .DistinctBy(x => x.Name);
         model.OpsoProviderModels = providers
             .Where(p => p.Opso && !p.IsLocalAuthority)
             .DistinctBy(p => p.Name);
         model.HoldProviderModels = providers
             .Where(p => p.Hold && !p.IsLocalAuthority)
-            .Distinct();
+            .DistinctBy(x => x.Name);
         model.RentToBuyProviderModels = providers
             .Where(p => p.RentToBuy && !p.IsLocalAuthority)
-            .Distinct();
+            .DistinctBy(x => x.Name);
 
         // we populate local authority names for each provider.
         model.SharedOwnershipProviderModels.GetListOfLaNamesFromLocations(matchedLocations);

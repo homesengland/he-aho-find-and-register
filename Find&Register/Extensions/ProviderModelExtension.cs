@@ -22,7 +22,7 @@ namespace Find_Register.Extensions
                 {
                     Id = la.Index,
                     Name = la.Value.LocalAuthority!,
-                    No = providers.Count(x => x.Locations.Contains(la.Value.LocationCode!))
+                    No = providers.DistinctBy(x => x.Name).Count(x => x.Locations.Contains(la.Value.LocationCode!))
                 });
             }
             model.AddRange(temp);
