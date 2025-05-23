@@ -1,7 +1,7 @@
-﻿@model EligibilityJourneyFirstTimeBuyer
+﻿@model EligibilityJourneyAffordability
 @{
-    ViewBag.Title = "How much do you earn";
-    var FirstTimeBuyer = nameof(EligibilityJourneyFirstTimeBuyer.firstTimeBuyer);
+    ViewBag.Title = "Affordable with Shared Ownership";
+    var affordWithoutSharedOwnership = nameof(EligibilityJourneyAffordability.affordWithoutSharedOwnership);
 }
 
 <div class="govuk-width-container ">
@@ -17,9 +17,9 @@
                 <form method="post">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                {
-                   HtmlId = FirstTimeBuyer,
-                   ValidationMessage = Html.ValidationMessageFor(m => m.firstTimeBuyer),
-                   AriaDescribe = FirstTimeBuyer + "-error",
+                   HtmlId = affordWithoutSharedOwnership,
+                   ValidationMessage = Html.ValidationMessageFor(m => m.affordWithoutSharedOwnership),
+                   AriaDescribe = affordWithoutSharedOwnership + "-error",
                    Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
                    Title = "Select the option that applies to you",
                    Content =
@@ -27,24 +27,24 @@
                             <fieldset class="govuk-fieldset">
                                 <div class="govuk-radios" data-module="govuk-radios">
                                     <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input" id="first-time-buyer" asp-for="@FirstTimeBuyer" name="@FirstTimeBuyer"
+                                        <input class="govuk-radios__input" id="can-afford-without-sp" asp-for="@affordWithoutSharedOwnership" name="@affordWithoutSharedOwnership"
                                                type="radio" value=true>
-                                        <label class="govuk-label govuk-radios__label" for="first-time-buyer">
-                                            I do not own a home
+                                        <label class="govuk-label govuk-radios__label" for="can-afford-without-sp">
+                                            I can afford a home without using shared ownership
                                         </label>
                                     </div>
                                     <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input" id="own-a-home" asp-for="@FirstTimeBuyer" name="@FirstTimeBuyer"
+                                        <input class="govuk-radios__input" id="cant-afford-without-sp" asp-for="@affordWithoutSharedOwnership" name="@affordWithoutSharedOwnership"
                                                type="radio" value=false>
-                                        <label class="govuk-label govuk-radios__label" for="own-a-home">
-                                            I own a home but need to move
+                                        <label class="govuk-label govuk-radios__label" for="cant-afford-without-sp1">
+                                            I cannot afford a home unless I use shared ownership
                                         </label>
                                     </div>
                                 </div>
                             </fieldset>
                         </div>
                })
-                    <button class="govuk-button" id="eligibility-Page-4-Submit-Button" data-module="govuk-button" type="submit">
+                    <button class="govuk-button" id="eligibility-Page-5-Submit-Button" data-module="govuk-button" type="submit">
                         Continue
                     </button>
                 </form>

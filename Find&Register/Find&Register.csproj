@@ -42,7 +42,6 @@
   <ItemGroup>
     <Folder Include="Cookies\" />
     <Folder Include="Middleware\" />
-    <Folder Include="Views\Eligibility\" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="FindAndRegisterUnitTests" />
