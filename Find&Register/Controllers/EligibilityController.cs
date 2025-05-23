@@ -36,6 +36,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     [HttpPost]
     public IActionResult Index(EligibilityJourneyWhereDoYouWantToBuyAHome _EligibilityJourneyWhereDoYouWantToBuyAHome)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
+        }
+
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.EligibilityJourneyWhereDoYouWantToBuyAHome = _EligibilityJourneyWhereDoYouWantToBuyAHome;
@@ -57,10 +62,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
             return RedirectToAction(nameof(BuyingWithAnotherPerson));
         }
 
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
-        }
         return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
     }
 
@@ -82,6 +83,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
 
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyBuyingWithAnotherPerson);
+        }
+
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.EligibilityJourneyBuyingWithAnotherPerson = _EligibilityJourneyBuyingWithAnotherPerson;
@@ -96,11 +102,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         if (_EligibilityJourneyBuyingWithAnotherPerson.SingleBuyer == false)
         {
             return RedirectToAction(nameof(HowMuchDoYouEarn));
-        }
-
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyBuyingWithAnotherPerson);
         }
 
         return View(_EligibilityJourneyBuyingWithAnotherPerson);
@@ -124,6 +125,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
 
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyHowMuchDoYouEarn);
+        }
+
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn);
@@ -142,11 +148,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         if (_EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80 == false)
         {
             return RedirectToAction(nameof(FirstTimeBuyer));
-        }
-
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyHowMuchDoYouEarn);
         }
 
         return View(_EligibilityJourneyHowMuchDoYouEarn);
@@ -169,6 +170,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     public IActionResult HowMuchDoYouEarn_MultiplePeople(EligibilityJourneyHowMuchDoYouEarn_MultiplePeople _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople)
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
+        
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
+        }
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
@@ -189,11 +195,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == false)
         {
             return RedirectToAction(nameof(FirstTimeBuyer));
-        }
-
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
         }
 
         return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
@@ -220,6 +221,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     public IActionResult FirstTimeBuyer(EligibilityJourneyFirstTimeBuyer _EligibilityJourneyFirstTimeBuyer)
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
+
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyFirstTimeBuyer);
+        }
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
@@ -254,6 +260,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     public IActionResult Affordability(EligibilityJourneyAffordability _EligibilityJourneyAffordability)
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
+
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyAffordability);
+        }
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;

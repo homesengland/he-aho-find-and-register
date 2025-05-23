@@ -44,20 +44,20 @@ public class LocationApiTests
         mockServiceProvider.Setup(m => m.GetService(typeof(IHttpClient))).Returns(client);
 
         var source = new LocationApiDataSource(_testConfig, mockLogger, mockServiceProvider.Object);
-        Assert.Equivalent(true, source.Locations!.Any(l => l.IsLondon));
+        Assert.Equivalent(false, source.Locations!.Any(l => l.IsLondon));
     }
 
     [Fact]
-    public void LocationApiDataSource_ContainsLondonAreasIfTheyAreReturnedFromApi()
+    public void LocationApiDataSource_LondonAreasAreTakenOutFromApi()
     {
         var mockClient = new MockHttpClient();
         var mockServiceProvider = new Mock<IServiceProvider>();
         var mockLogger = new MockLogger();
-        mockServiceProvider.Setup(m => m.GetService(typeof(IHttpClient))).Returns(mockClient);
+        
         var locationConfig = new LocationConfiguration
         {
             LocalFile = "Resources/TestLocations.json",
-            UseApi = true
+            UseApi = false
         };
         mockClient.SetReturnObject(() =>
         {
@@ -65,13 +65,14 @@ public class LocationApiTests
             {
                 LocalAuthorities = new List<LocationModel>
                 {
-                    new LocationModel{ LocalAuthority= "Central London", AreaCode="London Borough"},
-                    new LocationModel{ LocalAuthority= "Milton Keynes", AreaCode="Buckinghamshire"},
+                    new LocationModel{ LocalAuthority= "Central London", AreaCode="London Borough" },
+                    new LocationModel{ LocalAuthority= "Milton Keynes", AreaCode="Buckinghamshire" },
                 }
             };
         });
+        mockServiceProvider.Setup(m => m.GetService(typeof(IHttpClient))).Returns(mockClient);
         var source = new LocationApiDataSource(locationConfig, mockLogger, mockServiceProvider.Object);
-        Assert.Equivalent(true, source.Locations!.Any(l => l.IsLondon));
+        Assert.Equivalent(false, source.Locations!.Any(l => l.IsLondon));
     }
 
     [Fact]

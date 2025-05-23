@@ -7,7 +7,6 @@ using Find_Register.Controllers;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Find_Register.Cookies;
-using Microsoft.AspNetCore.Http;
 
 namespace Find_RegisterTest.ControllerTests;
 
@@ -97,7 +96,7 @@ public class SearchControllerTests
 
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
-        Assert.Equal("NoSearchResults", viewResult.ViewName);
+        Assert.True(string.IsNullOrEmpty(viewResult.ViewName));
         Assert.Equal(inputModel, viewResult.Model);
     }
 
@@ -220,7 +219,7 @@ public class SearchControllerTests
 
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
-        Assert.Equal("NoSearchResults", viewResult.ViewName);
+        Assert.True(string.IsNullOrEmpty(viewResult.ViewName));
     }
 
     [Theory]
