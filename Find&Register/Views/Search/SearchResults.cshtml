@@ -9,7 +9,6 @@
     ViewBag.Hold = JsonConvert.SerializeObject(Model.HoldProviderModels, Formatting.Indented);
     ViewBag.Opso = JsonConvert.SerializeObject(Model.OpsoProviderModels, Formatting.Indented);
     ViewBag.Rent2Buy = JsonConvert.SerializeObject(Model.RentToBuyProviderModels, Formatting.Indented);
-
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
 @section Scripts {
@@ -60,7 +59,7 @@
 
                     <p class="govuk-body">Select a category to view providers offering homes:</p>
                     <!-- Accordion components -->
-                    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-result">
+                    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-result" data-remember-expanded="false">
 
                         <!-- Shared ownership -->
                         <div class="govuk-accordion__section">
@@ -132,12 +131,12 @@
                                         </ul>
                                     }
                                     <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes in: </h3>
-                                    @foreach (var LA in provider.LaLocations)
-                                    {                                        
-                                        <ul class="govuk-list govuk-list--bullet">
+                                    <ul class="govuk-list govuk-list--bullet">
+                                        @foreach (var LA in provider.LaLocations)
+                                        {                                        
                                             <li>@LA</li>
-                                        </ul>
-                                    }
+                                        }
+                                    </ul>
                                 }
                             </div>
                         </div>
@@ -214,12 +213,12 @@
                                         </ul>
                                     }
                                     <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes in: </h3>
-                                    @foreach (var LA in provider.LaLocations)
-                                    {                                        
-                                        <ul class="govuk-list govuk-list--bullet">
+                                    <ul class="govuk-list govuk-list--bullet">
+                                        @foreach (var LA in provider.LaLocations)
+                                        {                                                                                
                                             <li>@LA</li>
-                                        </ul>
-                                    }
+                                        }
+                                    </ul>
                                 }
                             </div>
                         </div>
@@ -296,12 +295,12 @@
                                         </ul>
                                     }
                                     <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes in: </h3>
-                                    @foreach (var LA in provider.LaLocations)
-                                    {                                        
-                                        <ul class="govuk-list govuk-list--bullet">
+                                    <ul class="govuk-list govuk-list--bullet">
+                                        @foreach (var LA in provider.LaLocations)
+                                        {                                        
                                             <li>@LA</li>
-                                        </ul>
-                                    }
+                                        }
+                                    </ul>
                                 }
 
                             </div>
@@ -379,11 +378,11 @@
                                         </ul>
                                     }
                                     <h3 class="govuk-heading-s govuk-!-font-weight-regular">@provider.Name sells homes in: </h3>
-                                    @foreach (var LA in provider.LaLocations){                                        
-                                        <ul class="govuk-list govuk-list--bullet">
+                                    <ul class="govuk-list govuk-list--bullet">
+                                        @foreach (var LA in provider.LaLocations){                                        
                                             <li>@LA</li>
-                                        </ul>
-                                    }
+                                        }
+                                    </ul>
                                 }
                             </div>
                         </div>
