@@ -9,6 +9,8 @@
     ViewBag.Hold = JsonConvert.SerializeObject(Model.HoldProviderModels, Formatting.Indented);
     ViewBag.Opso = JsonConvert.SerializeObject(Model.OpsoProviderModels, Formatting.Indented);
     ViewBag.Rent2Buy = JsonConvert.SerializeObject(Model.RentToBuyProviderModels, Formatting.Indented);
+    var NoOfOrgs = Model.OrganisationsInAreas.Sum(x => x.No);
+    ViewBag.TitleforNoOfOrgs = $"{NoOfOrgs} organisation{(NoOfOrgs > 1 ? "s" : "")} offer{(NoOfOrgs > 1 ? "" : "s")} homes in:";
 }
 <link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
 @section Scripts {
@@ -49,7 +51,7 @@
                     }
 
                     <div class="counsil-container">
-                        <p class="govuk-body"><strong>@Model.OrganisationsInAreas.Sum(x => x.No) organisations offer homes in:</strong></></p>
+                        <p class="govuk-body"><strong>@ViewBag.TitleforNoOfOrgs</strong></></p>
                         <ul class="govuk-list govuk-list--bullet">
                             @foreach(var orgs in Model.OrganisationsInAreas.OrderBy(x => x.Id)){
                                 <li>@orgs.Name</li>
@@ -242,7 +244,7 @@
                                 else
                                 {
                                     <p class="govuk-body">
-                                        If you have a long-term disability and you haven&#39;t found other scheme properties to meet your needs, you may be able to get help through <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/home-ownership-for-people-with-a-long-term-disability-hold">Home Ownership for people with a long-term disability (HOLD)</a>.
+                                        If you have a long-term disability and you haven&#39;t found a home that meets your needs through Shared Ownership, you may be able to get help through Home Ownership for people with a long-term disability (HOLD)
                                     </p>
                                 }
                                 @{
@@ -400,7 +402,7 @@
                                 </div>
                                 <div id="accordion-result-content-otherInfo" class="govuk-accordion__section-content">
                                     <p class="govuk-body">
-                                        Some of the local authorities in the local authority areas you have searched have agreed to provide help for those buying shared ownership homes and are listed here.
+                                        The following Local Authorities in the areas you have searched may be able to provide further assistance in finding other Shared Ownership homes available
                                     </p>
                                     @foreach (var LAmodel in Model.LaModels!){
                                         <h3 class="govuk-heading-m">@LAmodel.Name</h3>
