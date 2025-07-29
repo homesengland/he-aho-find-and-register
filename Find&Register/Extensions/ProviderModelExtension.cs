@@ -18,11 +18,12 @@ namespace Find_Register.Extensions
             var indexedMatchedLocations = matchedLocations!.Select((value, index) => new { Index = index, Value = value });
             foreach (var la in indexedMatchedLocations!)
             {
+                var no_of_organisations = providers.DistinctBy(x => x.Name).Where(x => x.SharedOwnership || x.Opso || x.Hold || x.RentToBuy).Count(x => x.Locations.Contains(la.Value.LocationCode!));
                 temp.Add(new OrganisationResultModel
                 {
                     Id = la.Index,
                     Name = la.Value.LocalAuthority!,
-                    No = providers.DistinctBy(x => x.Name).Count(x => x.Locations.Contains(la.Value.LocationCode!))
+                    No = no_of_organisations
                 });
             }
             model.AddRange(temp);

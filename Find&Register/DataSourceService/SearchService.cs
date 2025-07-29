@@ -54,8 +54,9 @@ public class SearchService : ISearchService
                 _ => nameof(model.Area1)
             };
 
-            modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)} {(j < invalidAreas.Count ? ", OR" : "")}");
-            
+            modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)}");
+            //modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)} {(j < invalidAreas.Count ? ", " + (j == invalidAreas.Count - 1 ? "or" : "") : "")}");
+
             j++;
         }
         if (!modelState.IsValid)

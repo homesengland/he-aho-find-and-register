@@ -36,13 +36,13 @@ namespace Find_Register.Models
 
     public class EligibilityJourneyFirstTimeBuyer
     {
-        [Required(ErrorMessage = "Select the option that applies to you")]
+        [Required(ErrorMessage = "Choose one option from below")]
         public bool? firstTimeBuyer { get; set; }
     }
 
     public class EligibilityJourneyAffordability
     {
-        [Required(ErrorMessage = "Select the option that applies to you")]
+        [Required(ErrorMessage = "Choose one option from below")]
         public bool? affordWithoutSharedOwnership { get; set; }
     }
 }

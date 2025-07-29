@@ -14,18 +14,7 @@ namespace Find_Register.Models
 
         public List<OrganisationResultModel> OrganisationsInAreas = new List<OrganisationResultModel>();
 
-        //public List<string> Products { get; set; } = new(); // will be redundant -> after result PBI
-
-        //public ProviderModel? LocalAuthority { get; set; } // will be redundant -> after result PBI
-        //public IEnumerable<ProviderModel>? ProviderModels {get;set; } // will be redundant -> after result PBI
         public List<LocationModel>? LocationModels { get; set; }
-
-        //public bool IsSharedOwnershipSelected => Products?.Contains(nameof(ProviderModel.SharedOwnership)) ?? false; // will be redundant -> after result PBI
-        //public bool IsHoldSelected => Products?.Contains(nameof(ProviderModel.Hold)) ?? false;// will be redundant -> after result PBI
-        //public bool IsOpsoSelected => Products?.Contains(nameof(ProviderModel.Opso)) ?? false;// will be redundant -> after result PBI
-        //public bool IsRentToBuySelected => Products?.Contains(nameof(ProviderModel.RentToBuy)) ?? false;// will be redundant -> after result PBI
-        //public bool AreAnyProductsSelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected || IsRentToBuySelected;// will be redundant -> after result PBI
-        //public bool AreAnyNonRentToBuySelected => IsSharedOwnershipSelected || IsHoldSelected || IsOpsoSelected; // will be redundant -> after result PBI
 
         public int GetOpsoCount() => OpsoProviderModels.Distinct().Count();
         public int GetHoldCount() => HoldProviderModels.Distinct().Count();

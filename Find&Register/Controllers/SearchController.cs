@@ -52,15 +52,6 @@ public class SearchController : BaseControllerWithShareStaticPages
             return InvalidSearchResult(model);
         }
 
-        // If no provider results exist, then we show a dedicated view.
-        /*if (!model.OpsoProviderModels.Any() &&
-            !model.HoldProviderModels.Any() &&
-            !model.SharedOwnershipProviderModels.Any() &&
-            !model.RentToBuyProviderModels.Any())
-        {
-            return View("NoSearchResults", model);
-        }*/
-
         return View(model);
     }
 
