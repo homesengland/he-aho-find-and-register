@@ -1,9 +1,97 @@
 ﻿@model EligibilityJourneyFirstTimeBuyer
 @{
-    ViewBag.Title = "How much do you earn";
+    ViewBag.Title = "First time buyer";
     var FirstTimeBuyer = nameof(EligibilityJourneyFirstTimeBuyer.firstTimeBuyer);
-}
+    var OwnAHomeButNeedToMove = nameof(EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove);
+    var CannotAffordAHome = nameof(EligibilityJourneyFirstTimeBuyer.cannotAffordAHome);
+    var TheseDoNotApply = nameof(EligibilityJourneyFirstTimeBuyer.theseDoNotApply);
 
+    
+}
+@if (ViewBag.conflictingChoicesChosen == true)
+{
+    <div class="govuk-width-container ">
+        <div role="navigation" aria-label="navigate back">
+            <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+        </div>
+        <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <div class="govuk-error-summary" data-module="govuk-error-summary">
+                        <div role="alert">
+                            <h2 class="govuk-error-summary__title">
+                                There is a problem
+                            </h2>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="#none">You cannot select ‘I do not own a home’ and ‘I own a home but need to move’</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="post">
+                        <div class="govuk-form-group govuk-form-group--error">
+                            @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                       {
+                           HtmlId = FirstTimeBuyer,
+                           ValidationMessage = Html.ValidationMessageFor(m => m.conflictingChoicesChosen),
+                           AriaDescribe = FirstTimeBuyer + "-error",
+                           Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                           Title = "Select all that apply to you",
+                           Content =
+
+                                                                                                        @<div class="govuk-form-group">
+                                                                                                            <fieldset class="govuk-fieldset">
+                                                                                                                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+
+                                                                                                                    <div class="govuk-checkboxes__item">
+                                                                                                                        <input class="govuk-checkboxes__input" id="first-time-buyer" name="@FirstTimeBuyer" type="checkbox" value="true" @ViewBag.FirstTimeBuyerCheck>
+
+                                                                                                                        <label class="govuk-label govuk-checkboxes__label" for="first-time-buyer">
+                                                                                                                            I do not own a home
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="govuk-checkboxes__item">
+                                                                                                                        <input class="govuk-checkboxes__input" id="own-a-home" name="@OwnAHomeButNeedToMove" type="checkbox" value="true" @ViewBag.OwnAHomeButNeedToMoveCheck>
+                                                                                                                        <label class="govuk-label govuk-checkboxes__label" for="own-a-home">
+                                                                                                                            I own a home but need to move
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="govuk-checkboxes__item">
+                                                                                                                        <input class="govuk-checkboxes__input" id="cannot-afford-home" name="@CannotAffordAHome" type="checkbox" value="true" @ViewBag.CannotAffordAHomeCheck>
+                                                                                                                        <label class="govuk-label govuk-checkboxes__label" for="cannot-afford-home">
+                                                                                                                            I cannot afford a home unless I use shared ownership
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="govuk-checkboxes__divider">or</div>
+                                                                                                                    <div class="govuk-checkboxes__item">
+                                                                                                                        <input class="govuk-checkboxes__input" id="none" name="@TheseDoNotApply" type="checkbox" value="true" @ViewBag.TheseDoNotApplyCheck data-behaviour="exclusive">
+                                                                                                                        <label class="govuk-label govuk-checkboxes__label" for="none">
+                                                                                                                            These do not apply to me
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </fieldset>
+
+                                                                                                        </div>
+
+
+})
+                        </div>
+                        <button class="govuk-button" id="eligibility-Page-4-Submit-Button" data-module="govuk-button" type="submit">
+                            Continue
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+}
+else if (ViewBag.all4ChoicesChosen == true)
+{
 <div class="govuk-width-container ">
     <div role="navigation" aria-label="navigate back">
         <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
@@ -11,9 +99,103 @@
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
-                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)
-                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                <div class="govuk-error-summary" data-module="govuk-error-summary">
+                    <div role="alert">
+                        <h2 class="govuk-error-summary__title">
+                            There is a problem
+                        </h2>
+                        <div class="govuk-error-summary__body">
+                            <ul class="govuk-list govuk-error-summary__list">
+                                <li>
+                                    <a href="#none">You cannot select one of the first 3 options and ‘These do not apply to me’</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <form method="post">
+                    <div class="govuk-form-group govuk-form-group--error">
+                        @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+                   {
+                       HtmlId = FirstTimeBuyer,
+                       ValidationMessage = Html.ValidationMessageFor(m => m.Conflicting4Choices),
+                       AriaDescribe = FirstTimeBuyer + "-error",
+                       Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                       Title = "Select all that apply to you",
+                       Content =
 
+                                                                                                    @<div class="govuk-form-group">
+                                                                                                        <fieldset class="govuk-fieldset">
+                                                                                                            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+
+                                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                                    <input class="govuk-checkboxes__input" id="first-time-buyer" name="@FirstTimeBuyer" type="checkbox" value="true" @ViewBag.FirstTimeBuyerCheck>
+
+                                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="first-time-buyer">
+                                                                                                                        I do not own a home
+                                                                                                                    </label>
+                                                                                                                </div>
+                                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                                    <input class="govuk-checkboxes__input" id="own-a-home" name="@OwnAHomeButNeedToMove" type="checkbox" value="true" @ViewBag.OwnAHomeButNeedToMoveCheck>
+                                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="own-a-home">
+                                                                                                                        I own a home but need to move
+                                                                                                                    </label>
+                                                                                                                </div>
+                                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                                    <input class="govuk-checkboxes__input" id="cannot-afford-home" name="@CannotAffordAHome" type="checkbox" value="true" @ViewBag.CannotAffordAHomeCheck>
+                                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="cannot-afford-home">
+                                                                                                                        I cannot afford a home unless I use shared ownership
+                                                                                                                    </label>
+                                                                                                                </div>
+                                                                                                                <div class="govuk-checkboxes__divider">or</div>
+                                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                                    <input class="govuk-checkboxes__input" id="none" name="@TheseDoNotApply" type="checkbox" value="true" @ViewBag.TheseDoNotApplyCheck data-behaviour="exclusive">
+                                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="none">
+                                                                                                                        These do not apply to me
+                                                                                                                    </label>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </fieldset>
+
+                                                                                                    </div>
+
+
+})
+                    </div>
+                    <button class="govuk-button" id="eligibility-Page-4-Submit-Button" data-module="govuk-button" type="submit">
+                        Continue
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+}
+else if (ViewBag.nothingChosen == true)
+{
+    {
+<div class="govuk-width-container ">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-error-summary" data-module="govuk-error-summary">
+                    <div role="alert">
+                        <h2 class="govuk-error-summary__title">
+                            There is a problem
+                        </h2>
+                        <div class="govuk-error-summary__body">
+                            <ul class="govuk-list govuk-error-summary__list">
+                                <li>
+                                    <a href="#none">Select at least one option</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <form method="post">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                {
@@ -21,29 +203,46 @@
                    ValidationMessage = Html.ValidationMessageFor(m => m.firstTimeBuyer),
                    AriaDescribe = FirstTimeBuyer + "-error",
                    Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                   Title = "Select the option that applies to you",
+                   Title = "Select all that apply to you",
                    Content =
-                        @<div class="govuk-form-group">
-                            <fieldset class="govuk-fieldset">
-                                <div class="govuk-radios" data-module="govuk-radios">
-                                    <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input" id="first-time-buyer" asp-for="@FirstTimeBuyer" name="@FirstTimeBuyer"
-                                               type="radio" value=true>
-                                        <label class="govuk-label govuk-radios__label" for="first-time-buyer">
-                                            I do not own a home
-                                        </label>
-                                    </div>
-                                    <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input" id="own-a-home" asp-for="@FirstTimeBuyer" name="@FirstTimeBuyer"
-                                               type="radio" value=false>
-                                        <label class="govuk-label govuk-radios__label" for="own-a-home">
-                                            I own a home but need to move
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-               })
+
+                                                                                    @<div class="govuk-form-group">
+                                                                                        <fieldset class="govuk-fieldset">
+                                                                                            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="first-time-buyer" name="@FirstTimeBuyer" type="checkbox" value="true" @ViewBag.FirstTimeBuyerCheck>
+
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="first-time-buyer">
+                                                                                                        I do not own a home
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="own-a-home" name="@OwnAHomeButNeedToMove" type="checkbox" value="true" @ViewBag.OwnAHomeButNeedToMoveCheck>
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="own-a-home">
+                                                                                                        I own a home but need to move
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="cannot-afford-home" name="@CannotAffordAHome" type="checkbox" value="true" @ViewBag.CannotAffordAHomeCheck>
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="cannot-afford-home">
+                                                                                                        I cannot afford a home unless I use shared ownership
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="govuk-checkboxes__divider">or</div>
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="none" name="@TheseDoNotApply" type="checkbox" value="true" @ViewBag.TheseDoNotApplyCheck data-behaviour="exclusive">
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="none">
+                                                                                                        These do not apply to me
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </fieldset>
+
+                                                                                    </div>
+
+
+})
                     <button class="govuk-button" id="eligibility-Page-4-Submit-Button" data-module="govuk-button" type="submit">
                         Continue
                     </button>
@@ -52,3 +251,71 @@
         </div>
     </main>
 </div>
+    }
+}
+else
+{
+<div class="govuk-width-container ">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@ViewBag.previousPage" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)@await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                <form method="post">
+                    @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
+               {
+                   HtmlId = FirstTimeBuyer,
+                   ValidationMessage = Html.ValidationMessageFor(m => m.firstTimeBuyer),
+                   AriaDescribe = FirstTimeBuyer + "-error",
+                   Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                   Title = "Select all that apply to you",
+                   Content =
+
+                                                                                    @<div class="govuk-form-group">
+                                                                                        <fieldset class="govuk-fieldset">
+                                                                                            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="first-time-buyer" name="@FirstTimeBuyer" type="checkbox" value="true" @ViewBag.FirstTimeBuyerCheck>
+
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="first-time-buyer">
+                                                                                                        I do not own a home
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="own-a-home" name="@OwnAHomeButNeedToMove" type="checkbox" value="true" @ViewBag.OwnAHomeButNeedToMoveCheck>
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="own-a-home">
+                                                                                                        I own a home but need to move
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="cannot-afford-home" name="@CannotAffordAHome" type="checkbox" value="true" @ViewBag.CannotAffordAHomeCheck>
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="cannot-afford-home">
+                                                                                                        I cannot afford a home unless I use shared ownership
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="govuk-checkboxes__divider">or</div>
+                                                                                                <div class="govuk-checkboxes__item">
+                                                                                                    <input class="govuk-checkboxes__input" id="none" name="@TheseDoNotApply" type="checkbox" value="true" @ViewBag.TheseDoNotApplyCheck data-behaviour="exclusive">
+                                                                                                    <label class="govuk-label govuk-checkboxes__label" for="none">
+                                                                                                        These do not apply to me
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </fieldset>
+
+                                                                                    </div>
+
+
+})
+                    <button class="govuk-button" id="eligibility-Page-4-Submit-Button" data-module="govuk-button" type="submit">
+                        Continue
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+}

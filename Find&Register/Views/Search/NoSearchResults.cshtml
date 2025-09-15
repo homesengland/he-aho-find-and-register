@@ -1,0 +1,93 @@
+@model SearchResultsModel
+@inject NonceModel Nonces
+@{
+    List<string> homeTypes = new();
+
+    if (!Model.AreAnyProductsSelected || Model.AreAnyNonRentToBuySelected) homeTypes.Add("shared ownership");
+    if (!Model.AreAnyProductsSelected || Model.IsRentToBuySelected) homeTypes.Add("rent to buy");
+
+    ViewBag.Title = $"We cannot find any organisations that offer {string.Join(" or ", homeTypes)} homes in {Model.Area}";
+}
+<link rel="stylesheet" href="/css/accessible-autocomplete.min.css">
+
+@section Scripts {
+    <script nonce="@Nonces.GaNonce" type="text/javascript" src="/js/accessible-autocomplete.min.js" style-src='self'></script>
+}
+
+<script nonce="@Nonces.GaNonce" type="text/javascript">
+    var countries = [];
+    @if (Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+        {
+            @:countries.push("@location.LocalAuthority");
+        }
+</script>
+
+<script nonce="@Nonces.GaNonce" type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        var element = document.querySelector('#tt-default')
+        var id = 'Area'
+        accessibleAutocomplete({
+            element: element,
+            id: id,
+            source: countries,
+            defaultValue: '@Model.Area'
+        })
+    })</script>
+<div class="govuk-width-container govuk-body">
+    <div role="navigation" aria-label="navigate back">
+        <a href="@Url.Action("Index", "Search")" class="govuk-back-link">Back</a>
+    </div>
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+        <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-fieldset__heading">
+                    @ViewBag.Title
+                </h1>
+            </legend>
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds-from-desktop">
+                    @switch (Model.ProviderModels?.Count())
+                    {
+                        case 0 when Model.LocalAuthority != null:
+                            <div class="govuk-inset-text">
+                                <p>The organisations listed on this service are required to regularly update their details.</p>
+                                <p>The next time you use this service you may see different organisations with homes for sale.</p>
+                            </div>
+                            break;
+                        case 0 when Model.LocalAuthority == null:
+                            <div class="govuk-inset-text">
+                                <p>The organisations listed on this service are required to regularly update their details.</p>
+                                <p>The next time you use this service you may see different organisations with homes for sale.</p>
+                            </div>
+                            break;
+                    }
+                    @if (Model.LocalAuthority != null)
+                    {
+                        <p>
+                            @Model.LocalAuthority.Name may be able to help you find a new home. Contact @Model.LocalAuthority.Name for more information.
+                        </p>
+
+                        <h2 class="govuk-heading-s">Contact @Model.LocalAuthority.Name</h2>
+                        <p class="govuk-body">
+                            <span class="govuk-!-font-weight-bold">Telephone:</span> @Model.LocalAuthority.Phone
+                        </p>
+                        <p class="govuk-body">
+                            <span class="govuk-!-font-weight-bold">Email:</span> <a class="govuk-link" href="mailto:@Model.LocalAuthority.Email">@Model.LocalAuthority.Email</a>
+                        </p>
+                        <p class="govuk-body">
+                            <span class="govuk-!-font-weight-bold">Website:</span> <a class="govuk-link" href="@Model.LocalAuthority.WebsiteUrl">@Model.LocalAuthority.Website</a>
+                        </p>
+                    }
+
+                    <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
+                        <partial name="SearchFormPartial" />
+                        <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
+                            Search
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </fieldset>
+    </main>
+</div>

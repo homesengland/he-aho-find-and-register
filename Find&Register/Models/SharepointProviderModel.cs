@@ -20,5 +20,4 @@ public class SharepointProviderValue
     public bool HOLD { get; set; }
     public bool RentToBuy { get; set; }
     public string? LocalAuthorities { get; set; }
-    public bool Archived { get; set; }
 }

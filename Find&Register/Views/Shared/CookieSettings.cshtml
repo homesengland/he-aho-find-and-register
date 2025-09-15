@@ -75,7 +75,7 @@
                         Content =
                                             @<div class="govuk-radios">
                                                 <div class="govuk-radios__item">
-                                                    <!input @(Model.AcceptAnalyticsCookies ?? false ? "checked=\"checked\"" : "" )
+                                                    <input @(Model.AcceptAnalyticsCookies ?? false ? "checked=\"checked\"" : "" )
                                                            class="govuk-radios__input" id="accept-yes" asp-for="@acceptAnalyticsCookies"
                                                            name="@acceptAnalyticsCookies" type="radio" value="true">
                                                     <label class="govuk-label govuk-radios__label" for="accept-yes">
@@ -83,7 +83,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="govuk-radios__item">
-                                                    <!input @(Model.AcceptAnalyticsCookies ?? false ? "" : "checked=\"checked\"" )
+                                                    <input @(Model.AcceptAnalyticsCookies ?? false ? "" : "checked=\"checked\"" )
                                                            class="govuk-radios__input" id="accept-no" asp-for="@acceptAnalyticsCookies"
                                                            name="@acceptAnalyticsCookies" type="radio" value="false">
                                                     <label class="govuk-label govuk-radios__label" for="accept-no">

@@ -23,7 +23,7 @@ public class LocationApiDataSource : ILocationDataSource
         try
         {
             var results = httpClient.GetFromJson<LocationFileModel>(config.ApiUrl ?? "");
-            return results?.LocalAuthorities?.Where(x => !x.IsLondon).ToList() ?? new List<LocationModel>(); // here we filter to have non-london LA s in the list for users to choose
+            return results?.LocalAuthorities ?? new List<LocationModel>();
         }
         catch (Exception ex)
         {
