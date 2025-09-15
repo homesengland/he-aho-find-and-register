@@ -36,11 +36,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     [HttpPost]
     public IActionResult Index(EligibilityJourneyWhereDoYouWantToBuyAHome _EligibilityJourneyWhereDoYouWantToBuyAHome)
     {
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
-        }
-
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.EligibilityJourneyWhereDoYouWantToBuyAHome = _EligibilityJourneyWhereDoYouWantToBuyAHome;
@@ -62,6 +57,10 @@ public class EligibilityController : BaseControllerWithShareStaticPages
             return RedirectToAction(nameof(BuyingWithAnotherPerson));
         }
 
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
+        }
         return View(_EligibilityJourneyWhereDoYouWantToBuyAHome);
     }
 
@@ -83,11 +82,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
 
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyBuyingWithAnotherPerson);
-        }
-
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.EligibilityJourneyBuyingWithAnotherPerson = _EligibilityJourneyBuyingWithAnotherPerson;
@@ -102,6 +96,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         if (_EligibilityJourneyBuyingWithAnotherPerson.SingleBuyer == false)
         {
             return RedirectToAction(nameof(HowMuchDoYouEarn));
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyBuyingWithAnotherPerson);
         }
 
         return View(_EligibilityJourneyBuyingWithAnotherPerson);
@@ -125,11 +124,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
 
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyHowMuchDoYouEarn);
-        }
-
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn);
@@ -148,6 +142,11 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         if (_EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80 == false)
         {
             return RedirectToAction(nameof(FirstTimeBuyer));
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyHowMuchDoYouEarn);
         }
 
         return View(_EligibilityJourneyHowMuchDoYouEarn);
@@ -170,11 +169,6 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     public IActionResult HowMuchDoYouEarn_MultiplePeople(EligibilityJourneyHowMuchDoYouEarn_MultiplePeople _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople)
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
-        
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
-        }
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
@@ -197,12 +191,17 @@ public class EligibilityController : BaseControllerWithShareStaticPages
             return RedirectToAction(nameof(FirstTimeBuyer));
         }
 
+        if (!ModelState.IsValid)
+        {
+            return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
+        }
+
         return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
     }
 
     //page 4
     [HttpGet]
-    [Route("select-one-that-apply-to-you")] // Select the option that applies to you
+    [Route("select-all-that-apply-to-you")]
     [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult FirstTimeBuyer()
     {
@@ -217,15 +216,10 @@ public class EligibilityController : BaseControllerWithShareStaticPages
 
 
     [HttpPost]
-    [Route("select-one-that-apply-to-you")]
+    [Route("select-all-that-apply-to-you")]
     public IActionResult FirstTimeBuyer(EligibilityJourneyFirstTimeBuyer _EligibilityJourneyFirstTimeBuyer)
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
-
-        if (!ModelState.IsValid)
-        {
-            return View(_EligibilityJourneyFirstTimeBuyer);
-        }
 
         var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
         var cookie = applicationCookie.EligibilityResponses.Value;
@@ -234,63 +228,153 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         cookie.PreviousPageBeforeErrorOutcome = nameof(FirstTimeBuyer);
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(cookie.PreviousPage, "Eligibility"));
 
-        cookie.FirstTimeBuyer = _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer.GetValueOrDefault();
-        applicationCookie.EligibilityResponses.Value = cookie;
+        ViewBag.FirstTimeBuyerCheck = _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true ? ViewBag.FirstTimeBuyerCheck = "checked" : ViewBag.FirstTimeBuyerCheck = "";
+        ViewBag.OwnAHomeButNeedToMoveCheck = _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true ? ViewBag.OwnAHomeButNeedToMoveCheck = "checked" : ViewBag.OwnAHomeButNeedToMoveCheck = "";
+        ViewBag.CannotAffordAHomeCheck = _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true ? ViewBag.CannotAffordAHomeCheck = "checked" : ViewBag.CannotAffordAHomeCheck = "";
+        ViewBag.TheseDoNotApplyCheck = _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == true ? ViewBag.TheseDoNotApplyCheck = "checked" : ViewBag.TheseDoNotApplyCheck = "";
 
-        return RedirectToAction(nameof(Affordability));
-    }
-
-    // page 5
-    [HttpGet]
-    [Route("select-another-option-that-apply-to-you")] // Select the option that applies to you
-    [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
-    public IActionResult Affordability()
-    {
-        if (RequiresInitialization()) return RedirectToAction(nameof(Index));
-
-        var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
-        var cookie = applicationCookie.EligibilityResponses.Value;
-        ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(FirstTimeBuyer), "Eligibility"));
-
-        return View();
-    }
-
-    [HttpPost]
-    [Route("select-another-option-that-apply-to-you")]
-    public IActionResult Affordability(EligibilityJourneyAffordability _EligibilityJourneyAffordability)
-    {
-        if (RequiresInitialization()) return RedirectToAction(nameof(Index));
-
-        if (!ModelState.IsValid)
+        //Nothing is selected
+        if (
+            _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null &&
+            _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null &&
+            _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null &&
+            _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null
+        )
         {
-            return View(_EligibilityJourneyAffordability);
+            ViewBag.nothingChosen = true;
+            ViewBag.conflictingChoicesChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            return View(_EligibilityJourneyFirstTimeBuyer);
         }
 
-        var applicationCookie = CookieHelper.GetApplicationCookieData(Request?.Cookies, Response?.Cookies);
-        var cookie = applicationCookie.EligibilityResponses.Value;
-        cookie.EligibilityJourneyAffordability = _EligibilityJourneyAffordability;
-        applicationCookie.EligibilityResponses.Value = cookie;
-        cookie.PreviousPageBeforeErrorOutcome = nameof(Affordability);
-        ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(FirstTimeBuyer), "Eligibility"));
-
-        cookie.AffordableWithoutSharedOwnership = _EligibilityJourneyAffordability.affordWithoutSharedOwnership.GetValueOrDefault();
-        applicationCookie.EligibilityResponses.Value = cookie;
-
-        if (cookie.AffordableWithoutSharedOwnership)
+        if (_EligibilityJourneyFirstTimeBuyer.theseDoNotApply == true
+            && _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null)
         {
+            ViewBag.nothingChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            ViewBag.all4ChoicesChosen = false;
             cookie.EligibilityOutcome = "NotEligable";
             applicationCookie.EligibilityResponses.Value = cookie;
-            ViewBag.outcome = "NotEligable";
             return Redirect("./you-may-not-be-eligible-to-buy-a-shared-ownership-home");
         }
 
-        cookie.EligibilityOutcome = "Eligable";
-        applicationCookie.EligibilityResponses.Value = cookie;
-        ViewBag.outcome = "Eligable";
-        return Redirect("./you-may-be-eligible-to-buy-a-shared-ownership-home");
-    }
+        if (_EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            cookie.EligibilityOutcome = "NotEligable";
+            applicationCookie.EligibilityResponses.Value = cookie;
+            return Redirect("./you-may-not-be-eligible-to-buy-a-shared-ownership-home");
+        }
 
-    //page 6
+        if (_EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true
+            && _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            cookie.EligibilityOutcome = "NotEligable";
+            applicationCookie.EligibilityResponses.Value = cookie;
+            return Redirect("./you-may-not-be-eligible-to-buy-a-shared-ownership-home");
+        }
+
+
+        if (_EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true
+            && _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            cookie.EligibilityOutcome = "NotEligable";
+            applicationCookie.EligibilityResponses.Value = cookie;
+            return Redirect("./you-may-not-be-eligible-to-buy-a-shared-ownership-home");
+        }
+
+        if (_EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            ViewBag.conflictingChoicesChosen = true;
+            return View(_EligibilityJourneyFirstTimeBuyer);
+        }
+
+        if (_EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null
+            && _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            return View(_EligibilityJourneyFirstTimeBuyer);
+        }
+
+        if (_EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            ViewBag.conflictingChoicesChosen = true;
+            return View(_EligibilityJourneyFirstTimeBuyer);
+        }
+
+        if (_EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == null
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            cookie.EligibilityOutcome = "Eligable";
+            applicationCookie.EligibilityResponses.Value = cookie;
+            return Redirect("./you-may-be-eligible-to-buy-a-shared-ownership-home");
+        }
+
+        if (_EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == null
+            && _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true
+            && _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true
+            && _EligibilityJourneyFirstTimeBuyer.theseDoNotApply == null)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.all4ChoicesChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            cookie.EligibilityOutcome = "Eligable";
+            applicationCookie.EligibilityResponses.Value = cookie;
+            return Redirect("./you-may-be-eligible-to-buy-a-shared-ownership-home");
+        }
+
+        //Users can only select from one group of options at a time
+        if (_EligibilityJourneyFirstTimeBuyer.theseDoNotApply == true &
+
+                 _EligibilityJourneyFirstTimeBuyer.cannotAffordAHome == true ||
+                 _EligibilityJourneyFirstTimeBuyer.firstTimeBuyer == true ||
+                 _EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove == true)
+        {
+            ViewBag.nothingChosen = false;
+            ViewBag.conflictingChoicesChosen = false;
+            ViewBag.all4ChoicesChosen = true;
+            return View(_EligibilityJourneyFirstTimeBuyer);
+        }
+        return View(_EligibilityJourneyFirstTimeBuyer);
+    }
+    
+    //page 5
     [HttpGet]
     [Route("you-may-be-eligible-to-buy-a-shared-ownership-home")]
     [Route("you-may-not-be-eligible-to-buy-a-shared-ownership-home")]
@@ -310,6 +394,9 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         {
             ViewBag.outcome = "NotEligable";
             ViewBag.firstTimeBuyer = cookie.EligibilityJourneyFirstTimeBuyer.firstTimeBuyer.GetValueOrDefault();
+            ViewBag.ownAHomeButNeedToMove = cookie.EligibilityJourneyFirstTimeBuyer.ownAHomeButNeedToMove.GetValueOrDefault();
+            ViewBag.cannotAffordAHome = cookie.EligibilityJourneyFirstTimeBuyer.cannotAffordAHome.GetValueOrDefault();
+            ViewBag.theseDoNotApply = cookie.EligibilityJourneyFirstTimeBuyer.theseDoNotApply.GetValueOrDefault();
         }
         if (cookie.EligibilityOutcome == "Eligable")
         {

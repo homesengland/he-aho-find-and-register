@@ -20,25 +20,18 @@ public class SharepointListProviderDataSource : IProviderDataSource
         get
         {
             var lastModified = _clientInstance.GetLastModified();
-            if (lastModified != null && (_lastModified == null || lastModified > _lastModified))
-            {
+            if (lastModified != null && (_lastModified == null || lastModified > _lastModified)) {
                 _logger.Log(LogLevel.Trace, $"Provider list updated {lastModified}, updating cached provider list");
                 _lastModified = lastModified;
                 _providers = _clientInstance.GetAllProviders();
             }
-
-            //_logger.Log(LogLevel.Trace, $"Provider list updated {lastModified}, updating cached provider list");
-            //_lastModified = lastModified;
-            //_providers = _clientInstance.GetAllProviders();
-            
             return _providers;
         }
     }
 
     public IEnumerable<ProviderModel> ProvidersActiveInLocalAuthority(string gssCode)
     {
-        var tempProvider = Providers;
-        _logger.Log(LogLevel.Trace, $"Searching for {gssCode} location in {tempProvider.Count()} providers");
-        return tempProvider.Where(p => p.Locations.Contains(gssCode) && p.Archived == false).OrderBy(p => p.Name);
+        _logger.Log(LogLevel.Trace, $"Searching for {gssCode} location in {Providers.Count()} providers");
+        return Providers.Where(p => p.Locations.Contains(gssCode)).OrderBy(p => p.Name);
     }
 }
