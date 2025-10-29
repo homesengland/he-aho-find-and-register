@@ -1,6 +1,6 @@
 ﻿@model EligibilityJourneyHowMuchDoYouEarn
 @{
-    ViewBag.Title = "How much do you earn";
+    ViewBag.Title = "How much is your annual income";
     var SingleIncomeOver80 = nameof(EligibilityJourneyHowMuchDoYouEarn.SingleIncomeOver80);
 }
 
@@ -19,7 +19,7 @@
                        ValidationMessage = Html.ValidationMessageFor(m => m.SingleIncomeOver80),
                        AriaDescribe = SingleIncomeOver80 + "-error",
                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                       Title = "How much do you earn?",
+                       Title = "How much is your annual income?",
                        Content =
                                 @<div class="govuk-form-group">
                                     <fieldset class="govuk-fieldset">
