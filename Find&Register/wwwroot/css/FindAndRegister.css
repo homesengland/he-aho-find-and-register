@@ -42,3 +42,24 @@
 input {
     font-family: "GDS Transport", arial, sans-serif;
 }
+
+.govuk-table--full-border {
+    border-collapse: collapse;
+}
+
+.govuk-table--full-border th,
+.govuk-table--full-border td {
+    border: 1px solid #b1b4b6 !important
+}
+.govuk-table--full-border thead th {
+    border-bottom: 2px solid #b1b4b6 !important
+}
+.govuk-table--full-border tbody tr:last-child td {
+    border-bottom:1px solid #b1b4b6 !important
+}
+
+.govuk-table__header--no-wrap-force {
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important
+}

@@ -55,7 +55,7 @@ public class SearchService : ISearchService
             };
 
             modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)} {(j < invalidAreas.Count ? ", OR" : "")}");
-            
+
             j++;
         }
         if (!modelState.IsValid)
@@ -112,6 +112,35 @@ public class SearchService : ISearchService
             .OrderBy(p => p.Name)
             .ToList();
 
+        if (model.LocationModels == null)
+        {
+            return model;
+        }
+
+        foreach (var code in gssCodes)
+        {
+            var searchResultsByAreaModel = new SearchResultsByAreaModel();
+
+            searchResultsByAreaModel.LocalAuthority = model.LocationModels.FirstOrDefault(l => l.LocationCode == code)?.LocalAuthority;
+
+            searchResultsByAreaModel.SharedOwnershipProviderModels = model.SharedOwnershipProviderModels
+                                                                          .Where(p => p.SharedOwnership && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                                          .DistinctBy(x => x.Name);
+
+            searchResultsByAreaModel.OpsoProviderModels = model.OpsoProviderModels
+                                                               .Where(p => p.Opso && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                               .DistinctBy(p => p.Name);
+
+            searchResultsByAreaModel.HoldProviderModels = model.HoldProviderModels
+                                                               .Where(p => p.Hold && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                               .DistinctBy(x => x.Name);
+
+            searchResultsByAreaModel.RentToBuyProviderModels = model.RentToBuyProviderModels
+                                                                    .Where(p => p.RentToBuy && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                                    .DistinctBy(x => x.Name);
+
+            model.SearchResultsByAreaModels.Add(searchResultsByAreaModel);
+        }
         return model;
     }
 }
