@@ -46,15 +46,33 @@ public class SearchService : ISearchService
         var j = 1;
         foreach (var invalid in invalidAreas)
         {
-            string propertyName = invalid.index switch
+            switch (invalid.index)
             {
-                0 => nameof(model.Area1),
-                1 => nameof(model.Area2),
-                2 => nameof(model.Area3),
-                _ => nameof(model.Area1)
-            };
-
-            modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)} {(j < invalidAreas.Count ? ", OR" : "")}");
+                case 0:
+                    {
+                        var propertyName = nameof(model.Area1);
+                        modelState.AddModelError(propertyName, "Enter a valid first local authority");
+                        break;
+                    }
+                case 1:
+                    {
+                        var propertyName = nameof(model.Area2);
+                        modelState.AddModelError(propertyName, "Enter a valid second local authority");
+                        break;
+                    }
+                case 2:
+                    {
+                        var propertyName = nameof(model.Area3);
+                        modelState.AddModelError(propertyName, "Enter a valid third local authority");
+                        break;
+                    }
+                default:
+                    {
+                        var propertyName = nameof(model.Area1);
+                        modelState.AddModelError(propertyName, "Enter a valid first local authority");
+                        break;
+                    }
+            }
 
             j++;
         }
