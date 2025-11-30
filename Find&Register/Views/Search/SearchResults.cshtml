@@ -24,10 +24,10 @@
     var countries = [];
     @if (Model.LocationModels != null)
     {
-            @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
-            {
-                    @:countries.push("@location.LocalAuthority");
-            }
+                @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+                {
+                            @:countries.push("@location.LocalAuthority");
+                }
     }
 </script>
 
@@ -43,14 +43,14 @@
                 </h1>
             </legend>
             <div class="govuk-grid-row">
-                <div class="govuk-grid-column-two-thirds-from-desktop search-results-wrap-anywhere">
+                <div class="govuk-grid-column-full-from-desktop search-results-wrap-anywhere">
                     @if (ViewContext.HttpContext.Items["errorsBool"] as bool? == true)
                     {
                         @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
                     }
 
                     <div>
-                        <p class="govuk-body"><strong>Number of organisations offering properties</strong></></p>
+                        <p class="govuk-body"><strong>There are @Model.OrganisationsInAreas.Sum(x => x.No) organisations that offer properties in your selected local authority area@(inputAreas > 1 ? "s" : "")</strong></p>
                         <partial name="_SearchSummaryTablePartial" model="Model.SearchResultsByAreaModels"></partial>
                     </div>
 
