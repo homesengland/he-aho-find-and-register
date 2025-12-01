@@ -50,7 +50,7 @@
                     }
 
                     <div>
-                        <p class="govuk-body"><strong>There are @Model.OrganisationsInAreas.Sum(x => x.No) organisations that offer properties in your selected local authority area@(inputAreas > 1 ? "s" : "")</strong></p>
+                        <p class="govuk-body"><strong>There are @Model.OrganisationsInAreas.Sum(x => x.No) organisations that offer homes in your selected local authority area@(inputAreas > 1 ? "s" : "")</strong></p>
                         <partial name="_SearchSummaryTablePartial" model="Model.SearchResultsByAreaModels"></partial>
                     </div>
 
