@@ -24,10 +24,10 @@
     var countries = [];
     @if (Model.LocationModels != null)
     {
-            @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
-            {
-                    @:countries.push("@location.LocalAuthority");
-            }
+                @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+                {
+                            @:countries.push("@location.LocalAuthority");
+                }
     }
 </script>
 
