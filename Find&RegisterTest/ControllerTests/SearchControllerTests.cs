@@ -7,6 +7,7 @@ using Find_Register.Controllers;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Find_Register.Cookies;
+using FluentAssertions;
 
 namespace Find_RegisterTest.ControllerTests;
 
@@ -270,4 +271,20 @@ public class SearchControllerTests
         Assert.Contains(controller.ModelState.Values, v => v.ValidationState == ModelValidationState.Invalid);
     }
 
+    [Fact]
+    public void Index_ReturnsViewWithInitializedModelIncludingSearchResultsByAreaModel()
+    {
+        // Arrange
+        var expectedModel = new SearchResultsModel().SearchResultsByAreaModels;
+        _searchServiceMock.Setup(s => s.InitializeSearchModel()).Returns(new SearchResultsModel());
+
+        // Act
+        var result = _controller.Index();
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        var searchResultsModel = Assert.IsType<SearchResultsModel>(viewResult.Model);
+
+        Assert.IsType<List<SearchResultsByAreaModel>>(searchResultsModel.SearchResultsByAreaModels);
+    }
 }
