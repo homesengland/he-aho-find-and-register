@@ -1,6 +1,6 @@
 ﻿@model EligibilityJourneyBuyingWithAnotherPerson
 @{
-    ViewBag.Title = "Are you buying with another person";
+    ViewBag.Title = "Will you be buying and living with another person";
     var SingleBuyer = nameof(EligibilityJourneyBuyingWithAnotherPerson.SingleBuyer);
 }
 
@@ -17,7 +17,7 @@
                ValidationMessage = Html.ValidationMessageFor(m => m.SingleBuyer),
                AriaDescribe = SingleBuyer + "-error",
                Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-               Title = "Are you buying with another person?",
+               Title = "Will you be buying and living with another person?",
                Content =
                                     @<div class="govuk-form-group">
                                         <fieldset class="govuk-fieldset">

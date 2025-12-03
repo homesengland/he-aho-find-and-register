@@ -21,8 +21,8 @@ builder.Services.AddSingleton<IProviderDataSource, SharepointListProviderDataSou
 
 builder.Services.AddAntiforgery();
 
-
 builder.Services.AddSingleton<IDataSources, DataSources>();
+builder.Services.AddSingleton<ISearchService, SearchService>();
 
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.Configure<TelemetryConfiguration>(
@@ -80,7 +80,7 @@ app.Use(async (context, next) =>
 
     if (context.Response.StatusCode == StatusCodes.Status404NotFound)
     {
-         context.Response.Redirect("/GenericErrors/PageNotFound");
+        context.Response.Redirect("/GenericErrors/PageNotFound");
     }
     if (context.Response.StatusCode == StatusCodes.Status500InternalServerError)
     {

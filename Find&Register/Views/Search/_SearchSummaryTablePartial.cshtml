@@ -1,0 +1,26 @@
+﻿@using Newtonsoft.Json
+@model List<SearchResultsByAreaModel>
+
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header govuk-!-padding-left-1 govuk-!-text-align-left">LA</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric govuk-!-padding-left-1 govuk-!-text-align-left">Shared ownership</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric govuk-!-padding-left-1 govuk-!-text-align-left">OPSO</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric govuk-!-padding-left-1 govuk-!-text-align-left">HOLD</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric govuk-!-padding-left-1 govuk-!-padding-right-1 govuk-!-text-align-left ">Rent To Buy</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        @foreach (var row in Model)
+        {
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header govuk-!-padding-left-1">@row.LocalAuthority</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric govuk-!-text-align-centre">@row.SharedOwnershipProviderModels.Count()</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric govuk-!-text-align-centre">@row.OpsoProviderModels.Count()</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric govuk-!-text-align-centre">@row.HoldProviderModels.Count()</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric govuk-!-text-align-centre">@row.RentToBuyProviderModels.Count()</td>
+            </tr>
+        }
+    </tbody>
+</table>

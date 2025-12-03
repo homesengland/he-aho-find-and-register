@@ -7,11 +7,14 @@ namespace Find_Register.Models;
 
 public class ProviderModel
 {
-    public ProviderModel(){
+    public ProviderModel()
+    {
         Locations = new List<string>();
+        LaLocations = new List<string>();
     }
 
-    public ProviderModel(SharepointProviderValue providers) {
+    public ProviderModel(SharepointProviderValue providers)
+    {
         Name = providers.CompanyName;
         Email = providers.Email;
         Phone = providers.ContactNumber;
@@ -23,10 +26,15 @@ public class ProviderModel
         RentToBuy = providers.RentToBuy;
         IsLocalAuthority = providers.IsLocalAuthority;
         Locations = new List<string>();
+        Archived = providers.Archived;
+        LaLocations = new List<string>();
 
-        providers.LocalAuthorities?.Split(";")
-            .ToList()
-            .ForEach(la => Locations.Add(la));
+        if (!string.IsNullOrWhiteSpace(providers.LocalAuthorities))
+        {
+            providers.LocalAuthorities?.Split(";")
+                .ToList()
+                .ForEach(la => Locations.Add(la));
+        }
     }
 
     public string? Name { get; set; }
@@ -60,16 +68,32 @@ public class ProviderModel
 
     public bool RentToBuy { get; set; }
 
-    public bool IsLocalAuthority { get; set; }    
+    public bool IsLocalAuthority { get; set; }
+
+    /// <summary>
+    /// Collection of Local authority codes this provider operates in
+    /// </summary>
+    public List<string> Locations { get; set; }
+
+
+    /// <summary>
+    /// Indicates that this provider has been archived or still active
+    /// </summary>
+    public bool Archived { get; set; }
 
     /// <summary>
     /// Collection of Local authority names this provider operates in
     /// </summary>
-    public List<string> Locations {get; set;}
+    public List<string> LaLocations { get; set; }
 }
 
 public class ProviderFileModel
 {
     [JsonPropertyName("providers")]
     public List<ProviderModel>? Providers { get; set; }
+}
+
+public class ProviderModelExtension : ProviderModel
+{
+    public List<string> AssociatedLocalAuthorites { get; set; } = new List<string>();
 }

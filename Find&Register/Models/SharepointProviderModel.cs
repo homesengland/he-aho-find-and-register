@@ -4,7 +4,8 @@ public class SharepointProviderBody
 {
     public List<SharepointProviderValue>? value { get; set; }
 }
-public class SharepointProviderRoot {
+public class SharepointProviderRoot
+{
     public SharepointProviderBody? body { get; set; }
 }
 public class SharepointProviderValue
@@ -20,4 +21,5 @@ public class SharepointProviderValue
     public bool HOLD { get; set; }
     public bool RentToBuy { get; set; }
     public string? LocalAuthorities { get; set; }
+    public bool Archived { get; set; }
 }
