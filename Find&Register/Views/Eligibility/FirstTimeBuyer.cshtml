@@ -12,18 +12,19 @@
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
                 @if ((ViewContext.HttpContext.Items["errorsBool"] as bool?) == true)
-                    @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                @await Html.PartialAsync("_ErrorSummary", ViewContext.HttpContext.Items["errors"])
+                
 
                 <form method="post">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
-               {
-                   HtmlId = FirstTimeBuyer,
-                   ValidationMessage = Html.ValidationMessageFor(m => m.firstTimeBuyer),
-                   AriaDescribe = FirstTimeBuyer + "-error",
-                   Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                   Title = "Select the option that applies to you",
-                   Content =
-                        @<div class="govuk-form-group">
+                    {
+                        HtmlId = FirstTimeBuyer,
+                                        ValidationMessage = Html.ValidationMessageFor(m => m.firstTimeBuyer),
+                                        AriaDescribe = FirstTimeBuyer + "-error",
+                                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                                        Title = "Select the option that applies to you",
+                                        Content =
+                                        @<div class="govuk-form-group">
                             <fieldset class="govuk-fieldset">
                                 <div class="govuk-radios" data-module="govuk-radios">
                                     <div class="govuk-radios__item">
@@ -43,7 +44,7 @@
                                 </div>
                             </fieldset>
                         </div>
-               })
+                    })
                     <button class="govuk-button" id="eligibility-Page-4-Submit-Button" data-module="govuk-button" type="submit">
                         Continue
                     </button>

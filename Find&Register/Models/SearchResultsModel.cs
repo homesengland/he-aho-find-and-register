@@ -30,7 +30,7 @@ namespace Find_Register.Models
 
         public IEnumerable<ProviderModel> OpsoProviderModels { get; set; } = new List<ProviderModel>();
         public IEnumerable<ProviderModel> HoldProviderModels { get; set; } = new List<ProviderModel>();
-        public IEnumerable<ProviderModel> SharedOwnershipProviderModels { get; set; } = new List<ProviderModel>(); 
+        public IEnumerable<ProviderModel> SharedOwnershipProviderModels { get; set; } = new List<ProviderModel>();
         public IEnumerable<ProviderModel> RentToBuyProviderModels { get; set; } = new List<ProviderModel>();
         public IEnumerable<ProviderModel> LaModels { get; set; } = new List<ProviderModel>();
 
@@ -45,7 +45,8 @@ namespace Find_Register.Models
                 modelState.AddModelError(nameof(Area1), "Enter at least one valid local authority");
             }
         }
-        public SearchResultsModel SimplifiedRedirectionModel() {
+        public SearchResultsModel SimplifiedRedirectionModel()
+        {
             return new SearchResultsModel
             {
                 Area1 = Area1,

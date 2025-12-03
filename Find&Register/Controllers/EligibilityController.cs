@@ -71,7 +71,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     [ServiceFilter(typeof(JourneyPageTrackerFilterAttribute))]
     public IActionResult BuyingWithAnotherPerson()
     {
-        if(RequiresInitialization()) return RedirectToAction(nameof(Index));
+        if (RequiresInitialization()) return RedirectToAction(nameof(Index));
 
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(Index), "Eligibility"));
         return View();
@@ -134,7 +134,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         var cookie = applicationCookie.EligibilityResponses.Value;
         cookie.PreviousPage = nameof(HowMuchDoYouEarn);
         cookie.PreviousPageBeforeErrorOutcome = nameof(HowMuchDoYouEarn);
-        cookie.EligibilityJourneyHowMuchDoYouEarn = _EligibilityJourneyHowMuchDoYouEarn;        
+        cookie.EligibilityJourneyHowMuchDoYouEarn = _EligibilityJourneyHowMuchDoYouEarn;
         applicationCookie.EligibilityResponses.Value = cookie;
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(BuyingWithAnotherPerson), "Eligibility"));
 
@@ -170,7 +170,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
     public IActionResult HowMuchDoYouEarn_MultiplePeople(EligibilityJourneyHowMuchDoYouEarn_MultiplePeople _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople)
     {
         if (RequiresInitialization()) return RedirectToAction(nameof(Index));
-        
+
         if (!ModelState.IsValid)
         {
             return View(_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople);
@@ -182,7 +182,7 @@ public class EligibilityController : BaseControllerWithShareStaticPages
         cookie.PreviousPageBeforeErrorOutcome = nameof(HowMuchDoYouEarn_MultiplePeople);
         cookie.EligibilityJourneyHowMuchDoYouEarn_MultiplePeople = _EligibilityJourneyHowMuchDoYouEarn_MultiplePeople;
         applicationCookie.EligibilityResponses.Value = cookie;
-        
+
         ViewBag.previousPage = HttpUtility.HtmlEncode(this.Url.Action(nameof(BuyingWithAnotherPerson), "Eligibility"));
 
         if (_EligibilityJourneyHowMuchDoYouEarn_MultiplePeople.JointIncomeOver80 == true)

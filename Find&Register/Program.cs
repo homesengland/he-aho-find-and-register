@@ -80,7 +80,7 @@ app.Use(async (context, next) =>
 
     if (context.Response.StatusCode == StatusCodes.Status404NotFound)
     {
-         context.Response.Redirect("/GenericErrors/PageNotFound");
+        context.Response.Redirect("/GenericErrors/PageNotFound");
     }
     if (context.Response.StatusCode == StatusCodes.Status500InternalServerError)
     {

@@ -30,7 +30,7 @@ public class SharepointListProviderDataSource : IProviderDataSource
             //_logger.Log(LogLevel.Trace, $"Provider list updated {lastModified}, updating cached provider list");
             //_lastModified = lastModified;
             //_providers = _clientInstance.GetAllProviders();
-            
+
             return _providers;
         }
     }

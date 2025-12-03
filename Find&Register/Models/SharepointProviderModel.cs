@@ -4,7 +4,8 @@ public class SharepointProviderBody
 {
     public List<SharepointProviderValue>? value { get; set; }
 }
-public class SharepointProviderRoot {
+public class SharepointProviderRoot
+{
     public SharepointProviderBody? body { get; set; }
 }
 public class SharepointProviderValue

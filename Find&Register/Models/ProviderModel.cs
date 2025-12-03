@@ -7,12 +7,14 @@ namespace Find_Register.Models;
 
 public class ProviderModel
 {
-    public ProviderModel(){
+    public ProviderModel()
+    {
         Locations = new List<string>();
         LaLocations = new List<string>();
     }
 
-    public ProviderModel(SharepointProviderValue providers) {
+    public ProviderModel(SharepointProviderValue providers)
+    {
         Name = providers.CompanyName;
         Email = providers.Email;
         Phone = providers.ContactNumber;
@@ -66,12 +68,12 @@ public class ProviderModel
 
     public bool RentToBuy { get; set; }
 
-    public bool IsLocalAuthority { get; set; }    
+    public bool IsLocalAuthority { get; set; }
 
     /// <summary>
     /// Collection of Local authority codes this provider operates in
     /// </summary>
-    public List<string> Locations {get; set;}
+    public List<string> Locations { get; set; }
 
 
     /// <summary>

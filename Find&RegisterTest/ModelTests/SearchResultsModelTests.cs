@@ -10,14 +10,15 @@ public class SearchResultsModelTests
     {
         var stateDictionary = new ModelStateDictionary();
 
-        var model = new SearchResultsModel { Area1 = "" , Area2 = "", Area3 = "" };
+        var model = new SearchResultsModel { Area1 = "", Area2 = "", Area3 = "" };
         Assert.Throws<InvalidDataException>(() => model.ValidateLocalAuthorityAreaSearch(stateDictionary));
     }
 
     [Fact]
     public void SimplifiedRedirectionModelReturnsSameModelButOnlyWithArea()
     {
-        var model = new SearchResultsModel {
+        var model = new SearchResultsModel
+        {
             Area1 = "Somewhere",
             LocationModels = new List<LocationModel>()
         };

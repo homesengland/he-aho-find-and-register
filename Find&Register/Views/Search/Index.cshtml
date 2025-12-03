@@ -9,9 +9,9 @@
 }
 <script nonce="@Nonces.GaNonce" type="text/javascript">
     var countries = [];
-    @if (Model.LocationModels != null) @foreach (var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
-        {
-            @:countries.push("@location.LocalAuthority");
+    @if (Model.LocationModels != null) @foreach(var location in Model.LocationModels.OrderBy(la => la.LocalAuthority))
+                {
+                @:countries.push("@location.LocalAuthority");
         }
 </script>
 
@@ -54,7 +54,7 @@
           });
         }
     });
-    </script>
+</script>
 <div class="govuk-width-container govuk-body">
     <div role="navigation" aria-label="navigate back">
         <a href="#" id="backButton" class="govuk-back-link">Back</a>
@@ -68,11 +68,11 @@
                 }
                 <form action="@Url.Action("SearchResults", "Search")" method="get" autocomplete="off">
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
-                       {
-                           // ValidationMessage = Html.ValidationMessageFor(m => m.Area1),
-                           Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                           Content = @<partial name="SearchFormPartial" />
-                       })
+                    {
+                      // ValidationMessage = Html.ValidationMessageFor(m => m.Area1),
+                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                                        Content = @<partial name="SearchFormPartial" />
+                                        })
                     <button type="submit" class="govuk-button" data-module="govuk-button" id="submit-search">
                         Search
                     </button>

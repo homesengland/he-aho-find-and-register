@@ -69,29 +69,29 @@
                     @await Html.PartialAsync("_GovFormGroupValidation", new GovukValidatedFormFieldModel
                     {
                         HtmlId = acceptAnalyticsCookies,
-                        ValidationMessage = Html.ValidationMessageFor(m => m.AcceptAnalyticsCookies),
-                        AriaDescribe = acceptAnalyticsCookies + "-error",
-                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
-                        Content =
-                                            @<div class="govuk-radios">
-                                                <div class="govuk-radios__item">
-                                                    <!input @(Model.AcceptAnalyticsCookies ?? false ? "checked=\"checked\"" : "" )
-                                                           class="govuk-radios__input" id="accept-yes" asp-for="@acceptAnalyticsCookies"
-                                                           name="@acceptAnalyticsCookies" type="radio" value="true">
-                                                    <label class="govuk-label govuk-radios__label" for="accept-yes">
-                                                        Use cookies that measure my website use
-                                                    </label>
-                                                </div>
-                                                <div class="govuk-radios__item">
-                                                    <!input @(Model.AcceptAnalyticsCookies ?? false ? "" : "checked=\"checked\"" )
-                                                           class="govuk-radios__input" id="accept-no" asp-for="@acceptAnalyticsCookies"
-                                                           name="@acceptAnalyticsCookies" type="radio" value="false">
-                                                    <label class="govuk-label govuk-radios__label" for="accept-no">
-                                                        Do not use that measure my website use
-                                                    </label>
-                                                </div>
-                                            </div>
-})
+                                        ValidationMessage = Html.ValidationMessageFor(m => m.AcceptAnalyticsCookies),
+                                        AriaDescribe = acceptAnalyticsCookies + "-error",
+                                        Errors = ViewContext.HttpContext.Items["errors"] as IList<ErrorSummary>,
+                                        Content =
+                                        @<div class="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <!input @(Model.AcceptAnalyticsCookies ?? false ? "checked=\"checked\"" : "")
+                                class="govuk-radios__input" id="accept-yes" asp-for="@acceptAnalyticsCookies"
+                                name="@acceptAnalyticsCookies" type="radio" value="true">
+                                <label class="govuk-label govuk-radios__label" for="accept-yes">
+                                    Use cookies that measure my website use
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <!input @(Model.AcceptAnalyticsCookies ?? false ? "" : "checked=\"checked\"")
+                                class="govuk-radios__input" id="accept-no" asp-for="@acceptAnalyticsCookies"
+                                name="@acceptAnalyticsCookies" type="radio" value="false">
+                                <label class="govuk-label govuk-radios__label" for="accept-no">
+                                    Do not use that measure my website use
+                                </label>
+                            </div>
+                        </div>
+                    })
 
                     <button class="govuk-button" data-module="govuk-button" type="submit">
                         Save changes
