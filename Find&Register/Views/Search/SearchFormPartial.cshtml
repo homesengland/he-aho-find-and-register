@@ -2,95 +2,101 @@
 @{
     var action = ViewContext.RouteData.Values["action"];
 }
-<div class="govuk-form-group">
+<fieldset class="govuk-fieldset">
     @switch (action)
     {
         case "Index":
-            <h1 class="govuk-label-wrapper">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <label class="govuk-label govuk-label--l" for="Area1">
                     Where do you want to buy a home?
                 </label>
-            </h1>
+            </legend>
             break;
         default:
-            <h2 class="govuk-label-wrapper">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                 <label class="govuk-label govuk-label--m" for="Area1">
                     Search again
                 </label>
-            </h2>
+            </legend>
             break;
     }
-    <div id="Area-hint" class="govuk-hint">
-        <label for="Area1">Enter at least one local authority</label>
-    </div>
-    <div id="searchArea-container">
-        <div id="tt-default" class="autocomplete-wrapper">
-            <div class="autocomplete__wrapper">
-                <div>
-                    <noscript>
-                        <input type="text" id="Area1" name="Area1" value="@Model.Area1" class="autocomplete__input"
-                               autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                               placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
-                    </noscript>
-                    <div id="@Model.Area1" name="@Model.Area1" role="status" aria-atomic="true" aria-live="polite">
+
+
+    <!--Area1-->
+    <div class="govuk-form-group">
+        <label class="govuk-label" for="Area1">
+            Enter a local authority
+        </label>
+        <div id="searchArea-container">
+            <div id="tt-default" class="autocomplete-wrapper">
+                <div class="autocomplete__wrapper">
+                    <div>
+                        <noscript>
+                            <input type="text" id="Area1" name="Area1" value="@Model.Area1" class="govuk-input autocomplete__input"
+                                   autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                   placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
+                        </noscript>
+                        <div id="@Model.Area1" name="@Model.Area1" role="status" aria-atomic="true" aria-live="polite">
+                        </div>
                     </div>
+                    <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                        id="autocomplete-default__listbox" role="listbox">
+                    </ul>
+                    <span id="autocomplete-default__assistiveHint"></span>
                 </div>
-                <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                    id="autocomplete-default__listbox" role="listbox">
-                </ul>
-                <span id="autocomplete-default__assistiveHint"></span>
             </div>
         </div>
     </div>
-</div>
 
-<div class="govuk-form-group">
-    <div id="Area-hint2" class="govuk-hint">
-        <label for="Area2"></label>
-    </div>
-    <div id="searchArea-container">
-        <div id="tt-default2" class="autocomplete-wrapper">
-            <div class="autocomplete__wrapper">
-                <div>
-                    <noscript>
-                        <input type="text" id="Area2" name="Area2" value="@Model.Area2" class="autocomplete__input"
-                                autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                                placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
-                    </noscript>
-                    <div id="@Model.Area2" name="@Model.Area2" role="status" aria-atomic="true" aria-live="polite">
+    <!--Area2-->
+    <div class="govuk-form-group">
+        <label class="govuk-label" for="Area2">
+            Enter a second local authority (optional)
+        </label>
+        <div id="searchArea-container">
+            <div id="tt-default2" class="autocomplete-wrapper">
+                <div class="autocomplete__wrapper">
+                    <div>
+                        <noscript>
+                            <input type="text" id="Area2" name="Area2" value="@Model.Area2" class="govuk-input autocomplete__input"
+                                   autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                   placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
+                        </noscript>
+                        <div id="@Model.Area2" name="@Model.Area2" role="status" aria-atomic="true" aria-live="polite">
+                        </div>
                     </div>
+                    <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                        id="autocomplete-default__listbox" role="listbox">
+                    </ul>
+                    <span id="autocomplete-default__assistiveHint"></span>
                 </div>
-                <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                    id="autocomplete-default__listbox" role="listbox">
-                </ul>
-                <span id="autocomplete-default__assistiveHint"></span>
             </div>
         </div>
     </div>
-</div>
 
-<div class="govuk-form-group">
-    <div id="Area-hint3" class="govuk-hint">
-        <label for="Area3"></label>
-    </div>
-    <div id="searchArea-container">
-        <div id="tt-default3" class="autocomplete-wrapper">
-            <div class="autocomplete__wrapper">
-                <div>
-                    <noscript>
-                        <input type="text" id="Area3" name="Area3" value="@Model.Area3" class="autocomplete__input"
-                               autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
-                               placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
-                    </noscript>
-                    <div id="@Model.Area3" name="@Model.Area3" role="status" aria-atomic="true" aria-live="polite">
+    <!--Area3-->
+    <div class="govuk-form-group">
+        <label class="govuk-label" for="Area3">
+            Enter a third local authority (optional)
+        </label>
+        <div id="searchArea-container">
+            <div id="tt-default3" class="autocomplete-wrapper">
+                <div class="autocomplete__wrapper">
+                    <div>
+                        <noscript>
+                            <input type="text" id="Area3" name="Area3" value="@Model.Area3" class="govuk-input autocomplete__input"
+                                   autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off"
+                                   placeholder="" aria-autocomplete="list" aria-controls="autocomplete-default__listbox" />
+                        </noscript>
+                        <div id="@Model.Area3" name="@Model.Area3" role="status" aria-atomic="true" aria-live="polite">
+                        </div>
                     </div>
+                    <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                        id="autocomplete-default__listbox" role="listbox">
+                    </ul>
+                    <span id="autocomplete-default__assistiveHint"></span>
                 </div>
-                <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-                    id="autocomplete-default__listbox" role="listbox">
-                </ul>
-                <span id="autocomplete-default__assistiveHint"></span>
             </div>
         </div>
     </div>
-</div>
-
+</fieldset>

@@ -46,16 +46,34 @@ public class SearchService : ISearchService
         var j = 1;
         foreach (var invalid in invalidAreas)
         {
-            string propertyName = invalid.index switch
+            switch (invalid.index)
             {
-                0 => nameof(model.Area1),
-                1 => nameof(model.Area2),
-                2 => nameof(model.Area3),
-                _ => nameof(model.Area1)
-            };
+                case 0:
+                    {
+                        var propertyName = nameof(model.Area1);
+                        modelState.AddModelError(propertyName, "Enter a valid first local authority");
+                        break;
+                    }
+                case 1:
+                    {
+                        var propertyName = nameof(model.Area2);
+                        modelState.AddModelError(propertyName, "Enter a valid second local authority");
+                        break;
+                    }
+                case 2:
+                    {
+                        var propertyName = nameof(model.Area3);
+                        modelState.AddModelError(propertyName, "Enter a valid third local authority");
+                        break;
+                    }
+                default:
+                    {
+                        var propertyName = nameof(model.Area1);
+                        modelState.AddModelError(propertyName, "Enter a valid first local authority");
+                        break;
+                    }
+            }
 
-            modelState.AddModelError(propertyName, $"Enter a valid local authority as choice {(invalid.index + 1)} {(j < invalidAreas.Count ? ", OR" : "")}");
-            
             j++;
         }
         if (!modelState.IsValid)
@@ -112,6 +130,35 @@ public class SearchService : ISearchService
             .OrderBy(p => p.Name)
             .ToList();
 
+        if (model.LocationModels == null)
+        {
+            return model;
+        }
+
+        foreach (var code in gssCodes)
+        {
+            var searchResultsByAreaModel = new SearchResultsByAreaModel();
+
+            searchResultsByAreaModel.LocalAuthority = model.LocationModels.FirstOrDefault(l => l.LocationCode == code)?.LocalAuthority;
+
+            searchResultsByAreaModel.SharedOwnershipProviderModels = model.SharedOwnershipProviderModels
+                                                                          .Where(p => p.SharedOwnership && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                                          .DistinctBy(x => x.Name);
+
+            searchResultsByAreaModel.OpsoProviderModels = model.OpsoProviderModels
+                                                               .Where(p => p.Opso && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                               .DistinctBy(p => p.Name);
+
+            searchResultsByAreaModel.HoldProviderModels = model.HoldProviderModels
+                                                               .Where(p => p.Hold && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                               .DistinctBy(x => x.Name);
+
+            searchResultsByAreaModel.RentToBuyProviderModels = model.RentToBuyProviderModels
+                                                                    .Where(p => p.RentToBuy && !p.IsLocalAuthority && p.Locations.Contains(code!))
+                                                                    .DistinctBy(x => x.Name);
+
+            model.SearchResultsByAreaModels.Add(searchResultsByAreaModel);
+        }
         return model;
     }
 }

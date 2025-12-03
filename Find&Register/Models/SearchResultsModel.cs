@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Find_Register.Models
@@ -57,5 +53,7 @@ namespace Find_Register.Models
                 Area3 = Area3,
             };
         }
+
+        public List<SearchResultsByAreaModel> SearchResultsByAreaModels { get; set; } = new List<SearchResultsByAreaModel>();
     }
 }
