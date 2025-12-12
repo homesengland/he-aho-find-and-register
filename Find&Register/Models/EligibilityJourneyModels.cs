@@ -18,19 +18,19 @@ namespace Find_Register.Models
 
     public class EligibilityJourneyBuyingWithAnotherPerson
     {
-        [Required(ErrorMessage = "Choose if you are buying with another person")]
+        [Required(ErrorMessage = "Choose if you are buying and living with another person")]
         public bool? SingleBuyer { get; set; }
     }
 
     public class EligibilityJourneyHowMuchDoYouEarn
     {
-        [Required(ErrorMessage = "Choose how much you earn")]
+        [Required(ErrorMessage = "Choose your annual income")]
         public bool? SingleIncomeOver80 { get; set; }
     }
 
     public class EligibilityJourneyHowMuchDoYouEarn_MultiplePeople
     {
-        [Required(ErrorMessage = "Choose how much you both earn")]
+        [Required(ErrorMessage = "Choose your combined annual income")]
         public bool? JointIncomeOver80 { get; set; }
     }
 
