@@ -32,7 +32,7 @@ COPY . .
 # Fail the build immediately if the entry-point DLL was not copied correctly.
 # If this fires, check that the Docker build context is the flat publish output.
 # The ls output below shows what was actually copied.
-RUN test -f /Find&Register.dll || \
+RUN test -f Find&Register.dll || \
     (echo "BUILD ERROR: DLL not found" && ls -la /app && exit 1)
 
 ENTRYPOINT ["dotnet", "Find&Register.dll"]
