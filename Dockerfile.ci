@@ -1,0 +1,38 @@
+# Runtime-only Dockerfile for CI/CD pipelines
+# Assumes artifacts are pre-built by Azure DevOps agent
+# This eliminates the need for restore/build/publish inside Docker
+#
+# Configuration:
+# - Base config: appsettings.json (policy-protected, minimal settings)
+# - Development: appsettings.development.json (includes Cache/Telemetry)
+#   NOTE: This file is NOT included in Release publish by default!
+#   For local testing: Copy manually OR use ASPNETCORE_ENVIRONMENT=Production
+# - Production: appsettings.Production.json (includes minimal Cache/Telemetry)
+# - Override via: Environment variables (recommended for production)
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim AS base
+
+# Create non-root user (same as existing Dockerfile for consistency)
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser
+
+USER appuser
+
+WORKDIR /app
+
+# Configure ASP.NET Core
+ENV ASPNETCORE_URLS="http://*:5555"
+EXPOSE 5555
+
+# Copy pre-built artifacts from Azure Pipelines
+# Build context is set to $(Pipeline.Workspace)/published — the exact dotnet publish output.
+# All published files are at the build context root; copy them directly into /app.
+COPY . .
+
+# Fail the build immediately if the entry-point DLL was not copied correctly.
+# If this fires, check that the Docker build context is the flat publish output.
+# The ls output below shows what was actually copied.
+RUN test -f /app/Find&Register.dll || \
+    (echo "BUILD ERROR: DLL not found" && ls -la /app && exit 1)
+
+ENTRYPOINT ["dotnet", "Find&Register.dll"]

@@ -1,0 +1,296 @@
+# ========================================================
+# Account Management CI Pipeline (Optimized - Build Only)
+# ========================================================
+
+parameters:
+  - name: forcePushToProd
+    type: boolean
+    default: false
+
+  - name: skipCoverage
+    displayName: Skip Code Coverage Analysis
+    type: boolean
+    default: false
+
+  - name: gitFetchDepth
+    type: number
+    default: 1
+
+  - name: identifier
+    type: string
+
+  - name: unitTestProjects
+    type: object
+    default: []
+
+stages:
+
+  # ========================================================
+  # STAGE 1 — TEST (parallel jobs)
+  # ========================================================
+  - stage: Test
+    displayName: 'Unit Tests'
+    dependsOn: []
+    jobs:
+      - ${{ each testProject in parameters.unitTestProjects }}:
+        - template: dotnet-test.yml@templates
+          parameters:
+            identifier: ${{ parameters.identifier }}_${{ replace(replace(testProject.name, '.', '_'), '-', '_') }}
+            workingDirectory: "$(System.DefaultWorkingDirectory)"
+            dotnetVersion: '8.0.204'
+            useNuGetConfig: true
+            buildProjects: "Find&Register.sln"
+            unitTestProjects: ${{ testProject.path }}
+            unitTestExclude: "[HE.CRM.*]*%2c[HE.Common.IntegrationModel*]*%2c[HE.Investments.Common.CRM*]*%2c[*]*.Contract.*%2c[He.AspNetCore.Mvc.Gds.*]*%2c[*Tests*]*%2c[HE.Investment.AHP*]*%2c[HE.Investments.Loans*]*%2c[HE.Investments.FrontDoor*]*"
+            coverageThreshold: 0
+            publishCoverageArtifact: ${{ eq(parameters.skipCoverage, false) }}
+            coverageArtifactName: coverage_${{ replace(replace(testProject.name, '.', '_'), '-', '_') }}
+
+      - ${{ if eq(parameters.skipCoverage, false) }}:
+        - job: merge_coverage
+          displayName: 'Merge Code Coverage'
+          dependsOn:
+            - ${{ each testProject in parameters.unitTestProjects }}:
+              - test_${{ parameters.identifier }}_${{ replace(replace(testProject.name, '.', '_'), '-', '_') }}
+
+          steps:
+            - task: UseDotNet@2
+              displayName: 'Install .NET SDK 8.0.204'
+              inputs:
+                packageType: 'sdk'
+                version: '8.0.204'
+
+            - ${{ each testProject in parameters.unitTestProjects }}:
+              - task: DownloadPipelineArtifact@2
+                displayName: "Download Coverage - ${{ testProject.name }}"
+                inputs:
+                  artifactName: coverage_${{ replace(replace(testProject.name, '.', '_'), '-', '_') }}
+                  targetPath: "$(Pipeline.Workspace)/coverage_${{ replace(replace(testProject.name, '.', '_'), '-', '_') }}"
+
+            - task: reportgenerator@5
+              displayName: 'Merge Code Coverage'
+              inputs:
+                reports: "$(Pipeline.Workspace)/**/coverage.cobertura.xml"
+                targetdir: "$(Build.ArtifactStagingDirectory)/CodeCoverage"
+                reporttypes: "Cobertura"
+
+            - task: PublishCodeCoverageResults@2
+              displayName: 'Publish Merged Coverage'
+              inputs:
+                summaryFileLocation: "$(Build.ArtifactStagingDirectory)/CodeCoverage/Cobertura.xml"
+                codecoverageTool: 'cobertura'
+
+            - task: BuildQualityChecks@9
+              displayName: 'Check Merged Coverage Threshold'
+              inputs:
+                checkCoverage: true
+                coverageFailOption: 'fixed'
+                coverageType: 'lines'
+                coverageThreshold: 30
+
+  # ========================================================
+  # STAGE 2 — BUILD
+  # ========================================================
+  - stage: Build
+    displayName: "Build"
+    dependsOn: []
+    jobs:
+      - template: build-tag.yml@templates
+        parameters:
+          identifier: ${{ parameters.identifier }}
+
+      - template: dotnet-semver.yml@templates
+        parameters:
+          identifier: ${{ parameters.identifier }}
+          workingDirectory: "$(System.DefaultWorkingDirectory)"
+          buildProjects: "Find&Register.sln"
+          publishProjects: "Find&Register.sln"
+          publishOutputPath: "$(System.DefaultWorkingDirectory)/published"
+          dotnetVersion: "8.0.204"
+          useNuGetConfig: true
+          skipUnitTests: true
+          containerize: true
+          coverageThreshold: 30
+
+  # ========================================================
+  # STAGE 3a — SCAN SECRETS (TruffleHog, parallel with ScanQuality)
+  # ========================================================
+  - stage: ScanSecrets
+    displayName: 'Scan - Secrets'
+    dependsOn: Build
+    jobs:
+      - job: TruffleHog_Secrets
+        displayName: 'Scan using Trufflehog'
+        pool:
+          vmImage: 'Ubuntu-latest'
+        steps:
+          - template: trufflehog.yml@templates
+
+  # ========================================================
+  # STAGE 3b — SCAN QUALITY (OWASP → Checkov → Trivy, serial, parallel with ScanSecrets)
+  # ========================================================
+  - stage: ScanQuality
+    displayName: 'Scan - Quality'
+    dependsOn: Build
+    jobs:
+      - job: OWASPScan
+        displayName: 'Scan using OWASP Dependency Checker'
+        pool:
+          vmImage: 'Ubuntu-latest'
+        steps:
+          - template: owasp.yml@templates
+            parameters:
+              failOnCVSS: 4
+              suppressionPath: 'dependency-suppressions.xml'
+              suppressionsRepo: ''
+              scanPath: '**/*.csproj'
+              continueOnError: ${{ or(startsWith(variables['Build.Reason'], 'Schedule'), eq(parameters.forcePushToProd, true)) }}
+              createBugItemsOnProject: "Homes England Engineering Delivery"
+              areaPath: "Homes England Engineering Delivery\\Applications Reliability Team\\AHP"
+              iterationPath: "Homes England Engineering Delivery\\ART\\ART 1"
+              createBacklogItems: false
+              identifier: ${{ parameters.identifier }}
+
+      - job: SecurityCheck
+        displayName: 'Scan using Checkov'
+        dependsOn: OWASPScan
+        pool:
+          vmImage: 'Ubuntu-latest'
+        steps:
+          - template: checkov.yml@templates
+            parameters:
+              continueOnError: ${{ or(startsWith(variables['Build.Reason'], 'Schedule'), eq(parameters.forcePushToProd, true)) }}
+              skipPathsCheckov: ''
+              createBugItemsOnProject: "Homes England Engineering Delivery"
+              areaPath: "Homes England Engineering Delivery\\Applications Reliability Team\\AHP"
+              iterationPath: "Homes England Engineering Delivery\\ART\\ART 1"
+              createBacklogItems: false
+              identifier: ${{ parameters.identifier }}
+
+      - job: Trivy
+        displayName: 'Scan using Trivy'
+        dependsOn: SecurityCheck
+        pool:
+          vmImage: 'Ubuntu-latest'
+        steps:
+          - template: trivy.yml@templates
+            parameters:
+              suppressionsRepo: ''
+              trivySeverityLevel: 'CRITICAL,HIGH,MEDIUM'
+              trivyScanPath: './.'
+              continueOnError: ${{ or(startsWith(variables['Build.Reason'], 'Schedule'), eq(parameters.forcePushToProd, true)) }}
+              createBugItemsOnProject: "Homes England Engineering Delivery"
+              areaPath: "Homes England Engineering Delivery\\Applications Reliability Team\\AHP"
+              iterationPath: "Homes England Engineering Delivery\\ART\\ART 1"
+              createBacklogItems: false
+              identifier: ${{ parameters.identifier }}
+
+  # ========================================================
+  # STAGE 4 — DOCKER BUILD (PR)
+  # ========================================================
+  - stage: DockerBuild
+    displayName: "Docker Build (PR)"
+    condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+    dependsOn: Build
+    jobs:
+      - template: docker-build.yml@templates
+        parameters:
+          identifier: ${{ parameters.identifier }}
+          gitFetchDepth: ${{ parameters.gitFetchDepth }}
+          dockerBuildContext: "$(Pipeline.Workspace)/published/HE.Investments.Account.WWW"
+          containerize: true
+          containerRegistryAzureName: "local"
+          containerRepository: "ahofr-nonprod/he-ahofr"
+          dockerfile: "Dockerfile.ci"
+          downloadArtifact: true
+          customContainerTags: |
+            $(Build.BuildNumber)
+            latest
+
+  # ========================================================
+  # STAGE 5 — PACKAGE & PUSH
+  # ========================================================
+  - stage: Package
+    displayName: "Package and Push"
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+    dependsOn:
+      - Build
+      - Test
+    jobs:
+      - deployment: Approve
+        environment: "packageAndPush"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: none
+                - task: PowerShell@2
+                  displayName: Approve
+                  inputs:
+                    targetType: inline
+                    script: "Write-Host 'Approved to create tag and image.'"
+
+      - template: docker-push.yml@templates
+        parameters:
+          identifier: ${{ parameters.identifier }}
+          gitFetchDepth: ${{ parameters.gitFetchDepth }}
+          workingDirectory: "src"
+          containerize: true
+          containerRegistryAzureName: "acrchsnonprod01"
+          containerRegistrySpLogin: true
+          containerRegistrySpAzureConnection: "ahofr-nonprod"
+          containerRepository: "ahofr-nonprod/he-ahofr"
+          dockerfile: "Dockerfile.ci"
+          dockerBuildContext: "$(Pipeline.Workspace)/published/HE.Investments.Account.WWW"
+          downloadArtifact: true
+          customContainerTags: |
+            $(Build.BuildNumber)
+            latest
+
+      - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(parameters.forcePushToProd, true)) }}:
+        - template: docker-promote-semver.yml@templates
+          parameters:
+            identifier: ${{ parameters.identifier }}
+            buildTag: "$(Build.BuildNumber)"
+            SpAzureSrcConnection: "ahofr-nonprod"
+            SpAzureDstConnection: "ahofr-prod"
+            azureRegistrySrcName: "acrchsnonprod01"
+            azureRegistryDstName: "acrchsprod001"
+            containerSrcRepository: "ahofr-nonprod/he-ahofr"
+            containerDstRepository: "ahofr-prod/he-ahofr"
+
+      - job: PackageHelm
+        displayName: "Package Helm Chart"
+        dependsOn:
+          - Approve
+        steps:
+          - checkout: he-ahofr-deployment
+
+          - task: Bash@3
+            displayName: "Increment Helm Chart version"
+            inputs:
+              targetType: inline
+              script: |
+                bn=$(echo $(Build.BuildNumber) | sed 's/_/-/g')
+                sed -i \"s/version: 1.0.0/version: $bn/\" $(Build.SourcesDirectory)/helm/chart/Chart.yaml"
+
+          - task: CopyFiles@2
+            inputs:
+              Contents: "helm/**"
+              TargetFolder: "$(Build.ArtifactStagingDirectory)"
+
+          - task: PublishPipelineArtifact@1
+            displayName: "Publish helm-chart"
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/helm"
+              ArtifactName: "helm-chart-$(Build.BuildNumber)"
+              publishLocation: "pipeline"
+
+      - template: tagging.yml@templates
+        parameters:
+          createGitHubTag: true
+          repository: he-ahofr-deployment
+          identifier: ${{ parameters.identifier }}
+
+      - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(parameters.forcePushToProd, true)) }}:
+        - template: retain-run.yml@templates

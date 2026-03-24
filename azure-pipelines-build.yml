@@ -25,6 +25,11 @@ parameters:
   type: boolean
   default: false
 
+- name: skipCoverage
+  displayName: Skip Code Coverage Analysis
+  type: boolean
+  default: false
+
 variables:
   buildMajor: 3
   buildMinor: 0
@@ -47,6 +52,13 @@ resources:
   
 
 stages:
-- template: azure-pipelines-build.yml@he-ahofr-deployment
+- template: azure-pipelines-ci.yml@he-ahofr-deployment
   parameters:
     forcePushToProd: ${{ parameters.forcePushToProd }}
+    skipCoverage: ${{ parameters.skipCoverage }}
+    identifier: ${{ variables.identifier }}
+    unitTestProjects:
+      - name: Unit.Tests
+        path: '**/Find&RegisterTest/FindAndRegisterUnitTests.csproj'
+      - name: Integration.Tests
+        path: '**/Find&RegisterTestIntegrationTests/FindAndRegisterIntegrationTests.csproj'
