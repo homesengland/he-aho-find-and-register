@@ -61,7 +61,7 @@ stages:
     skipCoverage: ${{ parameters.skipCoverage }}
     identifier: ${{ variables.identifier }}
     unitTestProjects:
-      #- name: Unit.Tests
-      #  path: '**/Find&RegisterTest/FindAndRegisterUnitTests.csproj'
+      - name: Unit.Tests
+        path: '**/Find&RegisterTest/FindAndRegisterUnitTests.csproj'
       - name: Integration.Tests
         path: '**/Find&RegisterTestIntegrationTests/FindAndRegisterIntegrationTests.csproj'
