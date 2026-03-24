@@ -10,7 +10,7 @@
 # - Production: appsettings.Production.json (includes minimal Cache/Telemetry)
 # - Override via: Environment variables (recommended for production)
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim AS base
 
 # Create non-root user (same as existing Dockerfile for consistency)
 RUN groupadd -g 999 appuser && \
