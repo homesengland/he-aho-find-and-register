@@ -47,11 +47,9 @@ resources:
   - repository: he-ahofr-deployment
     type: git
     name: 'Find Affordable Homes/he-ahofr-deployment'
-    ref: 'feature/improved-pipelines'
   - repository: templates
     type: git
     name: 'Cloud Hosting Service/Templates'
-    ref: 'feature/ahp-build-pipeline'
   
 
 stages:
